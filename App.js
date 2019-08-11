@@ -7,11 +7,11 @@
  */
 
 import React, { Fragment } from 'react';
-import HelloWorld from './components/HelloWorld/HelloWorld';
+import HomePage from './app/views/HomePage/HomePage';
 
 const App = () => (
   <Fragment>
-    <HelloWorld />
+    <HomePage />
   </Fragment>
 );
 
