@@ -1,7 +1,0 @@
-{
-    "name": "components",
-    "dependencies": {
-        "react": "16.8.6",
-        "react-native": "0.60.4"
-    }
-}
