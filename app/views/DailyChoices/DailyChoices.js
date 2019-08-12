@@ -1,41 +1,77 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Menu } from '../../components/';
-import { colors, fonts, padding } from '../../styles/base';
+import React, { Component, Fragment } from 'react';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import { Menu } from '../../components';
+import { colors, padding, dimensions, fonts } from '../../styles/base';
 
 class DailyChoices extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      isLoading: true,
+      data: ''
     };
   }
 
+  componentDidMount() {
+    // eslint-disable-next-line no-undef
+    fetch('https://lunch-ordering-api.herokuapp.com/api/DailyChoices/today')
+      .then(res => res.json())
+      .then(resJson => {
+        this.setState({
+          isLoading: false,
+          data: resJson
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+  // eslint-disable-next-line no-undef
+  FlatListItemSeparator = () => (
+    <View
+      style={{
+        margin: 0
+      }}
+    />
+  );
+
+  // eslint-disable-next-line no-undef
+  renderItem = ({ item }) => <Menu name={item.Name} dishes={item.Dishes} />;
+
   render() {
-    const { data } = this.state;
-    const { titleStyle, titleContainer } = styles;
-    const menuList = data.Menus.map(m => <Menu key={m.Id} name={m.Name} dishes={m.Dishes} />);
+    const { isLoading, data } = this.state;
+    const { indicatorContainer, dailyChoiceStyle } = styles;
     return (
       <View>
-        <View style={titleContainer}>
-          <Text style={titleStyle}>{data.Name}</Text>
-          <Text>{data.dateCreated.split('T')[1].split('.')[0]}</Text>
-        </View>
-        {menuList}
+        {isLoading && (
+          <View style={indicatorContainer}>
+            <ActivityIndicator size="small" color={colors.loadingColor} />
+          </View>
+        )}
+        {!isLoading && (
+          <Fragment>
+            <Text style={dailyChoiceStyle}>{data.Name}</Text>
+            <FlatList
+              data={data.Menus}
+              ItemSeparatorComponent={this.FlatListItemSeparator}
+              renderItem={this.renderItem}
+              keyExtractor={item => item.Id.toString()}
+            />
+          </Fragment>
+        )}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  titleStyle: {
-    fontSize: fonts.md,
-    color: colors.textPrimaryColor
-  },
-  titleContainer: {
+  dailyChoiceStyle: {
     marginVertical: padding.md,
+    fontSize: fonts.md
+  },
+  indicatorContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: dimensions.fullHeight - dimensions.headerHeight
   }
 });
 

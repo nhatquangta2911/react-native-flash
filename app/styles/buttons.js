@@ -5,13 +5,14 @@ export const buttonColors = {
   warning: '#FBAC45',
   info: '#01BEDC',
   success: '#01B552',
-  disable: '#BEB1D4'
+  disable: '#BEB1D4',
+  textColor: '#ffffff'
 };
 
 export const buttonDimensions = {
   lowPriorityHeight: 42,
   mediumPriorityHeight: 60,
   highPriorityHeight: 72,
-  buttonPadding: 8,
-  buttonMargin: 8
+  buttonPadding: 6,
+  buttonMargin: 6
 };
