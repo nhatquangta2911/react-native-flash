@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { colors, dimensions, fonts, rates } from '../../styles/base';
+import { Text, View } from 'react-native';
+import styles from './styles';
 
 const Header = props => {
   const { viewStyle, textStyle } = styles;
@@ -10,27 +10,5 @@ const Header = props => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  viewStyle: {
-    backgroundColor: colors.backgroundHeader,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: dimensions.headerHeight,
-    shadowColor: colors.primary,
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: rates.shadowOpacity,
-    shadowRadius: rates.shadowRadius,
-    elevation: dimensions.shadowElavation,
-    position: 'relative'
-  },
-  textStyle: {
-    fontSize: fonts.md,
-    color: colors.secondary
-  }
-});
 
 export default Header;

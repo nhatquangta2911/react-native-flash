@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import styles from './styles';
 import { Header } from '../../components';
-import { dimensions, padding } from '../../styles/base';
 import { DailyChoices } from '../../views';
 
 class HomePage extends Component {
@@ -12,7 +12,6 @@ class HomePage extends Component {
 
   render() {
     const { homePageContainer } = styles;
-
     return (
       <Fragment>
         <Header headerText={'Lunch Ordering App'} />
@@ -23,13 +22,5 @@ class HomePage extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  homePageContainer: {
-    marginHorizontal: padding.md,
-    marginVertical: padding.sm,
-    height: dimensions.fullHeight - dimensions.headerHeight
-  }
-});
 
 export default HomePage;
