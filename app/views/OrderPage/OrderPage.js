@@ -2,20 +2,20 @@ import React, { Fragment, Component } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import { Header } from '../../components';
-import { DailyChoices } from '../../views';
+import { DailyChoices } from '../';
 
-class HomePage extends Component {
+class OrderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    const { homePageContainer } = styles;
+    const { orderPageContainer } = styles;
     return (
       <Fragment>
         <Header headerText={'Lunch Ordering App'} />
-        <View style={homePageContainer}>
+        <View style={orderPageContainer}>
           <DailyChoices />
         </View>
       </Fragment>
@@ -23,4 +23,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default OrderPage;
