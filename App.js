@@ -8,11 +8,11 @@
  */
 
 import React, { Fragment } from 'react';
-import { LoginPage, OrderPage } from './app/views';
+import { LoginPage, OrderPage, DemoReduxPage } from './app/views';
 
 const App = () => (
   <Fragment>
-    <LoginPage />
+    <DemoReduxPage />
   </Fragment>
 );
 

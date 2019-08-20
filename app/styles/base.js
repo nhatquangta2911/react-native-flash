@@ -21,7 +21,8 @@ export const colors = {
   textPrimaryColor: '#3d3d3d',
   loadingColor: '#834FE2',
   borderLight: '#eeeeee',
-  buttonTextColor: '#ffffff'
+  buttonTextColor: '#ffffff',
+  iconColor: '#ffffff'
 };
 
 export const padding = {
@@ -42,5 +43,7 @@ export const fonts = {
   sm: 12,
   md: 18,
   lg: 28,
+  outputText: 60,
+  special: 100,
   primary: 'Cochin'
 };
