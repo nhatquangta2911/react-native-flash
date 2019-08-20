@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -7,11 +8,11 @@
  */
 
 import React, { Fragment } from 'react';
-import HomePage from './app/views/HomePage/HomePage';
+import { LoginPage, OrderPage } from './app/views';
 
 const App = () => (
   <Fragment>
-    <HomePage />
+    <LoginPage />
   </Fragment>
 );
 
