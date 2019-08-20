@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
-import { Child, Button } from '../../components';
+import { Child, Button, TextOutput } from '../../components';
 import { buttonColors } from '../../styles/buttons';
 
 class DemoReduxPage extends Component {
@@ -16,18 +16,19 @@ class DemoReduxPage extends Component {
       <View style={containerStyles}>
         <View style={textOutputStyles}>
           <Child />
+          <TextOutput />
         </View>
         <View style={buttonGroupStyles}>
           <Button
             title="Increase"
-            textColor={buttonColors.textColor}
-            bgColor={buttonColors.success}
+            iconName="plus"
+            backgroundColor={buttonColors.info}
             onPress={this.handleIncrease}
           />
           <Button
             title="Decrease"
-            textColor={buttonColors.textColor}
-            bgColor={buttonColors.danger}
+            iconName="minus"
+            backgroundColor={buttonColors.warning}
             onPress={this.handleDecrease}
           />
         </View>

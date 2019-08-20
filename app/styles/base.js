@@ -4,6 +4,7 @@ export const dimensions = {
   fullHeight: Dimensions.get('window').height,
   fullWidth: Dimensions.get('window').width,
   headerHeight: 50,
+  buttonHeight: 45,
   shadowElevation: 4
 };
 
@@ -40,7 +41,7 @@ export const margin = {
 };
 
 export const fonts = {
-  sm: 12,
+  sm: 15,
   md: 18,
   lg: 28,
   outputText: 60,
