@@ -8,8 +8,8 @@
  */
 
 import React, { Fragment } from 'react';
-import { LoginPage, OrderPage, DemoReduxPage } from './app/views';
 import { Provider } from 'react-redux';
+import { LoginPage, OrderPage, DemoReduxPage } from './app/views';
 import store from './app/store';
 
 const App = () => (

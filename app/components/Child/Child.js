@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import styles from './styles';
 
 class Child extends Component {
@@ -18,4 +19,11 @@ class Child extends Component {
   }
 }
 
-export default Child;
+const mapStateToProps = state => ({
+  counter: state.counter
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Child);

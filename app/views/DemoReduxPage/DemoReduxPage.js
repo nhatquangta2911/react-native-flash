@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import styles from './styles';
 import { Child, Button, TextOutput } from '../../components';
 import { buttonColors } from '../../styles/buttons';
 import * as actions from '../../actions';
-import { connect } from 'react-redux';
 
 class DemoReduxPage extends Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class DemoReduxPage extends Component {
       <View style={containerStyles}>
         <View style={textOutputStyles}>
           <Child />
-          <TextOutput />
         </View>
         <View style={buttonGroupStyles}>
           <Button
@@ -37,7 +36,6 @@ class DemoReduxPage extends Component {
             backgroundColor={buttonColors.info}
             onPress={this.handleIncrease}
           />
-          d
           <Button
             title="Decrease"
             iconName="minus"
@@ -50,4 +48,7 @@ class DemoReduxPage extends Component {
   }
 }
 
-export default DemoReduxPage;
+export default connect(
+  null,
+  actions
+)(DemoReduxPage);
