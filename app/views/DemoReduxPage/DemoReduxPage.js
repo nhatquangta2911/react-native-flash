@@ -24,6 +24,13 @@ const DemoReduxPage = () => {
           onPress={() => dispatch(actions.counterIncrease())}
         />
         <Button
+          title="Double Increase"
+          iconName="plus"
+          doubleIcon="true"
+          backgroundColor={buttonColors.success}
+          onPress={() => dispatch(actions.counterDoubleIncrease())}
+        />
+        <Button
           title="Decrease"
           iconName="minus"
           backgroundColor={buttonColors.warning}
