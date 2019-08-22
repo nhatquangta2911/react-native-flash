@@ -9,11 +9,15 @@
 
 import React, { Fragment } from 'react';
 import { LoginPage, OrderPage, DemoReduxPage } from './app/views';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 const App = () => (
-  <Fragment>
-    <DemoReduxPage />
-  </Fragment>
+  <Provider store={store}>
+    <Fragment>
+      <DemoReduxPage />
+    </Fragment>
+  </Provider>
 );
 
 export default App;

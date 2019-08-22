@@ -1,14 +1,26 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import { Child, Button, TextOutput } from '../../components';
 import { buttonColors } from '../../styles/buttons';
+import * as actions from '../../actions';
+import { connect } from 'react-redux';
 
 class DemoReduxPage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  handleIncrease = () => {
+    this.props.counterIncrease();
+  };
+
+  handleDecrease = () => {
+    this.props.counterDecrease();
+  };
 
   render() {
     const { containerStyles, textOutputStyles, buttonGroupStyles } = styles;
@@ -25,6 +37,7 @@ class DemoReduxPage extends Component {
             backgroundColor={buttonColors.info}
             onPress={this.handleIncrease}
           />
+          d
           <Button
             title="Decrease"
             iconName="minus"
