@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, rates, padding, margin, fonts } from '../../styles/base';
+import { rates, padding, margin, fonts, darkPalette } from '../../styles/base';
 import { buttonDimensions, buttonColors } from '../../styles/buttons';
 import { shadow } from '../../styles/mixin';
 
@@ -8,14 +8,14 @@ export default StyleSheet.create({
     ...shadow,
     marginVertical: margin.sm,
     borderRadius: rates.borderRadius,
-    color: colors.borderLight,
+    color: darkPalette.darkGreen,
     paddingHorizontal: padding.md,
     paddingVertical: padding.md
   },
   menuTitle: {
     fontSize: fonts.md,
     fontWeight: 'bold',
-    color: colors.primary
+    color: darkPalette.darkCyan
   },
   menuDishes: {
     paddingVertical: padding.sm,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     color: buttonColors.textColor,
     ...shadow,
     borderRadius: rates.borderRadius,
-    backgroundColor: buttonColors.primary
+    backgroundColor: darkPalette.darkCyan
   },
   buttonChooseContainer: {
     alignItems: 'flex-end'

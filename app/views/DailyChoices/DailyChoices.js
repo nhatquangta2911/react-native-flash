@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component, Fragment } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
@@ -14,7 +15,7 @@ class DailyChoices extends Component {
   }
 
   componentDidMount() {
-    fetch('https://lunch-ordering-api.herokuapp.com/api/DailyChoices/today')
+    fetch('https://lunch-ordering-api.herokuapp.com/api/DailyChoices/5d5109bebc94d400056b40cb')
       .then(res => res.json())
       .then(resJson => {
         this.setState({
@@ -47,7 +48,7 @@ class DailyChoices extends Component {
         )}
         {!isLoading && (
           <Fragment>
-            <Text style={dailyChoiceStyle}>{data.Name}</Text>
+            {/* <Text style={dailyChoiceStyle}>{data.Name}</Text> */}
             <FlatList
               data={data.Menus}
               ItemSeparatorComponent={this.FlatListItemSeparator}

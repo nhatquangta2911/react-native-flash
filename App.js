@@ -8,16 +8,19 @@
  */
 
 import React, { Fragment } from 'react';
-import { Provider } from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { LoginPage, OrderPage, DemoReduxPage } from './app/views';
+import { Navigator, Header } from './app/components';
 import store from './app/store';
 
 const App = () => (
-  <Provider store={store}>
-    <Fragment>
-      <DemoReduxPage />
-    </Fragment>
-  </Provider>
+  <StoreProvider store={store}>
+    <PaperProvider settings={{ icon: props => <AwesomeIcon {...props} /> }}>
+      <Navigator />
+    </PaperProvider>
+  </StoreProvider>
 );
 
 export default App;

@@ -14,6 +14,30 @@ export const rates = {
   borderRadius: 2
 };
 
+export const template = {
+  reddish: '#ED6A5A',
+  beige: '#F4F1BB',
+  lightBlueish: '#9BC1BC',
+  mixedViolet: '#5D576B',
+  lightGray: '#E6EBE0'
+};
+
+export const lightPalette = {
+  lightBlue: '#BC46F6',
+  lightOrange: '#F3C98B',
+  lightLipstick: '#DAA588',
+  lightBrown: '#C46D5E',
+  lightRed: '#F56960'
+};
+
+export const darkPalette = {
+  darkPurple: '#503960',
+  darkCyan: '#3C6E71',
+  darkGreen: '#70AE6E',
+  darkYellow: '#BEEE62',
+  darkOrange: '#F4743B'
+};
+
 export const colors = {
   primary: '#5A4BAD',
   secondary: '#444444',

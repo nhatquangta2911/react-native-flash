@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { padding, dimensions, fonts, colors } from '../../styles/base';
+import { padding, dimensions, fonts, darkPalette } from '../../styles/base';
 
 export default StyleSheet.create({
   dailyChoiceStyle: {
@@ -12,6 +12,6 @@ export default StyleSheet.create({
     height: dimensions.fullHeight - dimensions.headerHeight
   },
   loadingStyle: {
-    color: colors.loadingColor
+    color: darkPalette.darkPurple
   }
 });

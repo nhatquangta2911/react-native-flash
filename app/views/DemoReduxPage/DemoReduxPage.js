@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import styles from './styles';
-import { Child, Button, TextOutput } from '../../components';
+import { Child, Button } from '../../components';
 import { buttonColors } from '../../styles/buttons';
 import * as actions from '../../actions';
 
@@ -27,7 +27,7 @@ const DemoReduxPage = () => {
           title="Double Increase"
           iconName="plus"
           doubleIcon="true"
-          backgroundColor={buttonColors.success}
+          backgroundColor={buttonColors.info}
           onPress={() => dispatch(actions.counterDoubleIncrease())}
         />
         <Button
