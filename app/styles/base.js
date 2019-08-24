@@ -89,8 +89,8 @@ export const fonts = {
   xl: 40,
   outputText: 60,
   special: 100,
-  light: 'Lato-Light',
-  regular: 'Lato-Regular',
-  bold: 'Lato-Black',
-  thin: 'Lato-Thin'
+  light: 'Nunito-Light',
+  regular: 'Nunito-Regular',
+  bold: 'Nunito-Black',
+  thin: 'Nunito-ExtraLight'
 };

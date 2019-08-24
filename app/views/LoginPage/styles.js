@@ -1,7 +1,15 @@
 /* eslint-disable import/imports-first */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, rates, colors, padding, margin, fonts, darkPalette } from '../../styles/base';
+import {
+  dimensions,
+  rates,
+  colors,
+  padding,
+  margin,
+  fonts,
+  darkPalette
+} from '../../styles/base';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
@@ -26,7 +34,7 @@ export default StyleSheet.create({
   },
   textLogo: {
     fontSize: fonts.xl,
-    fontFamily: fonts.light,
+    fontFamily: fonts.thin,
     color: darkPalette.darkPurple
   }
 });
