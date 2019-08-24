@@ -47,7 +47,7 @@ export default StyleSheet.create({
     marginBottom: margin.sm
   },
   modalContent: {
-    fontSize: fonts.md,
+    fontSize: fonts.sm,
     fontFamily: fonts.thin,
     color: darkPalette.darkPurple,
     marginBottom: margin.md

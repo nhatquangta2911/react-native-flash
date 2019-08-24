@@ -30,7 +30,9 @@ class LoginPage extends Component {
       isLoading: false,
       token: '',
       hidden: true,
-      isModalVisible: false
+      isModalVisible: false,
+      isTokenVisible: false,
+      isFocusNextInput: false
     };
   }
 
@@ -47,7 +49,8 @@ class LoginPage extends Component {
       .then(res => {
         this.setState({
           token: res.data,
-          isLoading: false
+          isLoading: false,
+          isTokenVisible: true
         });
         this.props.loginAction(res.data, this.state.email);
         tokenHandler.storeData('token', res.data);
@@ -79,7 +82,8 @@ class LoginPage extends Component {
       token,
       isLoading,
       hidden,
-      isModalVisible
+      isModalVisible,
+      isTokenVisible
     } = this.state;
     const {
       loginContainer,
@@ -106,6 +110,19 @@ class LoginPage extends Component {
             <Text style={modalContent}>
               Email or Password might not correct.
             </Text>
+          </View>
+        </Overlay>
+        <Overlay
+          width="90%"
+          height="auto"
+          isVisible={isTokenVisible}
+          onBackdropPress={() =>
+            this.setState({ isTokenVisible: !this.state.isTokenVisible })
+          }
+        >
+          <View style={modalContainer}>
+            <Text style={modalTitle}>Token</Text>
+            <Text style={modalContent}>{token}</Text>
           </View>
         </Overlay>
         <Header
@@ -139,9 +156,10 @@ class LoginPage extends Component {
           <View style={contentContainer}>
             <Input
               placeholder="Email"
+              autoCapitalize="none"
               autoCompleteType="email"
+              returnKeyType="next"
               type="email"
-              defaultValue="shawn@enclave.v"
               inputStyle={{
                 fontFamily: fonts.regular,
                 fontSize: fonts.text,
@@ -167,6 +185,7 @@ class LoginPage extends Component {
                 color: darkPalette.darkPurple
               }}
               secureTextEntry={hidden}
+              onSubmitEditing={() => this.login()}
               containerStyle={{ marginBottom: 2 }}
               rightIconContainerStyle={{ marginRight: 20, width: 25 }}
               rightIcon={
@@ -217,7 +236,6 @@ class LoginPage extends Component {
               style={{ height: sizes.buttonHeight }}
               type="facebook"
             />
-            <Text style={textStyle}>{token}</Text>
           </View>
         </View>
       </Fragment>
