@@ -1,15 +1,16 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable quote-props */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
-import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Input, Text, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { loginAction } from '../../actions';
 import styles from './styles';
 import { Header } from '../../components';
-import { handleToken } from '../../utils/token';
-import tokenHandler from '../../utils/token/tokenHandler';
+import { fonts, darkPalette, margin } from '../../styles/base';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -22,23 +23,13 @@ class LoginPage extends Component {
     };
   }
 
-  async componentDidMount() {
-    tokenHandler.storeData(
-      'token',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjVkM2VlMTY0NDAwNzIxMmI5MDBlZjkwZSIsIk5hbWUiOiJTaGF3biIsIm5iZiI6MTU2NjYxNzk5MCwiZXhwIjoxNTY2ODc3MTkwLCJpYXQiOjE1NjY2MTc5OTB9.7IrV_nEjycZuZ-uiHjv7RXt7oBuEHgmHuQfqkE0kNuw'
-    );
-    this.setState({
-      token: await tokenHandler.getData('token')
-    });
-  }
-
-  login(e) {
+  login() {
     this.setState({
       isLoading: true
     });
     axios
       .post('https://shawn-movie-rental.herokuapp.com/api/auth', {
-        username: this.state.email,
+        email: this.state.email,
         password: this.state.password
       })
       .then(res => {
@@ -48,20 +39,51 @@ class LoginPage extends Component {
           isLoading: false
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({
+          isLoading: false
+        });
+        console.log(err);
+      });
   }
 
   render() {
-    const { loginPageContainer, logo } = styles;
-    const { token } = this.state;
-    console.log(token);
+    const { email, password, token, isLoading } = this.state;
     return (
       <Fragment>
-        <View style={loginPageContainer}>
-          <View style={logo}>
-            <Text>{token}</Text>
-          </View>
-        </View>
+        <Input
+          placeholder="Email"
+          autoCompleteType="email"
+          type="email"
+          inputStyle={{ fontSize: fonts.sm, color: darkPalette.darkPurple }}
+          blurOnSubmit
+          containerStyle={{ marginBottom: 2 }}
+          leftIconContainerStyle={{ marginRight: 5, width: 20 }}
+          leftIcon={<Icon name="envelope" color={darkPalette.darkPurple} size={fonts.md} />}
+          onChangeText={text => this.setState({ email: text })}
+        />
+        <Input
+          placeholder="Password"
+          inputStyle={{ fontSize: fonts.sm, color: darkPalette.darkPurple }}
+          secureTextEntry
+          containerStyle={{ marginBottom: 2 }}
+          leftIconContainerStyle={{ marginRight: 5, width: 20 }}
+          leftIcon={<Icon name="unlock-alt" color={darkPalette.darkPurple} size={fonts.md} />}
+          onChangeText={text => this.setState({ password: text })}
+        />
+        <Button
+          title="LOGIN"
+          type="solid"
+          loading={isLoading}
+          titleStyle={{ color: '#fff', fontSize: fonts.sm }}
+          buttonStyle={{
+            margin: margin.md,
+            borderColor: darkPalette.darkPurple,
+            backgroundColor: darkPalette.darkPurple
+          }}
+          onPress={() => this.login()}
+        />
+        <Text style={{ margin: margin.md }}>{token}</Text>
       </Fragment>
     );
   }
