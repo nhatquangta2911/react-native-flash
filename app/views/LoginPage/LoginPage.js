@@ -4,10 +4,17 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
-import { View } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Input, Text, Button, Header, SocialIcon } from 'react-native-elements';
+import {
+  Input,
+  Text,
+  Button,
+  Header,
+  SocialIcon,
+  Overlay
+} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { loginAction } from '../../actions';
 import styles from './styles';
@@ -22,11 +29,13 @@ class LoginPage extends Component {
       password: '',
       isLoading: false,
       token: '',
-      hidden: true
+      hidden: true,
+      isModalVisible: false
     };
   }
 
   login() {
+    Keyboard.dismiss();
     this.setState({
       isLoading: true
     });
@@ -45,7 +54,8 @@ class LoginPage extends Component {
       })
       .catch(err => {
         this.setState({
-          isLoading: false
+          isLoading: false,
+          isModalVisible: true
         });
         console.log(err);
       });
@@ -63,16 +73,41 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { email, password, token, isLoading, hidden } = this.state;
+    const {
+      email,
+      password,
+      token,
+      isLoading,
+      hidden,
+      isModalVisible
+    } = this.state;
     const {
       loginContainer,
       textStyle,
       logoContainer,
       contentContainer,
-      textLogo
+      textLogo,
+      modalContainer,
+      modalTitle,
+      modalContent
     } = styles;
     return (
       <Fragment>
+        <Overlay
+          width="90%"
+          height="auto"
+          isVisible={isModalVisible}
+          onBackdropPress={() =>
+            this.setState({ isModalVisible: !this.state.isModalVisible })
+          }
+        >
+          <View style={modalContainer}>
+            <Text style={modalTitle}>Oop!</Text>
+            <Text style={modalContent}>
+              Email or Password might not correct.
+            </Text>
+          </View>
+        </Overlay>
         <Header
           leftComponent={{
             icon: 'menu',

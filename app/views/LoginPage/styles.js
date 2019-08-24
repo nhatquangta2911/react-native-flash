@@ -36,5 +36,20 @@ export default StyleSheet.create({
     fontSize: fonts.xl,
     fontFamily: fonts.thin,
     color: darkPalette.darkPurple
+  },
+  modalContainer: {
+    margin: margin.md
+  },
+  modalTitle: {
+    fontSize: fonts.xl,
+    fontFamily: fonts.regular,
+    color: darkPalette.darkPurple,
+    marginBottom: margin.sm
+  },
+  modalContent: {
+    fontSize: fonts.md,
+    fontFamily: fonts.thin,
+    color: darkPalette.darkPurple,
+    marginBottom: margin.md
   }
 });
