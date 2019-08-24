@@ -8,10 +8,26 @@ export default {
       console.log(e);
     }
   },
+
   async getData(key) {
     try {
-      const data = await AsyncStorage.getItem(key);
-      return data;
+      return await AsyncStorage.getItem(key);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  async removeData(key) {
+    try {
+      return await AsyncStorage.removeItem(key);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  async removeAll() {
+    try {
+      return await AsyncStorage.clear();
     } catch (e) {
       console.log(e);
     }

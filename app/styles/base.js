@@ -1,4 +1,21 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
+
+export const sizes = {
+  xxsm: 10,
+  xsm: 12,
+  sm: 14,
+  md: 18,
+  lg: 32,
+  xl: 40,
+  xxl: 60,
+  text: 18,
+  buttonHeight: 40,
+  roundedButtonRadius: 20,
+  androidHeader: 70,
+  offsetTopHeaderAndroid: (StatusBar.currentHeight || 0) * -1,
+  iOSHeader: 70,
+  special: 100
+};
 
 export const dimensions = {
   fullHeight: Dimensions.get('window').height,
@@ -35,7 +52,8 @@ export const darkPalette = {
   darkCyan: '#3C6E71',
   darkGreen: '#70AE6E',
   darkYellow: '#BEEE62',
-  darkOrange: '#F4743B'
+  darkOrange: '#F4743B',
+  white: '#fff'
 };
 
 export const colors = {
@@ -65,10 +83,14 @@ export const margin = {
 };
 
 export const fonts = {
-  sm: 15,
+  sm: 14,
   md: 18,
   lg: 28,
+  xl: 40,
   outputText: 60,
   special: 100,
-  primary: 'Cochin'
+  light: 'Lato-Light',
+  regular: 'Lato-Regular',
+  bold: 'Lato-Black',
+  thin: 'Lato-Thin'
 };
