@@ -2,17 +2,14 @@
 import { LOGIN } from '../actions/types';
 
 const initialState = {
-  email: '',
-  password: ''
+  token: '',
+  email: ''
 };
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      return Object.assign({}, state, {
-        email: action.email,
-        password: action.password
-      });
+      return action.payload;
   }
   return state;
 };

@@ -11,6 +11,7 @@ import { loginAction } from '../../actions';
 import styles from './styles';
 import { Header } from '../../components';
 import { fonts, darkPalette, margin } from '../../styles/base';
+import { tokenHandler } from '../../utils/token';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -33,11 +34,12 @@ class LoginPage extends Component {
         password: this.state.password
       })
       .then(res => {
-        this.props.loginAction(this.state.email, this.state.password);
         this.setState({
           token: res.data,
           isLoading: false
         });
+        this.props.loginAction(res.data, this.state.email);
+        tokenHandler.storeData('token', res.data);
       })
       .catch(err => {
         this.setState({
@@ -55,6 +57,7 @@ class LoginPage extends Component {
           placeholder="Email"
           autoCompleteType="email"
           type="email"
+          defaultValue="shawn@enclave.v"
           inputStyle={{ fontSize: fonts.sm, color: darkPalette.darkPurple }}
           blurOnSubmit
           containerStyle={{ marginBottom: 2 }}
@@ -81,7 +84,9 @@ class LoginPage extends Component {
             borderColor: darkPalette.darkPurple,
             backgroundColor: darkPalette.darkPurple
           }}
-          onPress={() => this.login()}
+          onPress={() => {
+            this.login();
+          }}
         />
         <Text style={{ margin: margin.md }}>{token}</Text>
       </Fragment>
@@ -91,7 +96,7 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
-  loginAction: (email, password) => dispatch(loginAction(email, password))
+  loginAction: (token, email) => dispatch(loginAction(token, email))
 });
 
 export default connect(
