@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { colors, fonts } from '../../styles/base';
+import { colors, fonts, padding } from '../../styles/base';
 
 export default StyleSheet.create({
+  childContainer: {
+    padding: padding.lg
+  },
   childStyles: {
     fontSize: fonts.special,
     fontFamily: fonts.regular,

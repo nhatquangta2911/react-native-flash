@@ -15,9 +15,9 @@ const Child = () => {
   getToken();
   const counter = useSelector(state => state.counter);
   const { email, token } = useSelector(state => state.loginReducer);
-  const { childStyles, textStyle } = styles;
+  const { childContainer, childStyles, textStyle } = styles;
   return (
-    <View>
+    <View style={childContainer}>
       <Text style={childStyles}>{counter}</Text>
       <Text style={textStyle}>{asyncToken}</Text>
     </View>

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable quote-props */
 /* eslint-disable max-len */
@@ -20,7 +21,8 @@ class LoginPage extends Component {
       email: '',
       password: '',
       isLoading: false,
-      token: ''
+      token: '',
+      hidden: true
     };
   }
 
@@ -49,16 +51,41 @@ class LoginPage extends Component {
       });
   }
 
+  handleEyeSlash = () => {
+    this.setState({
+      hidden: !this.state.hidden
+    });
+    setTimeout(() => {
+      this.setState({
+        hidden: !this.state.hidden
+      });
+    }, 700);
+  };
+
   render() {
-    const { email, password, token, isLoading } = this.state;
-    const { loginContainer, textStyle, logoContainer, contentContainer, textLogo } = styles;
+    const { email, password, token, isLoading, hidden } = this.state;
+    const {
+      loginContainer,
+      textStyle,
+      logoContainer,
+      contentContainer,
+      textLogo
+    } = styles;
     return (
       <Fragment>
         <Header
-          leftComponent={{ icon: 'menu', color: darkPalette.white, size: fonts.lg }}
+          leftComponent={{
+            icon: 'menu',
+            color: darkPalette.white,
+            size: fonts.lg
+          }}
           centerComponent={{
             text: 'Login Page',
-            style: { color: darkPalette.white, fontFamily: fonts.regular, fontSize: fonts.md }
+            style: {
+              color: darkPalette.white,
+              fontFamily: fonts.regular,
+              fontSize: fonts.md
+            }
           }}
           backgroundColor={darkPalette.darkPurple}
           containerStyle={{
@@ -67,7 +94,11 @@ class LoginPage extends Component {
         />
         <View style={loginContainer}>
           <View style={logoContainer}>
-            <Icon name="heartbeat" color={darkPalette.darkPurple} size={fonts.special} />
+            <Icon
+              name="heartbeat"
+              color={darkPalette.darkPurple}
+              size={fonts.special}
+            />
             <Text style={textLogo}>Senior Project</Text>
           </View>
           <View style={contentContainer}>
@@ -84,7 +115,13 @@ class LoginPage extends Component {
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="envelope" color={darkPalette.darkPurple} size={fonts.md} />}
+              leftIcon={
+                <Icon
+                  name="envelope"
+                  color={darkPalette.darkPurple}
+                  size={fonts.md}
+                />
+              }
               onChangeText={text => this.setState({ email: text })}
             />
             <Input
@@ -94,17 +131,36 @@ class LoginPage extends Component {
                 fontSize: fonts.text,
                 color: darkPalette.darkPurple
               }}
-              secureTextEntry
+              secureTextEntry={hidden}
               containerStyle={{ marginBottom: 2 }}
+              rightIconContainerStyle={{ marginRight: 20, width: 25 }}
+              rightIcon={
+                <Icon
+                  name={hidden ? 'eye' : 'eye-slash'}
+                  color={darkPalette.darkPurple}
+                  size={fonts.md}
+                  onPress={() => this.handleEyeSlash()}
+                />
+              }
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="unlock-alt" color={darkPalette.darkPurple} size={fonts.md} />}
+              leftIcon={
+                <Icon
+                  name="unlock-alt"
+                  color={darkPalette.darkPurple}
+                  size={fonts.md}
+                />
+              }
               onChangeText={text => this.setState({ password: text })}
             />
             <Button
               title="LOGIN"
               type="solid"
               loading={isLoading}
-              titleStyle={{ color: darkPalette.white, fontSize: fonts.sm, fontFamily: fonts.bold }}
+              titleStyle={{
+                color: darkPalette.white,
+                fontSize: fonts.sm,
+                fontFamily: fonts.bold
+              }}
               buttonStyle={{
                 margin: margin.md,
                 borderColor: darkPalette.darkPurple,
