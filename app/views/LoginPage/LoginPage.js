@@ -49,6 +49,7 @@ class LoginPage extends Component {
         });
         this.props.loginAction(res.data, this.state.email);
         tokenHandler.storeData('token', res.data);
+        this.props.jumpTo('redux');
       })
       .catch(err => {
         this.setState({

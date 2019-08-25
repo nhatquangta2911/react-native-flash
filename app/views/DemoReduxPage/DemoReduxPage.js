@@ -1,19 +1,28 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
+import { View, Text } from 'react-native';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
 import { Child, Button } from '../../components';
 import { buttonColors } from '../../styles/buttons';
 import * as actions from '../../actions';
+import { tokenHandler } from '../../utils/token';
+
+let asyncToken = '';
+
+const getToken = async () => {
+  asyncToken = await tokenHandler.getData('token');
+};
 
 const DemoReduxPage = () => {
+  getToken();
   const dispatch = useDispatch();
-  const { containerStyles, textOutputStyles, buttonGroupStyles } = styles;
+  const { containerStyles, textOutputStyles, buttonGroupStyles, tokenText } = styles;
   return (
     <View style={containerStyles}>
       <View style={textOutputStyles}>
+        <Text style={tokenText}> Demo Redux</Text>
         <Child />
       </View>
       <View style={buttonGroupStyles}>

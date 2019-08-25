@@ -9,7 +9,7 @@ const initialState = {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      return action.payload;
+      return { ...state, token: action.payload.token };
   }
   return state;
 };

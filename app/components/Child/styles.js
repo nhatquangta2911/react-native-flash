@@ -4,7 +4,7 @@ import { colors, fonts, padding } from '../../styles/base';
 
 export default StyleSheet.create({
   childContainer: {
-    padding: padding.lg
+    paddingVertical: padding.lg
   },
   childStyles: {
     fontSize: fonts.special,

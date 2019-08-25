@@ -9,7 +9,7 @@ export default class Navigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 2,
+      index: 1,
       routes: [
         {
           key: 'order',

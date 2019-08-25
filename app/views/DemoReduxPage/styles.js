@@ -1,18 +1,30 @@
 import { StyleSheet } from 'react-native';
+import { fonts, darkPalette } from '../../styles/base';
 
 export default StyleSheet.create({
   containerStyles: {
     flex: 1,
     width: '100%',
+    padding: 14,
     justifyContent: 'center'
   },
   textOutputStyles: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonGroupStyles: {
     flex: 1,
     justifyContent: 'flex-start'
+  },
+  tokenText: {
+    fontFamily: fonts.regular,
+    fontSize: fonts.sm,
+    backgroundColor: darkPalette.darkOrange,
+    color: darkPalette.white,
+    width: 100,
+    textAlign: 'center',
+    paddingVertical: 2,
+    borderRadius: 5
   }
 });
