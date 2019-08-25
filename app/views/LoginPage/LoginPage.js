@@ -7,14 +7,7 @@ import React, { Component, Fragment } from 'react';
 import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {
-  Input,
-  Text,
-  Button,
-  Header,
-  SocialIcon,
-  Overlay
-} from 'react-native-elements';
+import { Input, Text, Button, Header, SocialIcon, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { loginAction } from '../../actions';
 import styles from './styles';
@@ -32,7 +25,8 @@ class LoginPage extends Component {
       hidden: true,
       isModalVisible: false,
       isTokenVisible: false,
-      isFocusNextInput: false
+      isFocusNextInput: false,
+      isWrong: false
     };
   }
 
@@ -50,7 +44,8 @@ class LoginPage extends Component {
         this.setState({
           token: res.data,
           isLoading: false,
-          isTokenVisible: true
+          isTokenVisible: true,
+          isWrong: true
         });
         this.props.loginAction(res.data, this.state.email);
         tokenHandler.storeData('token', res.data);
@@ -58,7 +53,8 @@ class LoginPage extends Component {
       .catch(err => {
         this.setState({
           isLoading: false,
-          isModalVisible: true
+          isModalVisible: true,
+          password: ''
         });
         console.log(err);
       });
@@ -83,7 +79,8 @@ class LoginPage extends Component {
       isLoading,
       hidden,
       isModalVisible,
-      isTokenVisible
+      isTokenVisible,
+      isWrong
     } = this.state;
     const {
       loginContainer,
@@ -101,24 +98,18 @@ class LoginPage extends Component {
           width="90%"
           height="auto"
           isVisible={isModalVisible}
-          onBackdropPress={() =>
-            this.setState({ isModalVisible: !this.state.isModalVisible })
-          }
+          onBackdropPress={() => this.setState({ isModalVisible: !this.state.isModalVisible })}
         >
           <View style={modalContainer}>
             <Text style={modalTitle}>Oop!</Text>
-            <Text style={modalContent}>
-              Email or Password might not correct.
-            </Text>
+            <Text style={modalContent}>Email or Password might not correct.</Text>
           </View>
         </Overlay>
         <Overlay
           width="90%"
           height="auto"
           isVisible={isTokenVisible}
-          onBackdropPress={() =>
-            this.setState({ isTokenVisible: !this.state.isTokenVisible })
-          }
+          onBackdropPress={() => this.setState({ isTokenVisible: !this.state.isTokenVisible })}
         >
           <View style={modalContainer}>
             <Text style={modalTitle}>Token</Text>
@@ -146,11 +137,7 @@ class LoginPage extends Component {
         />
         <View style={loginContainer}>
           <View style={logoContainer}>
-            <Icon
-              name="heartbeat"
-              color={darkPalette.darkPurple}
-              size={fonts.special}
-            />
+            <Icon name="heartbeat" color={darkPalette.darkPurple} size={fonts.special} />
             <Text style={textLogo}>Senior Project</Text>
           </View>
           <View style={contentContainer}>
@@ -159,6 +146,7 @@ class LoginPage extends Component {
               autoCapitalize="none"
               autoCompleteType="email"
               returnKeyType="next"
+              keyboardType="email-address"
               type="email"
               inputStyle={{
                 fontFamily: fonts.regular,
@@ -168,13 +156,7 @@ class LoginPage extends Component {
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={
-                <Icon
-                  name="envelope"
-                  color={darkPalette.darkPurple}
-                  size={fonts.md}
-                />
-              }
+              leftIcon={<Icon name="envelope" color={darkPalette.darkPurple} size={fonts.md} />}
               onChangeText={text => this.setState({ email: text })}
             />
             <Input
@@ -196,14 +178,9 @@ class LoginPage extends Component {
                   onPress={() => this.handleEyeSlash()}
                 />
               }
+              value={isWrong ? '' : this.state.password}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={
-                <Icon
-                  name="unlock-alt"
-                  color={darkPalette.darkPurple}
-                  size={fonts.md}
-                />
-              }
+              leftIcon={<Icon name="unlock-alt" color={darkPalette.darkPurple} size={fonts.md} />}
               onChangeText={text => this.setState({ password: text })}
             />
             <Button

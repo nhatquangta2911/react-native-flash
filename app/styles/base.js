@@ -56,6 +56,18 @@ export const darkPalette = {
   white: '#fff'
 };
 
+export const notification = {
+  success: '#28A745',
+  danger: '#dc3545',
+  warning: '#FFC107',
+  info: '#17A2B8',
+  lightGray: '#F8F9FA',
+  primary: '#007BFF',
+  secondary: '#6C757D',
+  dark: '#343A40',
+  white: '#FFFFFF'
+};
+
 export const colors = {
   primary: '#5A4BAD',
   secondary: '#444444',
@@ -87,6 +99,7 @@ export const fonts = {
   md: 18,
   lg: 28,
   xl: 40,
+  text: 17,
   outputText: 60,
   special: 100,
   light: 'Nunito-Light',
