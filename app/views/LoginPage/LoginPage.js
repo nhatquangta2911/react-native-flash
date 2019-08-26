@@ -1,18 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component, Fragment } from 'react';
 import { View, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import axios from 'axios';
 import { Input, Text, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { loginAction } from '../../actions';
 import styles from './styles';
 import { fonts, darkPalette } from '../../styles/base';
-import { tokenHandler } from '../../utils/token';
 import { Modal, SocialButton } from '../../components';
 
 class LoginPage extends Component {
   static navigationOptions = {
+    headerMode: 'none',
     header: null
   };
 
@@ -39,19 +39,16 @@ class LoginPage extends Component {
       })
       .then(res => {
         this.setState({
-          token: res.data,
-          isLoading: false
+          isLoading: false,
+          isModalVisible: false
         });
-        this.props.loginAction(res.data, this.state.email);
-        tokenHandler.storeData('token', res.data);
-        this.props.navigation.navigate('Home');
+        this.props.navigation.push('Home');
       })
       .catch(err => {
         this.setState({
           isLoading: false,
           isModalVisible: true,
-          password: '',
-          isWrong: true
+          password: ''
         });
         console.log(err);
       });
@@ -68,16 +65,12 @@ class LoginPage extends Component {
     }, 250);
   };
 
-  callbackToken = status => {
-    this.setState({ isTokenVisible: status });
-  };
-
   callbackError = status => {
     this.setState({ isModalVisible: status });
   };
 
   render() {
-    const { isLoading, hidden, isModalVisible } = this.state;
+    const { email, password, isLoading, hidden, isModalVisible } = this.state;
     const {
       loginContainer,
       textStyle,
@@ -109,6 +102,7 @@ class LoginPage extends Component {
               returnKeyType="next"
               keyboardType="email-address"
               type="email"
+              defaultValue="shawn@enclave.v"
               inputStyle={inputStyle}
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
@@ -123,6 +117,7 @@ class LoginPage extends Component {
                 fontSize: fonts.text,
                 color: darkPalette.darkCyan
               }}
+              defaultValue="mrmms2am"
               secureTextEntry={hidden}
               onSubmitEditing={() => this.login()}
               containerStyle={{ marginBottom: 2 }}
@@ -158,12 +153,4 @@ class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = dispatch => ({
-  loginAction: (token, email) => dispatch(loginAction(token, email))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginPage);
+export default withNavigation(LoginPage);

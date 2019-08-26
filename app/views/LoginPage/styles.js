@@ -27,6 +27,7 @@ export default StyleSheet.create({
   },
   buttonLoginStyle: {
     margin: margin.md,
+    marginVertical: margin.lg,
     borderColor: darkPalette.darkCyan,
     backgroundColor: darkPalette.darkCyan,
     borderRadius: sizes.roundedButtonRadius,

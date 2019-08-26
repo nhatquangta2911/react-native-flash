@@ -3,7 +3,7 @@ export { default as Menu } from './Menu';
 export { default as Button } from './Button';
 export { default as Child } from './Child';
 export { default as TextOutput } from './TextOutput';
-export { default as Navigator } from './Navigator';
+export { default as BottomTabNavigator } from './BottomTabNavigator';
 export { default as OfflineNotice } from './OfflineNotice';
 export { default as OnlineNotice } from './OnlineNotice';
 export { default as Modal } from './Modal';

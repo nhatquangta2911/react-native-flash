@@ -5,7 +5,7 @@ import { BottomNavigation } from 'react-native-paper';
 import { OrderPage, DemoReduxPage, LoginPage } from '../../views';
 import { darkPalette } from '../../styles/base';
 
-export default class Navigator extends Component {
+export default class BottomTabNavigator extends Component {
   static navigationOptions = {
     header: null
   };

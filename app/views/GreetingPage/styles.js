@@ -17,5 +17,10 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.md,
     marginBottom: margin.special
+  },
+  percentText: {
+    fontFamily: fonts.thin,
+    fontSize: fonts.sm,
+    marginBottom: -fonts.sm
   }
 });

@@ -10,14 +10,7 @@ import * as actions from '../../actions';
 import { tokenHandler } from '../../utils/token';
 import { darkPalette } from '../../styles/base';
 
-let asyncToken = '';
-
-const getToken = async () => {
-  asyncToken = await tokenHandler.getData('token');
-};
-
 const DemoReduxPage = () => {
-  getToken();
   const dispatch = useDispatch();
   const { containerStyles, textOutputStyles, buttonGroupStyles, tokenText } = styles;
   return (

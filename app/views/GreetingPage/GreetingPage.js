@@ -7,6 +7,7 @@ import { darkPalette } from '../../styles/base';
 
 export class GreetingPage extends Component {
   static navigationOptions = {
+    headerMode: 'none',
     header: null
   };
 
@@ -23,7 +24,10 @@ export class GreetingPage extends Component {
 
   makeItRun = () => {
     setInterval(() => {
-      if (this.state.value > 1) this.props.navigation.navigate('Login');
+      if (this.state.value > 1) {
+        this.props.navigation.navigate('AuthLoading');
+        return;
+      }
       this.setState({
         value: this.state.value + 0.01
       });
@@ -32,12 +36,15 @@ export class GreetingPage extends Component {
 
   render() {
     const { value } = this.state;
-    const { greetingContainer, greetingText, contentText } = styles;
+    console.log(value);
+    const { greetingContainer, greetingText, contentText, percentText } = styles;
+    const percentValue = Math.round(value * 20) * 5;
     return (
       <View style={greetingContainer}>
         <View>
           <Text style={greetingText}>welcome</Text>
           <Text style={contentText}> how's your day going? </Text>
+          <Text style={percentText}>{percentValue > 100 ? 100 : percentValue}%</Text>
           <ProgressBar progress={value} color={darkPalette.darkCyan} />
         </View>
       </View>
