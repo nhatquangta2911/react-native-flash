@@ -7,12 +7,13 @@ import React, { Component, Fragment } from 'react';
 import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Input, Text, Button, Header, SocialIcon, Overlay } from 'react-native-elements';
+import { Input, Text, Button, SocialIcon, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { loginAction } from '../../actions';
 import styles from './styles';
 import { fonts, darkPalette, margin, sizes } from '../../styles/base';
 import { tokenHandler } from '../../utils/token';
+import { Header } from '../../components';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -117,25 +118,6 @@ class LoginPage extends Component {
             <Text style={modalContent}>{token}</Text>
           </View>
         </Overlay>
-        <Header
-          leftComponent={{
-            icon: 'menu',
-            color: darkPalette.white,
-            size: fonts.lg
-          }}
-          centerComponent={{
-            text: 'Login Page',
-            style: {
-              color: darkPalette.white,
-              fontFamily: fonts.regular,
-              fontSize: fonts.md
-            }
-          }}
-          backgroundColor={darkPalette.darkPurple}
-          containerStyle={{
-            marginTop: sizes.offsetTopHeaderAndroid
-          }}
-        />
         <View style={loginContainer}>
           <View style={logoContainer}>
             <Icon name="heartbeat" color={darkPalette.darkPurple} size={fonts.special} />

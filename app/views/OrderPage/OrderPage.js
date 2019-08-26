@@ -5,6 +5,7 @@ import styles from './styles';
 import { Header } from '../../components';
 import { DailyChoices } from '../';
 import { tokenHandler } from '../../utils/token';
+import { darkPalette } from '../../styles/base';
 
 class OrderPage extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class OrderPage extends Component {
       </Fragment>
     ) : (
       <Fragment>
-        {/* <Header headerText={'Lunch Ordering Page'} /> */}
+        <Header color={darkPalette.darkCyan} centerTitle="Order" />
         <View style={orderPageContainer}>
           <DailyChoices />
         </View>
