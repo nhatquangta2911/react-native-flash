@@ -6,6 +6,10 @@ import { OrderPage, DemoReduxPage, LoginPage } from '../../views';
 import { darkPalette } from '../../styles/base';
 
 export default class Navigator extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   constructor(props) {
     super(props);
     this.state = {

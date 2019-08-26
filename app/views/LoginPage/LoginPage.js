@@ -1,33 +1,29 @@
 /* eslint-disable no-undef */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable quote-props */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
 import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Input, Text, Button, SocialIcon, Overlay } from 'react-native-elements';
+import { Input, Text, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { loginAction } from '../../actions';
 import styles from './styles';
-import { fonts, darkPalette, margin, sizes } from '../../styles/base';
+import { fonts, darkPalette } from '../../styles/base';
 import { tokenHandler } from '../../utils/token';
-import { Header } from '../../components';
+import { Modal, SocialButton } from '../../components';
 
 class LoginPage extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
       isLoading: false,
-      token: '',
       hidden: true,
-      isModalVisible: false,
-      isTokenVisible: false,
-      isFocusNextInput: false,
-      isWrong: false
+      isModalVisible: false
     };
   }
 
@@ -44,20 +40,18 @@ class LoginPage extends Component {
       .then(res => {
         this.setState({
           token: res.data,
-          isLoading: false,
-          isTokenVisible: true,
-          isWrong: true
+          isLoading: false
         });
         this.props.loginAction(res.data, this.state.email);
         tokenHandler.storeData('token', res.data);
-        this.props.navigation.navigation('Greeting');
-        this.props.jumpTo('redux');
+        this.props.navigation.navigate('Home');
       })
       .catch(err => {
         this.setState({
           isLoading: false,
           isModalVisible: true,
-          password: ''
+          password: '',
+          isWrong: true
         });
         console.log(err);
       });
@@ -71,57 +65,40 @@ class LoginPage extends Component {
       this.setState({
         hidden: !this.state.hidden
       });
-    }, 700);
+    }, 250);
+  };
+
+  callbackToken = status => {
+    this.setState({ isTokenVisible: status });
+  };
+
+  callbackError = status => {
+    this.setState({ isModalVisible: status });
   };
 
   render() {
-    const {
-      email,
-      password,
-      token,
-      isLoading,
-      hidden,
-      isModalVisible,
-      isTokenVisible,
-      isWrong
-    } = this.state;
+    const { isLoading, hidden, isModalVisible } = this.state;
     const {
       loginContainer,
       textStyle,
       logoContainer,
       contentContainer,
       textLogo,
-      modalContainer,
-      modalTitle,
-      modalContent
+      buttonLoginStyle,
+      titleButtonLoginStyle,
+      inputStyle
     } = styles;
     return (
       <Fragment>
-        <Overlay
-          width="90%"
-          height="auto"
+        <Modal
           isVisible={isModalVisible}
-          onBackdropPress={() => this.setState({ isModalVisible: !this.state.isModalVisible })}
-        >
-          <View style={modalContainer}>
-            <Text style={modalTitle}>Oop!</Text>
-            <Text style={modalContent}>Email or Password might not correct.</Text>
-          </View>
-        </Overlay>
-        <Overlay
-          width="90%"
-          height="auto"
-          isVisible={isTokenVisible}
-          onBackdropPress={() => this.setState({ isTokenVisible: !this.state.isTokenVisible })}
-        >
-          <View style={modalContainer}>
-            <Text style={modalTitle}>Token</Text>
-            <Text style={modalContent}>{token}</Text>
-          </View>
-        </Overlay>
+          title="Oops!"
+          content="Email or Password might incorrect"
+          sendStatus={this.callbackError}
+        />
         <View style={loginContainer}>
           <View style={logoContainer}>
-            <Icon name="heartbeat" color={darkPalette.darkPurple} size={fonts.special} />
+            <Icon name="heartbeat" color={darkPalette.darkCyan} size={fonts.special} />
             <Text style={textLogo}>Senior Project</Text>
           </View>
           <View style={contentContainer}>
@@ -132,15 +109,11 @@ class LoginPage extends Component {
               returnKeyType="next"
               keyboardType="email-address"
               type="email"
-              inputStyle={{
-                fontFamily: fonts.regular,
-                fontSize: fonts.text,
-                color: darkPalette.darkPurple
-              }}
+              inputStyle={inputStyle}
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="envelope" color={darkPalette.darkPurple} size={fonts.md} />}
+              leftIcon={<Icon name="envelope" color={darkPalette.darkCyan} size={fonts.md} />}
               onChangeText={text => this.setState({ email: text })}
             />
             <Input
@@ -148,7 +121,7 @@ class LoginPage extends Component {
               inputStyle={{
                 fontFamily: fonts.regular,
                 fontSize: fonts.text,
-                color: darkPalette.darkPurple
+                color: darkPalette.darkCyan
               }}
               secureTextEntry={hidden}
               onSubmitEditing={() => this.login()}
@@ -157,46 +130,27 @@ class LoginPage extends Component {
               rightIcon={
                 <Icon
                   name={hidden ? 'eye' : 'eye-slash'}
-                  color={darkPalette.darkPurple}
+                  color={darkPalette.darkCyan}
                   size={fonts.md}
                   onPress={() => this.handleEyeSlash()}
                 />
               }
-              value={isWrong ? '' : this.state.password}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="unlock-alt" color={darkPalette.darkPurple} size={fonts.md} />}
+              leftIcon={<Icon name="unlock-alt" color={darkPalette.darkCyan} size={fonts.md} />}
               onChangeText={text => this.setState({ password: text })}
             />
             <Button
               title="LOGIN"
               type="solid"
               loading={isLoading}
-              titleStyle={{
-                color: darkPalette.white,
-                fontSize: fonts.sm,
-                fontFamily: fonts.bold
-              }}
-              buttonStyle={{
-                margin: margin.md,
-                borderColor: darkPalette.darkPurple,
-                backgroundColor: darkPalette.darkPurple,
-                borderRadius: sizes.roundedButtonRadius,
-                height: sizes.buttonHeight
-              }}
+              titleStyle={titleButtonLoginStyle}
+              buttonStyle={buttonLoginStyle}
               onPress={() => {
                 this.login();
               }}
             />
             <Text style={textStyle}>OR</Text>
-            <SocialIcon
-              title="Sign In With Facebook"
-              fontFamily={fonts.regular}
-              fontWeight="200"
-              button
-              light
-              style={{ height: sizes.buttonHeight }}
-              type="facebook"
-            />
+            <SocialButton type="facebook" />
           </View>
         </View>
       </Fragment>
@@ -204,7 +158,7 @@ class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({
   loginAction: (token, email) => dispatch(loginAction(token, email))
 });

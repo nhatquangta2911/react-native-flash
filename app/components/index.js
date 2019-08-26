@@ -6,3 +6,5 @@ export { default as TextOutput } from './TextOutput';
 export { default as Navigator } from './Navigator';
 export { default as OfflineNotice } from './OfflineNotice';
 export { default as OnlineNotice } from './OnlineNotice';
+export { default as Modal } from './Modal';
+export { default as SocialButton } from './SocialButton';

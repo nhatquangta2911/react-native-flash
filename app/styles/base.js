@@ -91,7 +91,9 @@ export const margin = {
   sm: 5,
   md: 10,
   lg: 15,
-  xl: 20
+  xl: 20,
+  xxl: 30,
+  special: 50
 };
 
 export const fonts = {

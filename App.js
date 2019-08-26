@@ -10,11 +10,10 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { Navigator, OfflineNotice, OnlineNotice } from './app/components';
+import { OfflineNotice } from './app/components';
 import store from './app/store';
 import { fonts } from './app/styles/base';
 import AppNavigator from './AppNavigator';
@@ -23,7 +22,6 @@ const App = () => (
   <StoreProvider store={store}>
     <PaperProvider theme={theme} settings={{ icon: props => <AwesomeIcon {...props} /> }}>
       <OfflineNotice />
-      <OnlineNotice />
       <AppNavigator />
     </PaperProvider>
   </StoreProvider>

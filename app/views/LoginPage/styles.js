@@ -1,19 +1,7 @@
 /* eslint-disable import/imports-first */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import {
-  dimensions,
-  rates,
-  colors,
-  padding,
-  margin,
-  fonts,
-  darkPalette
-} from '../../styles/base';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen';
+import { fonts, darkPalette, margin, sizes } from '../../styles/base';
 
 export default StyleSheet.create({
   loginContainer: {
@@ -30,26 +18,28 @@ export default StyleSheet.create({
     fontSize: fonts.sm,
     fontFamily: fonts.light,
     textAlign: 'center',
-    color: darkPalette.darkPurple
+    color: darkPalette.darkCyan
   },
   textLogo: {
     fontSize: fonts.xl,
     fontFamily: fonts.thin,
-    color: darkPalette.darkPurple
+    color: darkPalette.darkCyan
   },
-  modalContainer: {
-    margin: margin.md
+  buttonLoginStyle: {
+    margin: margin.md,
+    borderColor: darkPalette.darkCyan,
+    backgroundColor: darkPalette.darkCyan,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight
   },
-  modalTitle: {
-    fontSize: fonts.xl,
-    fontFamily: fonts.regular,
-    color: darkPalette.darkPurple,
-    marginBottom: margin.sm
-  },
-  modalContent: {
+  titleButtonLoginStyle: {
+    color: darkPalette.white,
     fontSize: fonts.sm,
-    fontFamily: fonts.thin,
-    color: darkPalette.darkPurple,
-    marginBottom: margin.md
+    fontFamily: fonts.bold
+  },
+  inputStyle: {
+    fontFamily: fonts.regular,
+    fontSize: fonts.text,
+    color: darkPalette.darkCyan
   }
 });
