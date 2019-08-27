@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import { OrderPage, DemoReduxPage, LoginPage } from '../../views';
-import { darkPalette } from '../../styles/base';
+import { OrderPage, DemoReduxPage, LoginPage, HomePage } from '../../views';
+import { darkPalette, dimensions } from '../../styles/base';
 
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
@@ -13,29 +13,29 @@ export default class BottomTabNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 1,
+      index: 0,
       routes: [
         {
-          key: 'order',
-          title: 'Order',
+          key: 'Home',
+          title: 'Home',
           icon: 'list',
           color: darkPalette.darkCyan
         },
         {
-          key: 'redux',
+          key: 'Redux',
           title: 'Demo Redux',
           icon: 'edit',
           color: darkPalette.darkOrange
         },
         {
-          key: 'login',
+          key: 'Login',
           title: 'Demo Login',
           icon: 'people',
           color: darkPalette.darkPurple
         },
         {
-          key: 'others',
-          title: 'Others',
+          key: 'Order',
+          title: 'Order',
           icon: 'info',
           color: darkPalette.darkGreen
         }
@@ -46,10 +46,10 @@ export default class BottomTabNavigator extends Component {
   handleIndexChange = index => this.setState({ index });
 
   renderScene = BottomNavigation.SceneMap({
-    redux: DemoReduxPage,
-    order: OrderPage,
-    login: LoginPage,
-    others: OrderPage
+    Home: HomePage,
+    Redux: DemoReduxPage,
+    Order: OrderPage,
+    Login: LoginPage
   });
 
   render() {
@@ -58,6 +58,7 @@ export default class BottomTabNavigator extends Component {
         navigationState={this.state}
         onIndexChange={this.handleIndexChange}
         renderScene={this.renderScene}
+        barStyle={{ height: (dimensions.fullHeight * 8) / 100 }}
       />
     );
   }

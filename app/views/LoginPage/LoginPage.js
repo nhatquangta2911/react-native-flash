@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './styles';
 import { fonts, darkPalette } from '../../styles/base';
 import { Modal, SocialButton } from '../../components';
+import { tokenHandler } from '../../utils/token';
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -21,11 +22,16 @@ class LoginPage extends Component {
     this.state = {
       email: '',
       password: '',
+      token: '',
       isLoading: false,
       hidden: true,
       isModalVisible: false
     };
   }
+
+  saveToken = async () => {
+    await tokenHandler.storeData('token', this.state.token);
+  };
 
   login() {
     Keyboard.dismiss();
@@ -39,10 +45,12 @@ class LoginPage extends Component {
       })
       .then(res => {
         this.setState({
+          token: res.data,
           isLoading: false,
           isModalVisible: false
         });
-        this.props.navigation.push('Home');
+        this.saveToken();
+        this.props.navigation.navigate('Home');
       })
       .catch(err => {
         this.setState({

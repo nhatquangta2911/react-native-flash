@@ -22,7 +22,8 @@ export const dimensions = {
   fullWidth: Dimensions.get('window').width,
   headerHeight: 50,
   buttonHeight: 45,
-  shadowElevation: 4
+  shadowElevation: 4,
+  containerHeight: (Dimensions.get('window').height * 92) / 100
 };
 
 export const rates = {
