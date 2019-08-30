@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
-import { fonts, dimensions, margin, darkPalette, sizes } from '../../styles/base';
+import { dimensions, fonts, margin, sizes, darkPalette } from '../../styles/base';
 
 export default StyleSheet.create({
-  homeContainer: {
+  settingContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     height: dimensions.containerHeight
@@ -11,7 +11,7 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.md
   },
-  buttonLoginStyle: {
+  buttonBackStyle: {
     margin: margin.md,
     marginVertical: margin.lg,
     borderColor: darkPalette.darkCyan,

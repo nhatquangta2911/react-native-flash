@@ -15,7 +15,7 @@ const DemoReduxPage = () => {
   const { containerStyles, textOutputStyles, buttonGroupStyles, tokenText } = styles;
   return (
     <Fragment>
-      <Header centerTitle="Demo Redux" color={darkPalette.darkOrange} />
+      {/* <Header centerTitle="Demo Redux" color={darkPalette.darkOrange} /> */}
       <View style={containerStyles}>
         <View style={textOutputStyles}>
           {/* <Text style={tokenText}> Demo Redux</Text> */}

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import { OrderPage, DemoReduxPage, LoginPage, HomePage } from '../../views';
+import { OrderPage, DemoReduxPage, SettingPage, HomePage } from '../../views';
 import { darkPalette, dimensions } from '../../styles/base';
 
 export default class BottomTabNavigator extends Component {
@@ -18,7 +18,7 @@ export default class BottomTabNavigator extends Component {
         {
           key: 'Home',
           title: 'Home',
-          icon: 'list',
+          icon: 'home',
           color: darkPalette.darkCyan
         },
         {
@@ -28,16 +28,16 @@ export default class BottomTabNavigator extends Component {
           color: darkPalette.darkOrange
         },
         {
-          key: 'Login',
-          title: 'Demo Login',
-          icon: 'people',
-          color: darkPalette.darkPurple
-        },
-        {
           key: 'Order',
           title: 'Order',
           icon: 'info',
           color: darkPalette.darkGreen
+        },
+        {
+          key: 'Setting',
+          title: 'Setting',
+          icon: 'list',
+          color: darkPalette.darkPurple
         }
       ]
     };
@@ -49,7 +49,7 @@ export default class BottomTabNavigator extends Component {
     Home: HomePage,
     Redux: DemoReduxPage,
     Order: OrderPage,
-    Login: LoginPage
+    Setting: SettingPage
   });
 
   render() {

@@ -8,8 +8,6 @@ import { withNavigation } from 'react-navigation';
 import styles from './styles';
 
 export class HomePage extends Component {
-  static navigationOptions = ({ navigation }) => {};
-
   handleLogout = async () => {
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');
@@ -17,9 +15,13 @@ export class HomePage extends Component {
 
   render() {
     const { homeContainer, textStyles, titleButtonLoginStyle, buttonLoginStyle } = styles;
+    const { navigation } = this.props;
+    const token = navigation.getParam('token', 'default-token');
     return (
       <View style={homeContainer}>
         <Text style={textStyles}>Home Page</Text>
+        <Text style={textStyles}>1
+        </Text>
         <Button
           title="LOGOUT"
           type="solid"

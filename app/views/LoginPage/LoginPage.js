@@ -50,7 +50,9 @@ class LoginPage extends Component {
           isModalVisible: false
         });
         this.saveToken();
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('Home', {
+          token: this.state.token
+        });
       })
       .catch(err => {
         this.setState({

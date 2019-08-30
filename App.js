@@ -12,6 +12,7 @@
 import React from 'react';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import { OfflineNotice } from './app/components';
 import store from './app/store';
 import { fonts } from './app/styles/base';
@@ -19,7 +20,7 @@ import AppNavigator from './AppNavigator';
 
 const App = () => (
   <StoreProvider store={store}>
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={theme} settings={{ icon: props => <AwesomeIcon {...props} /> }}>
       <AppNavigator />
     </PaperProvider>
     <OfflineNotice />
