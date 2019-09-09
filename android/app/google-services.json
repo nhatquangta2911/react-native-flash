@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "116963018082",
+    "firebase_url": "https://pushnotif-33754.firebaseio.com",
+    "project_id": "pushnotif-33754",
+    "storage_bucket": "pushnotif-33754.appspot.com"
+  },
+  "client": [{
+    "client_info": {
+      "mobilesdk_app_id": "1:116963018082:android:2d273fbd3ae3923e6cd83b",
+      "android_client_info": {
+        "package_name": "com.reactnativeflash"
+      }
+    },
+    "oauth_client": [{
+      "client_id": "116963018082-v14qe0oo65165nq5378nnu3p1obqvvj7.apps.googleusercontent.com",
+      "client_type": 3
+    }],
+    "api_key": [{
+      "current_key": "AIzaSyDsYdGdz8I3fNIXr3MYx_U9QqnSiZF9Qdg"
+    }],
+    "services": {
+      "appinvite_service": {
+        "other_platform_oauth_client": [{
+          "client_id": "116963018082-v14qe0oo65165nq5378nnu3p1obqvvj7.apps.googleusercontent.com",
+          "client_type": 3
+        }]
+      }
+    }
+  }],
+  "configuration_version": "1"
+}

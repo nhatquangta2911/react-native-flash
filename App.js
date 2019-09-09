@@ -17,6 +17,7 @@ import { OfflineNotice } from './app/components';
 import store from './app/store';
 import { fonts } from './app/styles/base';
 import AppNavigator from './AppNavigator';
+import PushController from './app/utils/notification/PushController';
 
 const App = () => (
   <StoreProvider store={store}>
@@ -24,6 +25,7 @@ const App = () => (
       <AppNavigator />
     </PaperProvider>
     <OfflineNotice />
+    <PushController />
   </StoreProvider>
 );
 
