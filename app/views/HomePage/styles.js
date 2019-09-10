@@ -3,7 +3,7 @@ import { fonts, dimensions, margin, darkPalette, sizes } from '../../styles/base
 
 export default StyleSheet.create({
   homeContainer: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     height: dimensions.containerHeight
   },

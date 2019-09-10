@@ -8,3 +8,4 @@ export { default as OfflineNotice } from './OfflineNotice';
 export { default as OnlineNotice } from './OnlineNotice';
 export { default as Modal } from './Modal';
 export { default as SocialButton } from './SocialButton';
+export { default as StatusCard } from './StatusCard';

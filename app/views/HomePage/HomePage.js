@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
+import { StatusCard } from '../../components';
 
 export class HomePage extends Component {
   handleLogout = async () => {
@@ -19,9 +20,7 @@ export class HomePage extends Component {
     const token = navigation.getParam('token', 'default-token');
     return (
       <View style={homeContainer}>
-        <Text style={textStyles}>Home Page</Text>
-        <Text style={textStyles}>1
-        </Text>
+        <StatusCard />
         <Button
           title="LOGOUT"
           type="solid"

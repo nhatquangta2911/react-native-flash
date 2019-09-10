@@ -21,7 +21,7 @@ export default class PushController extends Component {
       requestPermissions: true
     });
 
-    const localNotif = PushNotification.localNotification({
+    PushNotification.localNotification({
       /* Android Only Properties */
       id: '0',
       ticker: 'My Notification Ticker', // (optional)
@@ -41,12 +41,10 @@ export default class PushController extends Component {
       importance: 'high' // (optional) set notification importance, default: high
     });
 
-    PushNotification.presentLocalNotification(localNotif);
-
     PushNotification.localNotificationSchedule({
       message: 'Recuring',
       // eslint-disable-next-line no-mixed-operators
-      date: new Date(Date.now() + 10 * 1000),
+      date: new Date(Date.now() + 60 * 1000),
       color: 'red'
     });
   }
