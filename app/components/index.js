@@ -10,3 +10,5 @@ export { default as Modal } from './Modal';
 export { default as SocialButton } from './SocialButton';
 export { default as StatusCard } from './StatusCard';
 export { default as Avatar } from './Avatar';
+export { default as Recipe } from './Recipe';
+export { default as CustomRecipe } from './CustomCarousel';

@@ -54,7 +54,9 @@ export const darkPalette = {
   darkGreen: '#70AE6E',
   darkYellow: '#BEEE62',
   darkOrange: '#F4743B',
-  white: '#fff'
+  white: '#fff',
+  darkGray: '#444',
+  lightGray: '#888'
 };
 
 export const notification = {

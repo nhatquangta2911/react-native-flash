@@ -6,14 +6,14 @@ export default StyleSheet.create({
   statusCardContainer: {
     flexDirection: 'row',
     backgroundColor: darkPalette.white,
-    shadowColor: darkPalette.darkCyan,
+    shadowColor: darkPalette.darkGray,
     shadowOffset: {
       width: 0,
       height: 2
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-    elevation: 4,
+    elevation: 2,
     borderRadius: 3,
     borderColor: darkPalette.white,
     width: dimensions.fullWidth - 2 * margin.md,
