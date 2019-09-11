@@ -1,9 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { Image } from 'react-native-elements';
+import { Avatar } from '../';
 import styles from './styles';
 
 export class StatusCard extends Component {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const {
       statusCardContainer,
@@ -17,17 +23,14 @@ export class StatusCard extends Component {
     return (
       <View style={statusCardContainer}>
         <View style={statusCardLeft}>
-          <Image
-            source={{ uri: 'https://png.pngtree.com/svg/20170505/1313036a9c.png' }}
-            style={{ width: 55, height: 55 }}
-          />
+          <Avatar isOnline />
         </View>
         <View style={statusCardCenter}>
-          <Text style={titleStyles}>Hi Shawn!</Text>
-          <Text style={contentStyles}>How's your day going?</Text>
+          <Text style={titleStyles}>{this.props.title || 'Title'}</Text>
+          <Text style={contentStyles}>{this.props.content || 'Content'}</Text>
         </View>
         <View style={statusCardRight}>
-          <Text style={statsStyles}>95%</Text>
+          <Text style={statsStyles}>{this.props.percent || '0'}%</Text>
         </View>
       </View>
     );

@@ -23,12 +23,12 @@ export default StyleSheet.create({
   },
   titleStyles: {
     fontFamily: fonts.regular,
-    fontSize: fonts.lg,
+    fontSize: fonts.md,
     color: colors.secondary
   },
   statsStyles: {
     fontFamily: fonts.regular,
-    fontSize: fonts.xl,
+    fontSize: fonts.lg,
     color: darkPalette.darkCyan
   },
   contentStyles: {
@@ -42,12 +42,15 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   statusCardCenter: {
-    flex: 2,
+    flex: 3,
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    marginHorizontal: margin.md
   },
   statusCardRight: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    marginRight: margin.sm
   }
 });
