@@ -23,7 +23,7 @@ export class StatusCard extends Component {
     return (
       <View style={statusCardContainer}>
         <View style={statusCardLeft}>
-          <Avatar isOnline />
+          <Avatar isOnline={this.props.isOnline} uri={this.props.uri} />
         </View>
         <View style={statusCardCenter}>
           <Text style={titleStyles}>{this.props.title || 'Title'}</Text>
