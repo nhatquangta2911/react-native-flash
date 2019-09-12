@@ -10,6 +10,11 @@ import { StatusCard, CustomCarousel, Recipe } from '../../components';
 import { recipes } from '../../statics/entries';
 
 export class HomePage extends Component {
+  static navigationOptions = {
+    headerMode: 'none',
+    header: null
+  };
+
   render() {
     const { homeContainer, title } = styles;
     const { navigation } = this.props;

@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-mixed-operators */
 import { StyleSheet } from 'react-native';
-import { dimensions, margin } from '../../styles/base';
+import { dimensions, margin, darkPalette } from '../../styles/base';
 
 export default StyleSheet.create({
   carouselContainer: {

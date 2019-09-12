@@ -5,3 +5,4 @@ export { default as DemoReduxPage } from './DemoReduxPage';
 export { default as AuthLoadingPage } from './AuthLoadingPage';
 export { default as HomePage } from './HomePage';
 export { default as SettingPage } from './SettingPage';
+export { default as RecipeDetailPage } from './RecipeDetailPage';

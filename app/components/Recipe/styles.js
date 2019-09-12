@@ -6,7 +6,7 @@ export default StyleSheet.create({
   recipeContainer: {
     backgroundColor: darkPalette.white,
     minHeight: dimensions.fullHeight / 3,
-    width: (2 * dimensions.fullWidth) / 3,
+    width: (2.1 * dimensions.fullWidth) / 3,
     marginHorizontal: margin.sm,
     shadowColor: darkPalette.darkGray,
     shadowOffset: {

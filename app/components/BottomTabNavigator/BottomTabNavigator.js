@@ -1,9 +1,15 @@
+/* eslint-disable import/imports-first */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import { OrderPage, DemoReduxPage, SettingPage, HomePage } from '../../views';
+import { OrderPage, DemoReduxPage, SettingPage, HomePage, RecipeDetailPage } from '../../views';
 import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+
+const HomeStack = createAppContainer(
+  createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
+);
 
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
@@ -46,7 +52,7 @@ export default class BottomTabNavigator extends Component {
   handleIndexChange = index => this.setState({ index });
 
   renderScene = BottomNavigation.SceneMap({
-    Home: HomePage,
+    Home: HomeStack,
     Redux: DemoReduxPage,
     Order: OrderPage,
     Setting: SettingPage
