@@ -12,8 +12,8 @@ export default StyleSheet.create({
     fontSize: fonts.md
   },
   buttonBackStyle: {
-    margin: margin.md,
-    marginVertical: margin.lg,
+    marginHorizontal: margin.md,
+    marginTop: margin.sm,
     borderColor: darkPalette.darkCyan,
     backgroundColor: darkPalette.darkCyan,
     borderRadius: sizes.roundedButtonRadius,

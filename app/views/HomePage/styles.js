@@ -1,5 +1,6 @@
+/* eslint-disable no-mixed-operators */
 import { StyleSheet } from 'react-native';
-import { fonts, dimensions, margin, darkPalette, sizes } from '../../styles/base';
+import { fonts, dimensions, margin, darkPalette, sizes, padding } from '../../styles/base';
 
 export default StyleSheet.create({
   homeContainer: {
@@ -24,5 +25,18 @@ export default StyleSheet.create({
     color: darkPalette.white,
     fontSize: fonts.sm,
     fontFamily: fonts.regular
+  },
+  title: {
+    marginVertical: margin.md,
+    width: dimensions.fullWidth - 2 * margin.md,
+    textAlign: 'center',
+    fontFamily: fonts.thin,
+    fontSize: fonts.sm,
+    color: darkPalette.darkGray,
+    borderBottomColor: darkPalette.lightGray,
+    borderStyle: 'solid',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    paddingBottom: padding.sm
   }
 });

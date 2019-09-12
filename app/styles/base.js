@@ -32,6 +32,14 @@ export const rates = {
   borderRadius: 2
 };
 
+export const bottomTabNav = {
+  main1: '#575D90',
+  main2: '#595F72',
+  main3: '#5CC8FF',
+  main4: '#F15946',
+  main5: '#00CFC1'
+};
+
 export const template = {
   reddish: '#ED6A5A',
   beige: '#F4F1BB',
@@ -50,7 +58,7 @@ export const lightPalette = {
 
 export const darkPalette = {
   darkPurple: '#503960',
-  darkCyan: '#3C6E71',
+  darkCyan: '#4c8a81',
   darkGreen: '#70AE6E',
   darkYellow: '#BEEE62',
   darkOrange: '#F4743B',

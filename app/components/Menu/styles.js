@@ -7,17 +7,33 @@ export default StyleSheet.create({
   menuContainer: {
     ...shadow,
     marginVertical: margin.sm,
-    borderRadius: rates.borderRadius,
     color: darkPalette.darkGreen,
     paddingHorizontal: padding.md,
-    paddingVertical: padding.md
+    paddingVertical: padding.md,
+    shadowColor: darkPalette.darkGray,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 2,
+    borderRadius: 3,
+    borderColor: darkPalette.white
   },
   menuTitle: {
-    fontSize: fonts.md,
-    fontWeight: 'bold',
+    fontFamily: fonts.regular,
+    fontSize: fonts.lg,
+    color: darkPalette.darkCyan
+  },
+  dishesTitle: {
+    fontFamily: fonts.thin,
+    fontSize: fonts.sm,
     color: darkPalette.darkCyan
   },
   menuDishes: {
+    fontFamily: fonts.thin,
+    color: darkPalette.darkGray,
     paddingVertical: padding.sm,
     justifyContent: 'space-between'
   },
@@ -27,7 +43,8 @@ export default StyleSheet.create({
     color: buttonColors.textColor,
     ...shadow,
     borderRadius: rates.borderRadius,
-    backgroundColor: darkPalette.darkCyan
+    backgroundColor: darkPalette.darkCyan,
+    fontFamily: fonts.thin
   },
   buttonChooseContainer: {
     alignItems: 'flex-end'

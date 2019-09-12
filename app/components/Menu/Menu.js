@@ -2,10 +2,21 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
-const { menuContainer, menuTitle, menuDishes, buttonChooseStyle, buttonChooseContainer } = styles;
+const {
+  menuContainer,
+  menuTitle,
+  menuDishes,
+  buttonChooseStyle,
+  buttonChooseContainer,
+  dishesTitle
+} = styles;
 
 const Menu = props => {
-  const dishList = props.dishes.map(d => <Text key={d.Id}>{d.Name}</Text>);
+  const dishList = props.dishes.map(d => (
+    <Text style={dishesTitle} key={d.Id}>
+      {d.Name}
+    </Text>
+  ));
 
   return (
     <View style={menuContainer}>

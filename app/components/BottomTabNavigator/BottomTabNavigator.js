@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { BottomNavigation } from 'react-native-paper';
 import { OrderPage, DemoReduxPage, SettingPage, HomePage } from '../../views';
-import { darkPalette, dimensions } from '../../styles/base';
+import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
 
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
@@ -25,19 +25,19 @@ export default class BottomTabNavigator extends Component {
           key: 'Redux',
           title: 'Demo Redux',
           icon: 'edit',
-          color: darkPalette.darkOrange
+          color: darkPalette.darkCyan
         },
         {
           key: 'Order',
           title: 'Order',
           icon: 'info',
-          color: darkPalette.darkGreen
+          color: darkPalette.darkCyan
         },
         {
           key: 'Setting',
           title: 'Setting',
           icon: 'list',
-          color: darkPalette.darkPurple
+          color: darkPalette.darkCyan
         }
       ]
     };
