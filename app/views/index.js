@@ -6,3 +6,5 @@ export { default as AuthLoadingPage } from './AuthLoadingPage';
 export { default as HomePage } from './HomePage';
 export { default as SettingPage } from './SettingPage';
 export { default as RecipeDetailPage } from './RecipeDetailPage';
+export { default as QuestionPage } from './QuestionPage';
+export { default as SRecordPage } from './SRecordPage';

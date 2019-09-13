@@ -44,8 +44,8 @@ export default class PushController extends Component {
     PushNotification.localNotificationSchedule({
       message: 'Recuring',
       // eslint-disable-next-line no-mixed-operators
-      date: new Date(Date.now() + 60 * 1000),
-      color: 'red'
+      date: new Date(Date.now() + 3600 * 1000),
+      color: 'green'
     });
   }
 

@@ -3,7 +3,15 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import { OrderPage, DemoReduxPage, SettingPage, HomePage, RecipeDetailPage } from '../../views';
+import {
+  OrderPage,
+  DemoReduxPage,
+  SettingPage,
+  HomePage,
+  RecipeDetailPage,
+  QuestionPage,
+  SRecordPage
+} from '../../views';
 import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 
@@ -28,15 +36,15 @@ export default class BottomTabNavigator extends Component {
           color: darkPalette.darkCyan
         },
         {
-          key: 'Redux',
-          title: 'Demo Redux',
-          icon: 'edit',
+          key: 'Question',
+          title: 'Question',
+          icon: 'comment',
           color: darkPalette.darkCyan
         },
         {
-          key: 'Order',
-          title: 'Order',
-          icon: 'info',
+          key: 'Record',
+          title: 'Record',
+          icon: 'book',
           color: darkPalette.darkCyan
         },
         {
@@ -53,8 +61,8 @@ export default class BottomTabNavigator extends Component {
 
   renderScene = BottomNavigation.SceneMap({
     Home: HomeStack,
-    Redux: DemoReduxPage,
-    Order: OrderPage,
+    Question: QuestionPage,
+    Record: SRecordPage,
     Setting: SettingPage
   });
 
