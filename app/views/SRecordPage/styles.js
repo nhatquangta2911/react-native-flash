@@ -8,6 +8,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     margin: margin.md
   },
+  searchBar: {
+    flex: 1
+  },
+  mainContent: {
+    flex: 5,
+    justifyContent: 'center'
+  },
   titleStyles: {
     fontSize: fonts.md,
     fontFamily: fonts.regular,
