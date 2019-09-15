@@ -10,7 +10,8 @@ import {
   HomePage,
   RecipeDetailPage,
   QuestionPage,
-  SRecordPage
+  SRecordPage,
+  BlogPage
 } from '../../views';
 import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -48,6 +49,12 @@ export default class BottomTabNavigator extends Component {
           color: darkPalette.darkCyan
         },
         {
+          key: 'Community',
+          title: 'Community',
+          icon: 'business',
+          color: darkPalette.darkCyan
+        },
+        {
           key: 'Setting',
           title: 'Setting',
           icon: 'list',
@@ -63,7 +70,8 @@ export default class BottomTabNavigator extends Component {
     Home: HomeStack,
     Question: QuestionPage,
     Record: SRecordPage,
-    Setting: SettingPage
+    Setting: SettingPage,
+    Community: BlogPage
   });
 
   render() {

@@ -155,6 +155,15 @@ class LoginPage extends Component {
               }}
             />
             <Text style={textStyle}>OR</Text>
+            <Button
+              title="Become Our Family Member"
+              type="solid"
+              titleStyle={titleButtonLoginStyle}
+              buttonStyle={buttonLoginStyle}
+              onPress={() => {
+                this.props.navigation.navigate('Register');
+              }}
+            />
             <SocialButton type="facebook" />
           </View>
         </View>
