@@ -12,5 +12,6 @@ export { default as StatusCard } from './StatusCard';
 export { default as Avatar } from './Avatar';
 export { default as Recipe } from './Recipe';
 export { default as CustomCarousel } from './CustomCarousel';
+export { default as ImageCarousel } from './ImageCarousel';
 export { default as HomeHeaderItem } from './HomeHeaderItem';
 export { default as HomeHeader } from './HomeHeader';

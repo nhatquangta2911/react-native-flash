@@ -6,14 +6,18 @@ import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../s
 export default StyleSheet.create({
   itemContainer: {
     width: dimensions.fullWidth / 5,
-    height: (2 * dimensions.containerHeight) / 15,
-    justifyContent: 'center',
+    height: (1 * dimensions.containerHeight) / 8,
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   iconWrapper: {
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     flex: 2
+  },
+  iconStyle: {
+    height: dimensions.containerHeight / 12 - margin.md,
+    width: dimensions.containerHeight / 12 - margin.md
   },
   textWrapper: {
     justifyContent: 'center',

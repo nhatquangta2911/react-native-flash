@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -35,10 +36,32 @@ const HomeHeader = props => (
       </View>
     </View>
     <View style={listItem}>
-      <HomeHeaderItem title="Answer More" linkTo="Question" jumpTo={props.navigation} />
-      <HomeHeaderItem title="Your Answers" linkTo="SRecord" jumpTo={props.navigation} />
-      <HomeHeaderItem outside title="Statistic" linkTo="Stats" jumpTo={props.navigation} />
-      <HomeHeaderItem outside title="Browse Food" linkTo="Browsing" jumpTo={props.navigation} />
+      <HomeHeaderItem
+        title="Answer More"
+        linkTo="Question"
+        jumpTo={props.navigation}
+        icon={require('../../assets/icons/icon1.png')}
+      />
+      <HomeHeaderItem
+        title="Your Answers"
+        linkTo="SRecord"
+        jumpTo={props.navigation}
+        icon={require('../../assets/icons/icon2.png')}
+      />
+      <HomeHeaderItem
+        outside
+        title="Statistic"
+        linkTo="Stats"
+        jumpTo={props.navigation}
+        icon={require('../../assets/icons/icon3.png')}
+      />
+      <HomeHeaderItem
+        outside
+        title="Browse Food"
+        linkTo="Browsing"
+        jumpTo={props.navigation}
+        icon={require('../../assets/icons/icon4.png')}
+      />
     </View>
   </View>
 );

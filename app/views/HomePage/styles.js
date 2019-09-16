@@ -8,6 +8,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     height: dimensions.containerHeight
   },
+  scrollContainer: {
+    height: dimensions.containerHeight / 1.5
+  },
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.md

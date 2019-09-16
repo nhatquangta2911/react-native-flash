@@ -25,9 +25,15 @@ export const shadow = {
   },
   shadowOpacity: 0.23,
   shadowRadius: 2.62,
-  elevation: 2,
+  elevation: 3,
   borderRadius: 3,
   borderColor: '#fff'
+};
+
+export const headerStyle = {
+  fontFamily: 'Nunito-ExtraLight',
+  fontSize: 16,
+  color: '#444'
 };
 
 export const dimensions = {
@@ -122,7 +128,7 @@ export const margin = {
 };
 
 export const fonts = {
-  xsm: 11,
+  xsm: 12,
   sm: 14,
   md: 18,
   lg: 28,

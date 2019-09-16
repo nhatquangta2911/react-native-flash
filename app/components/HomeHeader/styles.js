@@ -5,10 +5,9 @@ import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../s
 export default StyleSheet.create({
   homeHeaderContainer: {
     width: dimensions.fullWidth - margin.lg,
-    height: dimensions.containerHeight / 5,
+    height: dimensions.containerHeight / 4.5,
     backgroundColor: darkPalette.white,
     margin: margin.md,
-    paddingVertical: padding.sm,
     ...shadow
   },
   status: {
