@@ -23,6 +23,7 @@ export default class CustomCarousel extends Component {
           data={this.props.items}
           renderItem={this._renderItem}
           sliderWidth={dimensions.fullWidth}
+          sliderHeight={dimensions.containerHeight / 2}
           itemWidth={(2.1 * dimensions.fullWidth) / 3 + margin.lg}
           inactiveSlideOpacity={0.4}
           autoplay

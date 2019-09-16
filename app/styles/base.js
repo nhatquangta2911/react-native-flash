@@ -17,6 +17,19 @@ export const sizes = {
   special: 100
 };
 
+export const shadow = {
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.23,
+  shadowRadius: 2.62,
+  elevation: 2,
+  borderRadius: 3,
+  borderColor: '#fff'
+};
+
 export const dimensions = {
   fullHeight: Dimensions.get('window').height,
   fullWidth: Dimensions.get('window').width,
@@ -64,7 +77,8 @@ export const darkPalette = {
   darkOrange: '#F4743B',
   white: '#fff',
   darkGray: '#444',
-  lightGray: '#888'
+  lightGray: '#888',
+  superLightgray: '#f3f3f3'
 };
 
 export const notification = {
@@ -108,6 +122,7 @@ export const margin = {
 };
 
 export const fonts = {
+  xsm: 11,
   sm: 14,
   md: 18,
   lg: 28,

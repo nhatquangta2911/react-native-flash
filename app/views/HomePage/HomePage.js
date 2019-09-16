@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
@@ -7,9 +8,13 @@ import { Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import { StatusCard, CustomCarousel, Recipe, HomeHeader } from '../../components';
-import { recipes } from '../../statics/entries';
 
 export class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   static navigationOptions = {
     headerMode: 'none',
     header: null
@@ -21,9 +26,9 @@ export class HomePage extends Component {
     const token = navigation.getParam('token', 'default-token');
     return (
       <View style={homeContainer}>
-        <HomeHeader />
-        <Text style={title}>Browse Food</Text>
-        <CustomCarousel items={recipes} />
+        <HomeHeader navigation={this.props} answerNumber={5} />
+        {/* <Text style={title}>Browse Food</Text>
+        <CustomCarousel items={recipes} /> */}
         {/* <Text style={title}>Information</Text> */}
         {/* <StatusCard title="Hi Shawn" content="How's your day going, buddy?" percent={89} /> */}
       </View>

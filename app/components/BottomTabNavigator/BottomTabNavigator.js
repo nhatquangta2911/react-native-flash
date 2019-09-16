@@ -16,9 +16,9 @@ import {
 import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-const HomeStack = createAppContainer(
-  createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
-);
+// const HomeStack = createAppContainer(
+//   createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
+// );
 
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
@@ -43,8 +43,8 @@ export default class BottomTabNavigator extends Component {
           color: darkPalette.darkCyan
         },
         {
-          key: 'Record',
-          title: 'Record',
+          key: 'SRecord',
+          title: 'SRecord',
           icon: 'book',
           color: darkPalette.darkCyan
         },
@@ -67,9 +67,9 @@ export default class BottomTabNavigator extends Component {
   handleIndexChange = index => this.setState({ index });
 
   renderScene = BottomNavigation.SceneMap({
-    Home: HomeStack,
+    Home: HomePage,
     Question: QuestionPage,
-    Record: SRecordPage,
+    SRecord: SRecordPage,
     Setting: SettingPage,
     Community: BlogPage
   });

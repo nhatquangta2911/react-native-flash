@@ -1,8 +1,12 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { BottomTabNavigator } from './app/components';
-import { AuthLoadingPage, LoginPage, RegisterPage } from './app/views';
+import { AuthLoadingPage, LoginPage, RegisterPage, StatsPage, BrowsingPage } from './app/views';
 
-const AppStack = createStackNavigator({ Home: BottomTabNavigator });
+const AppStack = createStackNavigator({
+  Home: BottomTabNavigator,
+  Stats: StatsPage,
+  Browsing: BrowsingPage
+});
 const AuthStack = createStackNavigator(
   { Login: LoginPage, Register: RegisterPage },
   { initialRouteName: 'Login' }

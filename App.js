@@ -21,12 +21,7 @@ import PushController from './app/utils/notification/PushController';
 
 const App = () => (
   <StoreProvider store={store}>
-    <PaperProvider
-      theme={theme}
-      settings={{
-        icon: props => <FontAwesome5 {...props} />
-      }}
-    >
+    <PaperProvider theme={theme}>
       <AppNavigator />
     </PaperProvider>
     <OfflineNotice />
