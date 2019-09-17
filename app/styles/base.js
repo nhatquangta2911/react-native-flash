@@ -130,6 +130,7 @@ export const margin = {
 export const fonts = {
   xsm: 12,
   sm: 14,
+  smd: 16,
   md: 18,
   lg: 28,
   xl: 40,
@@ -138,8 +139,10 @@ export const fonts = {
   outputText: 60,
   special: 100,
   largeIcon: 34,
+  //TODO: Change thin font for better display in VD
+  thin: 'Nunito-Light',
   light: 'Nunito-Light',
   regular: 'Nunito-Regular',
-  bold: 'Nunito-Black',
-  thin: 'Nunito-ExtraLight'
+  semibold: 'Nunito-SemiBold',
+  bold: 'Nunito-Black'
 };

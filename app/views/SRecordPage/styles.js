@@ -8,11 +8,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     margin: margin.md
   },
+  scrollContainer: {
+    flex: 8,
+    marginBottom: margin.xl
+  },
   searchBar: {
     flex: 1
   },
   mainContent: {
-    flex: 5,
+    flex: 1,
     justifyContent: 'center'
   },
   titleStyles: {
