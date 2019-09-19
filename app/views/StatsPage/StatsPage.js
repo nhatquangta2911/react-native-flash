@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '../../components';
 import styles from './styles';
 
 export class StatsPage extends Component {
   render() {
-    const { statsContainer, titleStyles, textStyles } = styles;
+    const { statsContainer } = styles;
     return (
       <View style={statsContainer}>
-        <Text style={titleStyles}> Stats Page </Text>
-        <Text style={textStyles}> Coming soon... </Text>
+        <Text.CommonText>Statistic Screen</Text.CommonText>
+        <Text.CommonText>Coming soon...</Text.CommonText>
       </View>
     );
   }

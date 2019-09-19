@@ -131,7 +131,7 @@ export const fonts = {
   xsm: 12,
   sm: 14,
   md: 18,
-  lg: 28,
+  lg: 18,
   xl: 40,
   text: 17,
   headerTextSize: 22,
