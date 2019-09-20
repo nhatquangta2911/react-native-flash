@@ -6,14 +6,25 @@ import {
   RegisterPage,
   StatsPage,
   BrowsingPage,
-  TipsPage
+  TipsPage,
+  RecipeDetailPage
 } from './app/views';
+
+const BrowsingStack = createStackNavigator(
+  {
+    Browsing: BrowsingPage,
+    Details: RecipeDetailPage
+  },
+  {
+    initialRouteName: 'Browsing'
+  }
+);
 
 const AppStack = createStackNavigator(
   {
     Home: BottomTabNavigator,
     Stats: StatsPage,
-    Browsing: BrowsingPage,
+    Browsing: BrowsingStack,
     Tips: TipsPage
   },
   {

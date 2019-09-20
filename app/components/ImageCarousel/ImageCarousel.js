@@ -24,7 +24,7 @@ class ImageCarousel extends Component {
         {
           id: 2,
           title: 'Swimming matters',
-          image: 'https://oclactive.co.uk/wp-content/uploads/2017/01/swim.jpg'
+          image: 'https://via.placeholder.com/500?text=Swimming+matters'
         },
         {
           id: 3,
