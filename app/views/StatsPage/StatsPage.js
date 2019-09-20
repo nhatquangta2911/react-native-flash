@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import { Text, Button } from '../../components';
 import styles from './styles';
+import { headerStyle } from '../../styles/base';
 
 export class StatsPage extends Component {
+  static navigationOptions = {
+    title: 'Statistic',
+    headerTitleStyle: { ...headerStyle }
+  };
+
   constructor(props) {
     super(props);
     this.state = {

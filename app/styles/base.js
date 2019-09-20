@@ -25,7 +25,7 @@ export const shadow = {
   },
   shadowOpacity: 0.23,
   shadowRadius: 2.62,
-  elevation: 3,
+  elevation: 2,
   borderRadius: 3,
   borderColor: '#fff'
 };
@@ -33,7 +33,9 @@ export const shadow = {
 export const headerStyle = {
   fontFamily: 'Nunito-ExtraLight',
   fontSize: 16,
-  color: '#444'
+  color: '#444',
+  padding: 0,
+  margin: 0
 };
 
 export const dimensions = {

@@ -28,8 +28,8 @@ export class HomePage extends Component {
         <ScrollView style={scrollContainer}>
           <Text style={title}>Tips & Advice</Text>
           <ImageCarousel />
-          <Text style={title}>Blogs</Text>
-          <ImageCarousel />
+          {/* <Text style={title}>Blogs</Text>
+          <ImageCarousel /> */}
         </ScrollView>
       </View>
     );

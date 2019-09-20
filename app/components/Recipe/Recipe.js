@@ -9,7 +9,7 @@ import { darkPalette } from '../../styles/base';
 
 class Recipe extends React.Component {
   goToDetails = () => {
-    this.props.navigation.navigate('RecipeDetail');
+    this.props.navigation.navigate('Details');
   };
 
   render() {

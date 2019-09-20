@@ -12,6 +12,7 @@
 import React from 'react';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { ModalProvider, createModalStack } from 'react-native-modalfy';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { OfflineNotice } from './app/components';
 import store from './app/store';
@@ -22,12 +23,18 @@ import PushController from './app/utils/notification/PushController';
 const App = () => (
   <StoreProvider store={store}>
     <PaperProvider theme={theme}>
-      <AppNavigator />
+      <ModalProvider stack={stack}>
+        <AppNavigator />
+      </ModalProvider>
     </PaperProvider>
     <OfflineNotice />
     <PushController />
   </StoreProvider>
 );
+
+const modalConfig = {};
+const defaultOptions = { backdropOpacity: 0.6 };
+const stack = createModalStack(modalConfig, defaultOptions);
 
 const theme = {
   ...DefaultTheme,

@@ -24,7 +24,9 @@ class ParallaxItem extends React.Component {
         activeOpacity={0.8}
       >
         <ParallaxImage
-          source={{ uri: item.image }}
+          source={{
+            uri: item.image
+          }}
           containerStyle={styles.imageContainer}
           style={styles.image}
           parallaxFactor={0.6}
