@@ -16,3 +16,5 @@ export { default as ImageCarousel } from './ImageCarousel';
 export { default as HomeHeaderItem } from './HomeHeaderItem';
 export { default as HomeHeader } from './HomeHeader';
 export { default as Text } from './Text';
+export { default as Question } from './Question';
+export { default as Answer } from './Answer';

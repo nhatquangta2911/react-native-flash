@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
+    marginBottom: Platform.select({ ios: 0, android: 1 }),
     backgroundColor: 'white',
     borderRadius: 8
   },

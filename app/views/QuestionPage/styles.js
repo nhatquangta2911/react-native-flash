@@ -1,12 +1,13 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette } from '../../styles/base';
+import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../styles/base';
 
 export default StyleSheet.create({
   questionContainer: {
     height: dimensions.containerHeight,
-    justifyContent: 'center',
-    margin: margin.md
+    justifyContent: 'flex-start',
+    marginHorizontal: margin.md
   },
   titleStyles: {
     fontSize: fonts.md,
@@ -17,5 +18,17 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  scrollContainer: {
+    flex: 7,
+    justifyContent: 'flex-start',
+    marginBottom: margin.xxl
+  },
+  scroll: {
+    height: (dimensions.containerHeight * 7) / 8
   }
 });

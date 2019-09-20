@@ -1,22 +1,39 @@
 import React, { Component, Fragment } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { Searchbar, Snackbar } from 'react-native-paper';
+import { Answer } from '../../components';
 import styles from './styles';
+import { answers } from '../../statics/answers';
 
 export class SRecordPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      answerData: answers,
       firstQuery: '',
       isVisible: false
     };
   }
   render() {
-    const { firstQuery, isVisible } = this.state;
-    const { questionContainer, mainContent, searchBar, titleStyles, textStyles } = styles;
+    const { answerData, firstQuery, isVisible } = this.state;
+    const {
+      questionContainer,
+      mainContent,
+      searchBar,
+      titleStyles,
+      textStyles,
+      scrollContainer
+    } = styles;
+    const answerResult = answerData
+      .filter(a => a.answer.includes(firstQuery))
+      .map(a => <Answer key={a && a.id} answer={a && a.answer} />);
     return (
       <Fragment>
         <View style={questionContainer}>
+          <View style={mainContent}>
+            <Text style={titleStyles}>SRecord</Text>
+            <Text style={textStyles}>This is all you need</Text>
+          </View>
           <View style={searchBar}>
             <Searchbar
               placeholder="Search"
@@ -27,9 +44,8 @@ export class SRecordPage extends Component {
               onSubmitEditing={() => this.setState({ isVisible: true })}
             />
           </View>
-          <View style={mainContent}>
-            <Text style={titleStyles}>SRecord</Text>
-            <Text style={textStyles}>This is all you need</Text>
+          <View style={scrollContainer}>
+            <ScrollView style={scrollContainer}>{answerResult}</ScrollView>
           </View>
         </View>
         <Snackbar
