@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
@@ -24,11 +25,20 @@ class ImageCarousel extends Component {
         {
           id: 2,
           title: 'Swimming matters',
-          image: 'https://via.placeholder.com/500?text=Swimming+matters'
+          // image: 'https://via.placeholder.com/500?text=Swimming+matters'
+          image:
+            'http://isanidad.com/wp-content/uploads/2019/03/doctor-cultivo-estetoscopio_23-2147796554.jpg'
         },
         {
           id: 3,
           title: 'Send the report weekly to your private doctor, why not?',
+          image:
+            'http://isanidad.com/wp-content/uploads/2019/03/doctor-cultivo-estetoscopio_23-2147796554.jpg'
+        },
+        {
+          id: 4,
+          title:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ex? Dicta adipisci debitis voluptatem optio delectus consectetur cupiditate commodi assumenda libero eum a impedit repudiandae consequuntur quisquam voluptate, laboriosam itaque.',
           image:
             'http://isanidad.com/wp-content/uploads/2019/03/doctor-cultivo-estetoscopio_23-2147796554.jpg'
         }
@@ -47,7 +57,7 @@ class ImageCarousel extends Component {
           itemWidth={screenWidth - 2 * margin.md}
           data={this.state.entries}
           renderItem={this._renderItem}
-          inactiveSlideOpacity={0.3}
+          // inactiveSlideOpacity={0.3}
           hasParallaxImages
           autoplay
           lockScrollWhileSnapping

@@ -16,7 +16,8 @@ export default StyleSheet.create({
   },
   textStyles: {
     fontFamily: fonts.thin,
-    fontSize: fonts.smd
+    fontSize: fonts.sm,
+    color: darkPalette.darkGray
   },
   buttonBackStyle: {
     marginTop: margin.sm,

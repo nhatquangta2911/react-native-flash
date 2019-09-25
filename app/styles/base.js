@@ -83,6 +83,7 @@ export const darkPalette = {
   darkGreen: '#70AE6E',
   darkYellow: '#BEEE62',
   darkOrange: '#F4743B',
+  backgroundOpacity: '#ffffff60',
   white: '#fff',
   darkGray: '#444',
   lightGray: '#888',
@@ -143,7 +144,7 @@ export const fonts = {
   largeIcon: 34,
   //TODO: Change thin font for better display in VD
   thin: 'Nunito-Light',
-  light: 'Nunito-Light',
+  light: 'Nunito-ExtraLight',
   regular: 'Nunito-Regular',
   semibold: 'Nunito-SemiBold',
   bold: 'Nunito-Black'

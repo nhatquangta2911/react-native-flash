@@ -3,11 +3,12 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
+import { withModal } from 'react-native-modalfy';
 import styles from './styles';
 
 const { offlineContainer, offlineText } = styles;
 
-const OfflineSign = props => (
+const OfflineSign = () => (
   <View style={offlineContainer}>
     <Text style={offlineText}>No Internet Connection</Text>
   </View>
@@ -31,6 +32,8 @@ class OfflineNotice extends PureComponent {
   handleConectivityChange = isConnected => {
     if (isConnected) {
       this.setState({ isConnected });
+      // console.log(this.props.modal);
+      // this.props.modal.openModal('ErrorModal');
     } else {
       this.setState({ isConnected });
     }

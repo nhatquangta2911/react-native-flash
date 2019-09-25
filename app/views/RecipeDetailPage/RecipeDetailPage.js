@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
+import { headerStyle } from '../../styles/base';
 
 export default class RecipeDetailPage extends Component {
   static navigationOptions = {
-    headerMode: 'none',
-    header: null
+    title: 'Recipe Detail',
+    headerTitleStyle: { ...headerStyle }
   };
   render() {
     const { recipeDetailContainer, textStyles } = styles;

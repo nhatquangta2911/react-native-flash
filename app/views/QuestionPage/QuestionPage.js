@@ -26,7 +26,12 @@ export class QuestionPage extends Component {
     const questionResult =
       questionList &&
       questionList.map(q => (
-        <Question key={q && q.id} type={q && q.type} content={q && q.content} />
+        <Question
+          key={q && q.id}
+          type={q && q.type}
+          content={q && q.content}
+          jumpTo={this.props.jumpTo}
+        />
       ));
     return (
       <View style={questionContainer}>

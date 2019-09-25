@@ -10,6 +10,7 @@ export class BrowsingPage extends Component {
   static navigationOptions = {
     title: 'Browsing Screen',
     headerTitleStyle: { ...headerStyle }
+    // header: null
   };
   render() {
     const { browsingContainer, textStyles, titleStyles } = styles;
