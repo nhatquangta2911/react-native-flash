@@ -25,11 +25,13 @@ export class HomePage extends Component {
     return (
       <View style={homeContainer}>
         <HomeHeader navigation={this.props} answerNumber={5} />
+        <Text style={title}>Tips & Advice</Text>
         <ScrollView style={scrollContainer}>
-          <Text style={title}>Tips & Advice</Text>
           <ImageCarousel />
-          {/* <Text style={title}>Blogs</Text>
-          <ImageCarousel /> */}
+        </ScrollView>
+        <Text style={title}>Blogs</Text>
+        <ScrollView style={scrollContainer}>
+          <ImageCarousel />
         </ScrollView>
       </View>
     );
