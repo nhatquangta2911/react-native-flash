@@ -15,19 +15,19 @@ class SettingPage extends Component {
       settingList: [
         {
           title: 'Change Your Info',
-          icon: 'home'
+          icon: 'list'
         },
         {
-          title: 'Change Your Info',
-          icon: 'home'
+          title: 'Your Private Doctor ',
+          icon: 'list'
         },
         {
-          title: 'Change Your Info',
-          icon: 'home'
+          title: 'Reminder',
+          icon: 'list'
         },
         {
-          title: 'Change Your Info',
-          icon: 'home'
+          title: 'About us',
+          icon: 'list'
         }
       ]
     };

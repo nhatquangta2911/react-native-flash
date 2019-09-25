@@ -29,7 +29,7 @@ export class StatsPage extends Component {
         },
         { text: 'OK', onPress: () => this.setState({ counter: ++this.state.counter }) }
       ],
-      { cancelable: false }
+      { cancelable: true }
     );
   };
 

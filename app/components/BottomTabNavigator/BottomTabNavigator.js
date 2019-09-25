@@ -85,3 +85,10 @@ export default class BottomTabNavigator extends Component {
     );
   }
 }
+
+// const QuestionStack = createStackNavigator(
+//   {
+//     Question: QuestionPage,
+//     QuestionDetail: Question
+//   }
+// );
