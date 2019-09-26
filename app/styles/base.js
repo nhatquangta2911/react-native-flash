@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import { Dimensions, StatusBar } from 'react-native';
 
 export const sizes = {
@@ -41,6 +42,7 @@ export const headerStyle = {
 export const dimensions = {
   fullHeight: Dimensions.get('window').height,
   fullWidth: Dimensions.get('window').width,
+  fitWidth: Dimensions.get('window').width - 2 * 10,
   headerHeight: 50,
   buttonHeight: 45,
   shadowElevation: 4,
@@ -85,6 +87,7 @@ export const darkPalette = {
   darkOrange: '#F4743B',
   backgroundOpacity: '#ffffff60',
   white: '#fff',
+  black: '#000',
   darkGray: '#444',
   lightGray: '#888',
   superLightgray: '#f3f3f3'
@@ -128,6 +131,14 @@ export const margin = {
   xl: 20,
   xxl: 30,
   special: 50
+};
+
+export const nutrientColor = {
+  carbs: '#FCB524',
+  fat: '#52C0BC',
+  protein: '#976FE8',
+  fiber: '#444444',
+  cal: '#EF754F'
 };
 
 export const fonts = {

@@ -27,4 +27,10 @@ const TitleText = styled(LargerText)`
   font-family: 'Nunito-Regular';
 `;
 
-export default { CommonText, SmallerText, MediumText, LargerText, TitleText };
+const ColorText = styled(SmallerText)`
+  color: ${props => props.color};
+  font-family: ${props => (props.bold ? 'Nunito-Bold' : 'Nunito-Light')};
+  font-size: ${props => (props.bold ? 18 : 12)};
+`;
+
+export default { CommonText, SmallerText, MediumText, LargerText, TitleText, ColorText };

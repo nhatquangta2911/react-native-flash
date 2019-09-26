@@ -9,7 +9,11 @@ import { darkPalette } from '../../styles/base';
 
 class Recipe extends React.Component {
   goToDetails = () => {
-    this.props.navigation.navigate('Details');
+    this.props.navigation.navigate('Details', {
+      name: this.props.name,
+      image: this.props.image,
+      nutrients: this.props.nutrients
+    });
   };
 
   render() {
@@ -47,7 +51,7 @@ class Recipe extends React.Component {
               title="Details"
               type="outline"
               titleStyle={textStyles}
-              buttonStyle={{ paddingVertical: 4, borderColor: darkPalette.darkGray }}
+              buttonStyle={{ paddingVertical: 4, borderColor: darkPalette.black }}
               onPress={() => this.goToDetails()}
             />
           </View>
