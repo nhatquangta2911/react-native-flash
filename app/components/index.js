@@ -18,3 +18,5 @@ export { default as HomeHeader } from './HomeHeader';
 export { default as Text } from './Text';
 export { default as Question } from './Question';
 export { default as Answer } from './Answer';
+export { default as ModalSingle } from './ModalSingle/';
+export { default as ModalMulti } from './ModalMulti';
