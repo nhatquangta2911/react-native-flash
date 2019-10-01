@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-first-prop-new-line */
 /* eslint-disable prefer-template */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-undef */
@@ -5,7 +7,13 @@
 import React, { Component, Fragment } from 'react';
 import { View, Keyboard, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import {
+  LoginButton,
+  AccessToken,
+  LoginManager,
+  GraphRequest,
+  GraphRequestManager
+} from 'react-native-fbsdk';
 import axios from 'axios';
 import { Input, Text, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -16,7 +24,6 @@ import { tokenHandler } from '../../utils/token';
 
 class LoginPage extends Component {
   static navigationOptions = {
-    headerMode: 'none',
     header: null
   };
 
@@ -28,7 +35,8 @@ class LoginPage extends Component {
       token: '',
       isLoading: false,
       hidden: true,
-      isModalVisible: false
+      isModalVisible: false,
+      user: ''
     };
   }
 
@@ -80,6 +88,42 @@ class LoginPage extends Component {
 
   callbackError = status => {
     this.setState({ isModalVisible: status });
+  };
+
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+      Alert.alert('Error fetching data', error.toString());
+    } else {
+      this.setState({
+        user: result
+      });
+      // Alert.alert('Success fetching data', result.name.toString());
+    }
+  };
+
+  handleFacebookLogin = async () => {
+    try {
+      const result = await LoginManager.logInWithPermissions([
+        'public_profile'
+      ]);
+      if (result.isCancelled) {
+        Alert.alert('Login was cancelled.');
+      } else {
+        const infoRequest = new GraphRequest(
+          '/me',
+          null,
+          this._responseInfoCallback
+        );
+        new GraphRequestManager().addRequest(infoRequest).start();
+        this.props.navigation.navigate('Register', { user: this.state.user });
+        // Alert.alert(
+        //   'Login successfully with permissions',
+        //   result.grantedPermissions.toString()
+        // );
+      }
+    } catch (error) {
+      Alert.alert('Login fail with error', error.toString());
+    }
   };
 
   render() {
@@ -175,7 +219,7 @@ class LoginPage extends Component {
             />
             <Text style={textStyle}>OR</Text>
             <Button
-              title="Become Our Family Member"
+              title="Register"
               type="solid"
               titleStyle={titleButtonLoginStyle}
               buttonStyle={buttonLoginStyle}
@@ -183,8 +227,13 @@ class LoginPage extends Component {
                 this.props.navigation.navigate('Register');
               }}
             />
-            <SocialButton type="facebook" />
-            <LoginButton
+            <Button
+              title="facebook"
+              onPress={() => {
+                this.handleFacebookLogin();
+              }}
+            />
+            {/* <LoginButton
               onLoginFinished={(error, result) => {
                 if (error) {
                   console.log('Login has error: ' + result.error);
@@ -197,7 +246,7 @@ class LoginPage extends Component {
                 }
               }}
               onLogoutFinished={() => console.log('Logout.')}
-            />
+            /> */}
           </View>
         </View>
       </Fragment>

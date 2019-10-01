@@ -17,11 +17,16 @@ class RegisterPage extends Component {
 
   render() {
     const { registerContainer, titleStyles, textStyles } = styles;
+    const user = this.props.navigation.getParam('user', { name: 'Shawn' });
     return (
       <View style={registerContainer}>
         <Text style={titleStyles}>Register</Text>
         <Text style={textStyles}>Update soon...</Text>
-        <Button title="Next" onPress={() => this.props.navigation.navigate('RegisterStep1')} />
+        <Text style={textStyles}>{user && user.name}</Text>
+        <Button
+          title="Next"
+          onPress={() => this.props.navigation.navigate('RegisterStep1')}
+        />
       </View>
     );
   }
