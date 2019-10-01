@@ -1,8 +1,11 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-template */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
-import { View, Keyboard } from 'react-native';
+import { View, Keyboard, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import axios from 'axios';
 import { Input, Text, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -101,7 +104,11 @@ class LoginPage extends Component {
         />
         <View style={loginContainer}>
           <View style={logoContainer}>
-            <Icon name="heartbeat" color={darkPalette.darkCyan} size={fonts.special} />
+            <Icon
+              name="heartbeat"
+              color={darkPalette.darkCyan}
+              size={fonts.special}
+            />
             <Text style={textLogo}>Senior Project</Text>
           </View>
           <View style={contentContainer}>
@@ -117,7 +124,13 @@ class LoginPage extends Component {
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="envelope" color={darkPalette.darkCyan} size={fonts.md} />}
+              leftIcon={
+                <Icon
+                  name="envelope"
+                  color={darkPalette.darkCyan}
+                  size={fonts.md}
+                />
+              }
               onChangeText={text => this.setState({ email: text })}
             />
             <Input
@@ -141,7 +154,13 @@ class LoginPage extends Component {
                 />
               }
               leftIconContainerStyle={{ marginRight: 5, width: 20 }}
-              leftIcon={<Icon name="unlock-alt" color={darkPalette.darkCyan} size={fonts.md} />}
+              leftIcon={
+                <Icon
+                  name="unlock-alt"
+                  color={darkPalette.darkCyan}
+                  size={fonts.md}
+                />
+              }
               onChangeText={text => this.setState({ password: text })}
             />
             <Button
@@ -165,6 +184,20 @@ class LoginPage extends Component {
               }}
             />
             <SocialButton type="facebook" />
+            <LoginButton
+              onLoginFinished={(error, result) => {
+                if (error) {
+                  console.log('Login has error: ' + result.error);
+                } else if (result.isCancelled) {
+                  console.log('Login is cancelled.');
+                } else {
+                  AccessToken.getCurrentAccessToken().then(data => {
+                    console.log(data.accessToken.toString());
+                  });
+                }
+              }}
+              onLogoutFinished={() => console.log('Logout.')}
+            />
           </View>
         </View>
       </Fragment>

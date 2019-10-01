@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReactNativeFlash</string>
+    <string name="facebook_app_id">2406756292900379</string>
+    <string name="fb_login_protocol_scheme">fb2406756292900379</string>
 </resources>

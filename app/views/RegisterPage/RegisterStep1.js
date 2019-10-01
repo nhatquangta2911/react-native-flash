@@ -4,9 +4,9 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './styles';
 
-class RegisterPage extends Component {
+class RegisterStep1 extends Component {
   static navigationOptions = {
-    title: 'Register',
+    title: 'Step 1',
     headerTitleStyle: styles.headerStyle
   };
 
@@ -19,12 +19,12 @@ class RegisterPage extends Component {
     const { registerContainer, titleStyles, textStyles } = styles;
     return (
       <View style={registerContainer}>
-        <Text style={titleStyles}>Register</Text>
+        <Text style={titleStyles}>Register Step 1</Text>
         <Text style={textStyles}>Update soon...</Text>
-        <Button title="Next" onPress={() => this.props.navigation.navigate('RegisterStep1')} />
+        <Button title="Next" onPress={() => this.props.navigation.navigate('RegisterStep2')} />
       </View>
     );
   }
 }
 
-export default RegisterPage;
+export default RegisterStep1;

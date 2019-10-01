@@ -3,8 +3,10 @@ import { BottomTabNavigator } from './app/components';
 import {
   AuthLoadingPage,
   LoginPage,
-  RegisterPage,
   StatsPage,
+  RegisterPage,
+  RegisterStep1,
+  RegisterStep2,
   BrowsingPage,
   TipsPage,
   RecipeDetailPage
@@ -34,8 +36,23 @@ const AppStack = createStackNavigator(
     initialRouteName: 'Home'
   }
 );
+
+const RegisterStack = createStackNavigator(
+  {
+    RegisterMain: RegisterPage,
+    RegisterStep1,
+    RegisterStep2
+  },
+  {
+    initialRouteName: 'RegisterMain',
+    navigationOptions: {
+      header: null
+    }
+  }
+);
+
 const AuthStack = createStackNavigator(
-  { Login: LoginPage, Register: RegisterPage },
+  { Login: LoginPage, Register: RegisterStack },
   { initialRouteName: 'Login' }
 );
 
