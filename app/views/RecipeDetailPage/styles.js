@@ -20,7 +20,8 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray,
-    paddingHorizontal: padding.sm
+    paddingHorizontal: padding.sm,
+    marginVertical: margin.sm
   },
   headerText: {
     fontFamily: fonts.semibold,

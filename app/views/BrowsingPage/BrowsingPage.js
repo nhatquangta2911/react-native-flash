@@ -16,9 +16,23 @@ export class BrowsingPage extends Component {
     const { browsingContainer, textStyles, titleStyles } = styles;
     return (
       <View style={browsingContainer}>
-        <Text style={titleStyles}>Browsing Page</Text>
-        <Text style={textStyles}>Coming soon...</Text>
+        <Text style={titleStyles}>Browsing basic ingredients</Text>
         <CustomCarousel items={recipes} />
+        <Text style={textStyles}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis fugiat amet nisi neque
+          molestias quas. Quia incidunt odit sequi. Illum nihil iste ipsum esse id fugit praesentium
+          nemo facere quod.
+        </Text>
+        <Text style={textStyles}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis fugiat amet nisi neque
+          molestias quas. Quia incidunt odit sequi. Illum nihil iste ipsum esse id fugit praesentium
+          nemo facere quod.
+        </Text>
+        <Text style={textStyles}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis fugiat amet nisi neque
+          molestias quas. Quia incidunt odit sequi. Illum nihil iste ipsum esse id fugit praesentium
+          nemo facere quod.
+        </Text>
       </View>
     );
   }

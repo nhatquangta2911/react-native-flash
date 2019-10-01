@@ -10,12 +10,13 @@ export default StyleSheet.create({
   titleStyles: {
     fontSize: fonts.md,
     fontFamily: fonts.regular,
-    color: darkPalette.darkCyan
+    color: darkPalette.darkCyan,
+    marginBottom: margin.md
   },
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray,
-    marginBottom: margin.xxl
+    marginVertical: margin.sm
   }
 });

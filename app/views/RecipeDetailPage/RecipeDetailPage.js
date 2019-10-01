@@ -68,6 +68,11 @@ class RecipeDetailPage extends Component {
                 dolore, quae tempora ducimus quaerat, amet libero non maxime fuga sunt pariatur,
                 aliquid omnis dicta quod? Nostrum, praesentium adipisci!
               </Text>
+              <Text style={textStyles}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dignissimos corrupti
+                dolore, quae tempora ducimus quaerat, amet libero non maxime fuga sunt pariatur,
+                aliquid omnis dicta quod? Nostrum, praesentium adipisci!
+              </Text>
             </View>
           </Collapsible>
           <Text

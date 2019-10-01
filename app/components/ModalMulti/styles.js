@@ -8,16 +8,17 @@ export default StyleSheet.create({
   modalTitle: {
     fontSize: fonts.xl,
     fontFamily: fonts.regular,
-    color: darkPalette.darkPurple,
+    color: darkPalette.darkGray,
     marginBottom: margin.sm
   },
   modalContent: {
     fontSize: fonts.sm,
     fontFamily: fonts.thin,
-    color: darkPalette.darkPurple,
+    color: darkPalette.darkGray,
     marginBottom: margin.md
   },
   scrollContainer: {
-    maxHeight: dimensions.containerHeight / 2.2
+    maxHeight: dimensions.containerHeight / 2.2,
+    marginVertical: margin.sm
   }
 });

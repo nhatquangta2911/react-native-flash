@@ -21,7 +21,7 @@ export class Question extends Component {
     return (
       <TouchableOpacity style={questionContainer} onPress={() => this.props.showModal(this.props)}>
         <Text style={titleStyle} numberOfLines={1}>
-          {this.props.type}
+          {this.props.title}
         </Text>
         <Text style={textStyle} numberOfLines={2}>
           {this.props.question}

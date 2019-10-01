@@ -9,6 +9,6 @@ export default StyleSheet.create({
     height: dimensions.fullHeight / 3 + margin.md,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: margin.md
+    marginVertical: margin.xl
   }
 });

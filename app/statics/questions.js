@@ -2,37 +2,77 @@
 export const questions = [
   {
     id: '1',
+    title: 'Breakfast',
     type: 'multi',
-    question:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, obcaecati, ea aliquam ut vel neque repellat quisquam voluptas numquam saepe libero quam! Aspernatur eveniet omnis sapiente libero quisquam distinctio veniam.',
-    choices: ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'K1', 'L1']
+    question: 'Have you eaten any of them?',
+    choices: ['Coffee', 'Black Tea', 'Green Tea', 'Coke', 'Lemonade']
   },
   {
     id: '2',
+    title: 'Water Intake',
     type: 'single',
-    question:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, obcaecati, ea aliquam ut vel neque repellat quisquam voluptas numquam saepe libero quam! Aspernatur eveniet omnis sapiente libero quisquam distinctio veniam.',
-    choices: ['A2', 'B2', 'C2']
+    question: 'How much water did you drink this morning?',
+    choices: ['500ml', '1l', '1.5l']
   },
   {
     id: '3',
-    type: 'single',
+    title: 'Activities',
+    type: 'yn',
     question:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, obcaecati, ea aliquam ut vel neque repellat quisquam voluptas numquam saepe libero quam! Aspernatur eveniet omnis sapiente libero quisquam distinctio veniam.',
-    choices: ['A3', 'B3', 'C3']
+      'We see your heart rate seemed quite a little high than usual. Did you run around after dinner?'
   },
   {
     id: '4',
-    type: 'multi',
-    question:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, obcaecati, ea aliquam ut vel neque repellat quisquam voluptas numquam saepe libero quam! Aspernatur eveniet omnis sapiente libero quisquam distinctio veniam.',
-    choices: ['A4', 'B4', 'C4']
+    title: 'Fruit',
+    type: 'drop',
+    question: 'Have you been into any of them? So we can know your interests, buddy',
+    choices: [
+      {
+        id: 'a0s0a8ssbsd',
+        name: 'Banana'
+      },
+      {
+        id: '16hbajsabsd',
+        name: 'Apple'
+      },
+      {
+        id: 'nahs75a5sg',
+        name: 'Pomegranate'
+      },
+      {
+        id: '667atsas',
+        name: 'Blueberries'
+      },
+      {
+        id: 'hsyasajs',
+        name: 'Orange'
+      },
+      {
+        id: 'djsjudksjd',
+        name: 'Pear'
+      },
+      {
+        id: 'sdhyaysdj',
+        name: 'Grape Fruit'
+      },
+      {
+        id: 'a0s0z8ssbsd',
+        name: 'Coconut'
+      }
+    ]
   },
   {
     id: '5',
-    type: 'single',
+    title: 'Activities',
+    type: 'yn',
     question:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, obcaecati, ea aliquam ut vel neque repellat quisquam voluptas numquam saepe libero quam! Aspernatur eveniet omnis sapiente libero quisquam distinctio veniam.',
-    choices: ['A5', 'B5', 'C5']
+      'We see your heart rate seemed quite a little high than usual. Did you run around after dinner?'
+  },
+  {
+    id: '6',
+    title: 'Activities',
+    type: 'yn',
+    question:
+      'We see your heart rate seemed quite a little high than usual. Did you run around after dinner?'
   }
 ];

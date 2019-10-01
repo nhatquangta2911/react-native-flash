@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
     height: dimensions.containerHeight / 4.5,
     width: screenWidth - 2 * margin.md,
     borderRadius: 5,
-    opacity: 0.7
+    opacity: 0.5
   },
   title: {
-    fontFamily: fonts.regular,
+    fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray,
     position: 'absolute',

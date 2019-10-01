@@ -20,15 +20,17 @@ export default StyleSheet.create({
     width: dimensions.fullWidth - 2 * margin.md,
     height: dimensions.containerHeight / 5,
     ...shadow,
-    opacity: 0.8
+    opacity: 0.7,
+    marginVertical: margin.md
   },
   headerStyle: {
     ...headerStyle
   },
   titleStyles: {
-    fontSize: fonts.md,
+    fontSize: fonts.lg,
     fontFamily: fonts.regular,
-    color: darkPalette.darkCyan
+    color: darkPalette.darkCyan,
+    marginVertical: margin.sm
   },
   textStyles: {
     fontFamily: fonts.thin,

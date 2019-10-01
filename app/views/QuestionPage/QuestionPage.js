@@ -2,10 +2,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Alert } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import styles from './styles';
-import { Question, ModalSingle, ModalMulti } from '../../components';
+import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
 import { questions } from '../../statics/questions';
 
 export class QuestionPage extends Component {
@@ -16,30 +16,59 @@ export class QuestionPage extends Component {
       modal: '',
       isSingleVisible: false,
       isMultiVisible: false,
-      isDropdownVisible: false,
+      isDropVisible: false,
       isSnackbarVisible: false,
       choice: ''
     };
   }
 
   callback = modal => {
-    if (modal.type === 'single') {
-      this.setState({
-        modal,
-        isMultiVisible: this.state.isSingleVisible,
-        isSingleVisible: !this.state.isSingleVisible
-      });
-    } else if (modal.type === 'multi') {
-      this.setState({
-        modal,
-        isSingleVisible: this.state.isMultiVisible,
-        isMultiVisible: !this.state.isMultiVisible
-      });
-    } else {
-      this.setState({
-        isSingleVisible: this.state.isSingleVisible,
-        isMultiVisible: this.state.isMultiVisible
-      });
+    switch (modal.type) {
+      case 'single':
+        this.setState({
+          modal,
+          isMultiVisible: this.state.isSingleVisible,
+          isDropVisible: this.state.isSingleVisible,
+          isSingleVisible: !this.state.isSingleVisible
+        });
+        break;
+      case 'multi':
+        this.setState({
+          modal,
+          isSingleVisible: this.state.isMultiVisible,
+          isDropVisible: this.state.isMultiVisible,
+          isMultiVisible: !this.state.isMultiVisible
+        });
+        break;
+      case 'yn':
+        Alert.alert(
+          modal.title,
+          modal.question,
+          [
+            // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+            {
+              text: 'No',
+              onPress: () =>
+                this.setState({ isSnackbarVisible: !this.state.isSnackbarVisible, choice: 'NO' })
+            },
+            {
+              text: 'Yes',
+              onPress: () =>
+                this.setState({ isSnackbarVisible: !this.state.isSnackbarVisible, choice: 'YES' })
+            }
+          ],
+          { cancelable: true }
+        );
+        break;
+      case 'drop':
+        this.setState({
+          modal,
+          isSingleVisible: this.state.isDropVisible,
+          isMultiVisible: this.state.isDropVisible,
+          isDropVisible: !this.state.isDropVisible
+        });
+        break;
+      default:
     }
   };
 
@@ -47,6 +76,7 @@ export class QuestionPage extends Component {
     this.setState({
       isSingleVisible: status,
       isMultiVisible: status,
+      isDropVisible: status,
       modal: ''
     });
   };
@@ -56,6 +86,7 @@ export class QuestionPage extends Component {
       isSnackbarVisible: true,
       isSingleVisible: false,
       isMultiVisible: false,
+      isDropVisible: false,
       choice
     });
     setTimeout(() => {
@@ -77,7 +108,7 @@ export class QuestionPage extends Component {
       modal,
       isSingleVisible,
       isMultiVisible,
-      isDropdownVisible,
+      isDropVisible,
       choice
     } = this.state;
     const questionResult =
@@ -86,6 +117,7 @@ export class QuestionPage extends Component {
         <Question
           key={q && q.id}
           type={q && q.type}
+          title={q && q.title}
           question={q && q.question}
           choices={q && q.choices}
           jumpTo={this.props.jumpTo}
@@ -105,7 +137,7 @@ export class QuestionPage extends Component {
         </View>
         <ModalSingle
           isSingleVisible={isSingleVisible}
-          title={modal.type}
+          title={modal.title}
           question={modal.question}
           choices={modal.choices}
           sendStatus={this.handleBackDrop}
@@ -113,7 +145,15 @@ export class QuestionPage extends Component {
         />
         <ModalMulti
           isMultiVisible={isMultiVisible}
-          title={modal.type}
+          title={modal.title}
+          question={modal.question}
+          choices={modal.choices}
+          sendStatus={this.handleBackDrop}
+          goTo={this.handleAnswer}
+        />
+        <ModalDrop
+          isDropVisible={isDropVisible}
+          title={modal.title}
           question={modal.question}
           choices={modal.choices}
           sendStatus={this.handleBackDrop}
@@ -130,7 +170,7 @@ export class QuestionPage extends Component {
             }
           }}
         >
-          You chose {choice}
+          {choice === 'empty' ? 'Choose one, buddy!' : `You chose ${choice}`}
         </Snackbar>
       </View>
     );

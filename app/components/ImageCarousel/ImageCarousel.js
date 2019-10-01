@@ -25,9 +25,8 @@ class ImageCarousel extends Component {
         {
           id: 2,
           title: 'Swimming matters',
-          // image: 'https://via.placeholder.com/500?text=Swimming+matters'
           image:
-            'http://isanidad.com/wp-content/uploads/2019/03/doctor-cultivo-estetoscopio_23-2147796554.jpg'
+            'https://spinalcare.com.au/wp-content/uploads/2019/01/b88824a2-84f7-11e8-bbc3-e5c02a79570e.jpg'
         },
         {
           id: 3,

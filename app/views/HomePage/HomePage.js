@@ -24,7 +24,7 @@ export class HomePage extends Component {
     const { homeContainer, title, scrollContainer } = styles;
     return (
       <View style={homeContainer}>
-        <HomeHeader navigation={this.props} answerNumber={5} />
+        <HomeHeader navigation={this.props} answerNumber={9} />
         <Text style={title}>Tips & Advice</Text>
         <ScrollView style={scrollContainer}>
           <ImageCarousel />

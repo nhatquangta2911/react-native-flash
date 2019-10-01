@@ -28,5 +28,11 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray
+  },
+  dateStyle: {
+    fontFamily: fonts.thin,
+    fontSize: fonts.sm,
+    color: darkPalette.darkGray,
+    marginVertical: margin.sm
   }
 });

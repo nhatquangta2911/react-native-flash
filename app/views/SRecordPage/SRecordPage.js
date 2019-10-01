@@ -22,7 +22,8 @@ export class SRecordPage extends Component {
       searchBar,
       titleStyles,
       textStyles,
-      scrollContainer
+      scrollContainer,
+      dateStyle
     } = styles;
     const answerResult = answerData
       .filter(a => a.answer.includes(firstQuery))
@@ -34,8 +35,10 @@ export class SRecordPage extends Component {
             <Text style={titleStyles}>SRecord</Text>
             <Text style={textStyles}>This is all you need</Text>
           </View>
+          <Text style={dateStyle}>26th September 2019</Text>
           <View style={searchBar}>
             <Searchbar
+              //TODO: Dropdown later
               placeholder="Search"
               onChangeText={query => this.setState({ firstQuery: query })}
               value={firstQuery}
