@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-underscore-dangle */
 import React, { Component, Fragment } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, RefreshControl } from 'react-native';
 import { Searchbar, Snackbar } from 'react-native-paper';
+import Collapsible from 'react-native-collapsible';
 import { Answer } from '../../components';
 import styles from './styles';
 import { answers } from '../../statics/answers';
@@ -11,11 +15,24 @@ export class SRecordPage extends Component {
     this.state = {
       answerData: answers,
       firstQuery: '',
-      isVisible: false
+      isVisible: false,
+      refreshing: false,
+      isCollapsed: true
     };
   }
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true, answerData: [] });
+    setTimeout(() => {
+      this.setState({
+        refreshing: false,
+        answerData: answers
+      });
+    }, 500);
+  };
+
   render() {
-    const { answerData, firstQuery, isVisible } = this.state;
+    const { answerData, firstQuery, isVisible, refreshing } = this.state;
     const {
       questionContainer,
       mainContent,
@@ -35,21 +52,40 @@ export class SRecordPage extends Component {
             <Text style={titleStyles}>SRecord</Text>
             <Text style={textStyles}>This is all you need</Text>
           </View>
-          <Text style={dateStyle}>26th September 2019</Text>
-          <View style={searchBar}>
-            <Searchbar
-              //TODO: Dropdown later
-              placeholder="Search"
-              onChangeText={query => this.setState({ firstQuery: query })}
-              value={firstQuery}
-              inputStyle={textStyles}
-              style={{ height: 50 }}
-              onSubmitEditing={() => this.setState({ isVisible: true })}
-            />
-          </View>
-          <View style={scrollContainer}>
-            <ScrollView style={scrollContainer}>{answerResult}</ScrollView>
-          </View>
+          <Text
+            style={dateStyle}
+            onPress={() =>
+              this.setState({ isCollapsed: !this.state.isCollapsed })
+            }
+          >
+            26th September 2019
+          </Text>
+          <Collapsible collapsed={this.state.isCollapsed}>
+            <View style={searchBar}>
+              <Searchbar
+                //TODO: Dropdown later
+                placeholder="Search"
+                onChangeText={query => this.setState({ firstQuery: query })}
+                value={firstQuery}
+                inputStyle={textStyles}
+                style={{ height: 50 }}
+                onSubmitEditing={() => this.setState({ isVisible: true })}
+              />
+            </View>
+            <View style={scrollContainer}>
+              <ScrollView
+                style={scrollContainer}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => this._onRefresh()}
+                  />
+                }
+              >
+                {answerResult}
+              </ScrollView>
+            </View>
+          </Collapsible>
         </View>
         <Snackbar
           visible={isVisible}

@@ -64,14 +64,16 @@ class RecipeDetailPage extends Component {
           <Collapsible collapsed={this.state.is1Collapsed}>
             <View style={nutrientStyle}>
               <Text style={textStyles}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dignissimos corrupti
-                dolore, quae tempora ducimus quaerat, amet libero non maxime fuga sunt pariatur,
-                aliquid omnis dicta quod? Nostrum, praesentium adipisci!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+                dignissimos corrupti dolore, quae tempora ducimus quaerat, amet
+                libero non maxime fuga sunt pariatur, aliquid omnis dicta quod?
+                Nostrum, praesentium adipisci!
               </Text>
               <Text style={textStyles}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam dignissimos corrupti
-                dolore, quae tempora ducimus quaerat, amet libero non maxime fuga sunt pariatur,
-                aliquid omnis dicta quod? Nostrum, praesentium adipisci!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+                dignissimos corrupti dolore, quae tempora ducimus quaerat, amet
+                libero non maxime fuga sunt pariatur, aliquid omnis dicta quod?
+                Nostrum, praesentium adipisci!
               </Text>
             </View>
           </Collapsible>

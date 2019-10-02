@@ -41,12 +41,12 @@ export default class PushController extends Component {
       importance: 'high' // (optional) set notification importance, default: high
     });
 
-    // PushNotification.localNotificationSchedule({
-    //   message: 'Recuring',
-    //   // eslint-disable-next-line no-mixed-operators
-    //   date: new Date(Date.now() + 3600 * 1000),
-    //   color: 'green'
-    // });
+    PushNotification.localNotificationSchedule({
+      message: 'Recuring',
+      // eslint-disable-next-line no-mixed-operators
+      date: new Date(Date.now() + 100 * 60 * 1000),
+      color: 'green'
+    });
   }
 
   render() {

@@ -80,11 +80,11 @@ export const lightPalette = {
 };
 
 export const darkPalette = {
-  darkPurple: '#503960',
+  darkPurple: '#976FE8',
   darkCyan: '#17A2B8',
   darkGreen: '#70AE6E',
-  darkYellow: '#BEEE62',
-  darkOrange: '#F4743B',
+  darkYellow: '#FCB524',
+  darkOrange: '#EF754F',
   backgroundOpacity: '#ffffff60',
   white: '#fff',
   black: '#000',

@@ -1,8 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Alert } from 'react-native';
+import { Text, View, ScrollView, Alert, RefreshControl } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
@@ -18,7 +19,8 @@ export class QuestionPage extends Component {
       isMultiVisible: false,
       isDropVisible: false,
       isSnackbarVisible: false,
-      choice: ''
+      choice: '',
+      refreshing: false
     };
   }
 
@@ -49,12 +51,18 @@ export class QuestionPage extends Component {
             {
               text: 'No',
               onPress: () =>
-                this.setState({ isSnackbarVisible: !this.state.isSnackbarVisible, choice: 'NO' })
+                this.setState({
+                  isSnackbarVisible: !this.state.isSnackbarVisible,
+                  choice: 'NO'
+                })
             },
             {
               text: 'Yes',
               onPress: () =>
-                this.setState({ isSnackbarVisible: !this.state.isSnackbarVisible, choice: 'YES' })
+                this.setState({
+                  isSnackbarVisible: !this.state.isSnackbarVisible,
+                  choice: 'YES'
+                })
             }
           ],
           { cancelable: true }
@@ -94,6 +102,19 @@ export class QuestionPage extends Component {
     }, 1500);
   };
 
+  _onRefresh = () => {
+    this.setState({
+      refreshing: true,
+      questionList: []
+    });
+    setTimeout(() => {
+      this.setState({
+        refreshing: false,
+        questionList: questions
+      });
+    }, 500);
+  };
+
   render() {
     const {
       questionContainer,
@@ -109,7 +130,8 @@ export class QuestionPage extends Component {
       isSingleVisible,
       isMultiVisible,
       isDropVisible,
-      choice
+      choice,
+      refreshing
     } = this.state;
     const questionResult =
       questionList &&
@@ -133,7 +155,17 @@ export class QuestionPage extends Component {
           </Text>
         </View>
         <View style={scrollContainer}>
-          <ScrollView style={scroll}>{questionResult}</ScrollView>
+          <ScrollView
+            style={scroll}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          >
+            {questionResult}
+          </ScrollView>
         </View>
         <ModalSingle
           isSingleVisible={isSingleVisible}
