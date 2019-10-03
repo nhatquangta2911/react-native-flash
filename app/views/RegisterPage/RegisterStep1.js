@@ -32,8 +32,11 @@ class RegisterStep1 extends Component {
     return (
       <View style={registerContainer}>
         <Text style={titleStyles}>Register Step 1</Text>
-        <Text style={textStyles}>Update soon...</Text>
         <Text style={textStyles}>{physicalProfile.height}</Text>
+        <Text style={textStyles}>{physicalProfile.weight}</Text>
+        <Text style={textStyles}>{physicalProfile.age}</Text>
+        <Text style={textStyles}>{physicalProfile.gender}</Text>
+        <Text style={textStyles}>{physicalProfile.bodyFat}</Text>
         <Button
           type="solid"
           title="Next Step"
