@@ -228,7 +228,7 @@ class LoginPage extends Component {
               onChangeText={text => this.setState({ password: text })}
             />
             <Button
-              title="LOGIN"
+              title="Log In"
               type="solid"
               loading={isLoading}
               titleStyle={titleButtonLoginStyle}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
@@ -16,12 +17,31 @@ class RegisterStep1 extends Component {
   }
 
   render() {
-    const { registerContainer, titleStyles, textStyles } = styles;
+    const {
+      registerContainer,
+      titleStyles,
+      textStyles,
+      secondaryTextStyle,
+      commonButtonStyle,
+      commonButtonTextStyle,
+      logoutStyle
+    } = styles;
+    const physicalProfile = this.props.navigation.getParam('physicalProfile', {
+      height: 160
+    });
     return (
       <View style={registerContainer}>
         <Text style={titleStyles}>Register Step 1</Text>
         <Text style={textStyles}>Update soon...</Text>
-        <Button title="Next" onPress={() => this.props.navigation.navigate('RegisterStep2')} />
+        <Text style={textStyles}>{physicalProfile.height}</Text>
+        <Button
+          type="solid"
+          title="Next Step"
+          buttonStyle={commonButtonStyle}
+          titleStyle={commonButtonTextStyle}
+          title="Next"
+          onPress={() => this.props.navigation.navigate('RegisterStep2')}
+        />
       </View>
     );
   }

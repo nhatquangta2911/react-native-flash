@@ -12,18 +12,19 @@ import {
 export default StyleSheet.create({
   registerContainer: {
     height: dimensions.containerHeight,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     margin: margin.md
   },
   headerStyle: {
     fontFamily: fonts.thin,
-    fontSize: fonts.sm,
+    fontSize: fonts.smd,
     color: darkPalette.darkGray
   },
   titleStyles: {
     fontSize: fonts.lg,
     fontFamily: fonts.regular,
-    color: darkPalette.darkCyan
+    color: darkPalette.darkCyan,
+    textAlign: 'center'
   },
   textStyles: {
     fontFamily: fonts.thin,
@@ -33,14 +34,13 @@ export default StyleSheet.create({
   secondaryTextStyle: {
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
-    color: darkPalette.lightGray,
-    marginVertical: margin.sm
+    color: darkPalette.lightGray
   },
   commonButtonStyle: {
     marginVertical: margin.sm,
     borderColor: darkPalette.darkCyan,
     borderWidth: 1,
-    backgroundColor: darkPalette.white,
+    backgroundColor: darkPalette.darkCyan,
     borderRadius: sizes.roundedButtonRadius,
     height: sizes.buttonHeight
   },
@@ -50,8 +50,24 @@ export default StyleSheet.create({
     fontFamily: fonts.regular
   },
   commonButtonTextStyle: {
+    fontFamily: fonts.regular,
+    fontSize: fonts.sm,
+    color: darkPalette.white
+  },
+  logoutStyle: {
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
-    color: darkPalette.darkCyan
+    color: darkPalette.darkOrange,
+    textAlign: 'right',
+    marginHorizontal: margin.sm
+  },
+  allChoiceStyle: {},
+  contentContainer: {
+    backgroundColor: darkPalette.white,
+    marginVertical: margin.lg,
+    height: dimensions.containerHeight / 2
+  },
+  row: {
+    marginBottom: margin.sm
   }
 });
