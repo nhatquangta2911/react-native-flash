@@ -7,7 +7,7 @@ import styles from './styles';
 
 class RegisterStep1 extends Component {
   static navigationOptions = {
-    title: 'Step 1',
+    title: 'Goal',
     headerTitleStyle: styles.headerStyle
   };
 
@@ -23,20 +23,57 @@ class RegisterStep1 extends Component {
       textStyles,
       secondaryTextStyle,
       commonButtonStyle,
+      commonNotChosenButtonStyle,
       commonButtonTextStyle,
-      logoutStyle
+      commonHalfButtonStyle,
+      commonHalfButtonTextStyle,
+      commonChosenHalfButtonStyle,
+      commonChosenHalfButtonTextStyle,
+      commonThirdButtonStyle,
+      commonChosenThirdButtonStyle,
+      commonThirdButtonTextStyle,
+      commonChosenThirdButtonTextStyle,
+      logoutStyle,
+      contentContainer,
+      row,
+      rowButton,
+      explain
     } = styles;
     const physicalProfile = this.props.navigation.getParam('physicalProfile', {
       height: 160
     });
     return (
       <View style={registerContainer}>
-        <Text style={titleStyles}>Register Step 1</Text>
-        <Text style={textStyles}>{physicalProfile.height}</Text>
-        <Text style={textStyles}>{physicalProfile.weight}</Text>
-        <Text style={textStyles}>{physicalProfile.age}</Text>
-        <Text style={textStyles}>{physicalProfile.gender}</Text>
-        <Text style={textStyles}>{physicalProfile.bodyFat}</Text>
+        <Text style={{ ...textStyles, textAlign: 'center' }}>
+          What is your goal,{' '}
+          {this.props.navigation.getParam('user', { name: 'buddy' }).name}?
+        </Text>
+        <View style={contentContainer}>
+          <Button
+            type="outline"
+            title="Lose fat"
+            buttonStyle={commonNotChosenButtonStyle}
+            titleStyle={commonThirdButtonTextStyle}
+            title="Next"
+            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+          />
+          <Button
+            type="outline"
+            title="Maintain weight"
+            buttonStyle={commonNotChosenButtonStyle}
+            titleStyle={commonThirdButtonTextStyle}
+            title="Next"
+            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+          />
+          <Button
+            type="outline"
+            title="Build muscle"
+            buttonStyle={commonNotChosenButtonStyle}
+            titleStyle={commonThirdButtonTextStyle}
+            title="Next"
+            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+          />
+        </View>
         <Button
           type="solid"
           title="Next Step"

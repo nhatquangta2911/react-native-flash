@@ -183,7 +183,6 @@ class LoginPage extends Component {
               returnKeyType="next"
               keyboardType="email-address"
               type="email"
-              defaultValue="shawn@enclave.v"
               inputStyle={inputStyle}
               blurOnSubmit
               containerStyle={{ marginBottom: 2 }}
@@ -204,7 +203,6 @@ class LoginPage extends Component {
                 fontSize: fonts.text,
                 color: darkPalette.darkCyan
               }}
-              defaultValue="mrmms2am"
               secureTextEntry={hidden}
               onSubmitEditing={() => this.login()}
               containerStyle={{ marginBottom: 2 }}

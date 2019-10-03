@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
 import {
@@ -29,7 +30,8 @@ export default StyleSheet.create({
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
-    color: darkPalette.darkGray
+    color: darkPalette.darkGray,
+    marginTop: margin.sm
   },
   secondaryTextStyle: {
     fontFamily: fonts.thin,
@@ -38,16 +40,26 @@ export default StyleSheet.create({
   },
   explain: {
     fontFamily: 'Nunito-ExtraLightItalic',
-    fontSize: fonts.xsm,
-    color: darkPalette.superLightgray
+    fontSize: 10,
+    color: darkPalette.darkGray,
+    textAlign: 'right'
   },
   commonButtonStyle: {
     marginVertical: margin.sm,
     borderColor: darkPalette.darkCyan,
-    borderWidth: 1,
+    borderWidth: 0.9,
     backgroundColor: darkPalette.darkCyan,
     borderRadius: sizes.roundedButtonRadius,
     height: sizes.buttonHeight
+  },
+  commonNotChosenButtonStyle: {
+    marginVertical: margin.sm,
+    borderColor: darkPalette.darkCyan,
+    borderWidth: 0.9,
+    backgroundColor: darkPalette.white,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight,
+    width: dimensions.fitWidth - 2 * margin.md
   },
   textButtonStyles: {
     color: darkPalette.white,
@@ -61,9 +73,9 @@ export default StyleSheet.create({
   },
   logoutStyle: {
     fontFamily: fonts.thin,
-    fontSize: fonts.sm,
+    fontSize: fonts.xsm,
     color: darkPalette.darkOrange,
-    textAlign: 'right',
+    textAlign: 'center',
     marginHorizontal: margin.sm
   },
   contentContainer: {
@@ -72,8 +84,16 @@ export default StyleSheet.create({
     paddingHorizontal: padding.md,
     paddingVertical: padding.lg
   },
+  buttonChoiceContainer: {
+    backgroundColor: darkPalette.superLightgray,
+    marginVertical: margin.lg,
+    paddingHorizontal: padding.md,
+    paddingVertical: padding.lg,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   row: {
-    marginBottom: margin.md
+    marginBottom: margin.xsm
   },
   rowButton: {
     marginBottom: margin.md,
@@ -129,4 +149,5 @@ export default StyleSheet.create({
     fontSize: fonts.sm,
     color: darkPalette.white
   }
+  //TODO: Register 1
 });

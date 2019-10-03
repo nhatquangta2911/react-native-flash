@@ -26,12 +26,11 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: 170,
-      weight: 65,
-      gender: 'Male',
-      age: 22,
-      bodyFat: 'Medium',
-      isHeightFocus: true,
+      height: null,
+      weight: null,
+      gender: null,
+      age: null,
+      bodyFat: null,
       inputError: false
     };
   }
@@ -97,7 +96,6 @@ class RegisterPage extends Component {
       rowButton,
       explain
     } = styles;
-    const user = this.props.navigation.getParam('user', { name: 'Shawn' });
     return (
       <View style={registerContainer}>
         <Text style={textStyles}>
@@ -154,19 +152,18 @@ class RegisterPage extends Component {
             />
             <HelperText
               type="error"
-              style={{ color: darkPalette.darkOrange }}
+              style={{
+                color: darkPalette.darkOrange,
+                fontSize: 10,
+                fontFamily: 'Nunito-ExtraLightItalic'
+              }}
               visible={() => {
-                if (
+                this.setState({ inputError: true });
+                return (
                   isNaN(this.state.height) ||
                   this.state.height < 0 ||
                   this.state.height > 250
-                ) {
-                  this.setState({
-                    inputError: true
-                  });
-                  return true;
-                }
-                return false;
+                );
               }}
             >
               Height must be a valid number
@@ -185,7 +182,11 @@ class RegisterPage extends Component {
             />
             <HelperText
               type="error"
-              style={{ color: darkPalette.darkOrange }}
+              style={{
+                color: darkPalette.darkOrange,
+                fontSize: 10,
+                fontFamily: 'Nunito-ExtraLightItalic'
+              }}
               visible={
                 isNaN(this.state.weight) ||
                 this.state.weight < 0 ||
@@ -208,7 +209,11 @@ class RegisterPage extends Component {
             />
             <HelperText
               type="error"
-              style={{ color: darkPalette.darkOrange }}
+              style={{
+                color: darkPalette.darkOrange,
+                fontSize: 10,
+                fontFamily: 'Nunito-ExtraLightItalic'
+              }}
               visible={
                 isNaN(this.state.age) ||
                 this.state.age < 0 ||
@@ -274,12 +279,14 @@ class RegisterPage extends Component {
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
           onPress={() => {
-            if (this.state.inputError) {
-              this.props.navigation.navigate('RegisterStep1', {
-                physicalProfile: this.state
-              });
-            } else {
+            if (this.state.inputError || false) {
               Alert.alert('Take your time to rectify your profile, buddy!');
+            } else {
+              this.props.navigation.navigate('RegisterStep1', {
+                physicalProfile: this.state,
+                name: this.props.navigation.getParam('user', { name: 'buddy' })
+                  .name
+              });
             }
           }}
         />
