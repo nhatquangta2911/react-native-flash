@@ -34,6 +34,7 @@ class LoginPage extends Component {
       password: '',
       token: '',
       isLoading: false,
+      isFBLoading: false,
       hidden: true,
       isModalVisible: false,
       user: ''
@@ -93,21 +94,30 @@ class LoginPage extends Component {
   _responseInfoCallback = (error, result) => {
     if (error) {
       Alert.alert('Error fetching data', error.toString());
+      this.setState({
+        isFBLoading: false
+      });
     } else {
       this.setState({
-        user: result
+        user: result,
+        isFBLoading: false
       });
       // Alert.alert('Success fetching data', result.name.toString());
+      this.props.navigation.navigate('Register', { user: this.state.user });
     }
   };
 
   handleFacebookLogin = async () => {
+    this.setState({ isFBLoading: true });
     try {
       const result = await LoginManager.logInWithPermissions([
         'public_profile'
       ]);
       if (result.isCancelled) {
         Alert.alert('Login was cancelled.');
+        this.setState({
+          isFBLoading: false
+        });
       } else {
         const infoRequest = new GraphRequest(
           '/me',
@@ -115,7 +125,6 @@ class LoginPage extends Component {
           this._responseInfoCallback
         );
         new GraphRequestManager().addRequest(infoRequest).start();
-        this.props.navigation.navigate('Register', { user: this.state.user });
         // Alert.alert(
         //   'Login successfully with permissions',
         //   result.grantedPermissions.toString()
@@ -123,11 +132,21 @@ class LoginPage extends Component {
       }
     } catch (error) {
       Alert.alert('Login fail with error', error.toString());
+      this.setState({
+        isFBLoading: false
+      });
     }
   };
 
   render() {
-    const { email, password, isLoading, hidden, isModalVisible } = this.state;
+    const {
+      email,
+      password,
+      isLoading,
+      isFBLoading,
+      hidden,
+      isModalVisible
+    } = this.state;
     const {
       loginContainer,
       textStyle,
@@ -136,7 +155,8 @@ class LoginPage extends Component {
       textLogo,
       buttonLoginStyle,
       titleButtonLoginStyle,
-      inputStyle
+      inputStyle,
+      buttonLoginFBStyle
     } = styles;
     return (
       <Fragment>
@@ -228,7 +248,11 @@ class LoginPage extends Component {
               }}
             />
             <Button
-              title="facebook"
+              title="Login with Facebook"
+              type="solid"
+              loading={isFBLoading}
+              titleStyle={titleButtonLoginStyle}
+              buttonStyle={buttonLoginFBStyle}
               onPress={() => {
                 this.handleFacebookLogin();
               }}

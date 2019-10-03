@@ -1,7 +1,13 @@
 /* eslint-disable import/imports-first */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { fonts, darkPalette, margin, sizes } from '../../styles/base';
+import {
+  fonts,
+  darkPalette,
+  margin,
+  sizes,
+  dimensions
+} from '../../styles/base';
 
 export default StyleSheet.create({
   loginContainer: {
@@ -33,10 +39,16 @@ export default StyleSheet.create({
     borderRadius: sizes.roundedButtonRadius,
     height: sizes.buttonHeight
   },
+  buttonLoginFBStyle: {
+    marginHorizontal: margin.md,
+    backgroundColor: darkPalette.facebook,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight
+  },
   titleButtonLoginStyle: {
     color: darkPalette.white,
     fontSize: fonts.sm,
-    fontFamily: fonts.bold
+    fontFamily: fonts.regular
   },
   inputStyle: {
     fontFamily: fonts.regular,

@@ -85,6 +85,7 @@ export const darkPalette = {
   darkGreen: '#70AE6E',
   darkYellow: '#FCB524',
   darkOrange: '#EF754F',
+  facebook: '#29487D',
   backgroundOpacity: '#ffffff60',
   white: '#fff',
   black: '#000',
