@@ -13,65 +13,77 @@ class RegisterStep1 extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      physicalProfile: this.props.navigation.getParam('physicalProfile', {
+        name: 'Default'
+      }),
+      goal: null
+    };
   }
 
   render() {
     const {
       registerContainer,
-      titleStyles,
       textStyles,
-      secondaryTextStyle,
       commonButtonStyle,
       commonNotChosenButtonStyle,
       commonButtonTextStyle,
-      commonHalfButtonStyle,
-      commonHalfButtonTextStyle,
-      commonChosenHalfButtonStyle,
-      commonChosenHalfButtonTextStyle,
       commonThirdButtonStyle,
-      commonChosenThirdButtonStyle,
-      commonThirdButtonTextStyle,
       commonChosenThirdButtonTextStyle,
-      logoutStyle,
+      commonThirdButtonTextStyle,
       contentContainer,
-      row,
-      rowButton,
-      explain
+      commonChosenButtonStyle
     } = styles;
-    const physicalProfile = this.props.navigation.getParam('physicalProfile', {
-      height: 160
-    });
     return (
       <View style={registerContainer}>
         <Text style={{ ...textStyles, textAlign: 'center' }}>
-          What is your goal,{' '}
-          {this.props.navigation.getParam('user', { name: 'buddy' }).name}?
+          What is your goal?
         </Text>
         <View style={contentContainer}>
           <Button
             type="outline"
             title="Lose fat"
-            buttonStyle={commonNotChosenButtonStyle}
-            titleStyle={commonThirdButtonTextStyle}
-            title="Next"
-            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+            buttonStyle={
+              this.state.goal === '1'
+                ? commonChosenButtonStyle
+                : commonNotChosenButtonStyle
+            }
+            titleStyle={
+              this.state.goal === '1'
+                ? commonChosenThirdButtonTextStyle
+                : commonThirdButtonTextStyle
+            }
+            onPress={() => this.setState({ goal: '1' })}
           />
           <Button
             type="outline"
             title="Maintain weight"
-            buttonStyle={commonNotChosenButtonStyle}
-            titleStyle={commonThirdButtonTextStyle}
-            title="Next"
-            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+            buttonStyle={
+              this.state.goal === '2'
+                ? commonChosenButtonStyle
+                : commonNotChosenButtonStyle
+            }
+            titleStyle={
+              this.state.goal === '2'
+                ? commonChosenThirdButtonTextStyle
+                : commonThirdButtonTextStyle
+            }
+            onPress={() => this.setState({ goal: '2' })}
           />
           <Button
             type="outline"
             title="Build muscle"
-            buttonStyle={commonNotChosenButtonStyle}
-            titleStyle={commonThirdButtonTextStyle}
-            title="Next"
-            onPress={() => this.props.navigation.navigate('RegisterStep2')}
+            buttonStyle={
+              this.state.goal === '3'
+                ? commonChosenButtonStyle
+                : commonNotChosenButtonStyle
+            }
+            titleStyle={
+              this.state.goal === '3'
+                ? commonChosenThirdButtonTextStyle
+                : commonThirdButtonTextStyle
+            }
+            onPress={() => this.setState({ goal: '3' })}
           />
         </View>
         <Button
@@ -80,7 +92,12 @@ class RegisterStep1 extends Component {
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
           title="Next"
-          onPress={() => this.props.navigation.navigate('RegisterStep2')}
+          onPress={() =>
+            this.props.navigation.navigate('RegisterStep2', {
+              physicalProfile: this.state.physicalProfile,
+              goal: this.state.goal
+            })
+          }
         />
       </View>
     );

@@ -1,4 +1,9 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+/* eslint-disable object-shorthand */
+import {
+  createStackNavigator,
+  createAppContainer,
+  createSwitchNavigator
+} from 'react-navigation';
 import { BottomTabNavigator } from './app/components';
 import {
   AuthLoadingPage,
@@ -7,6 +12,8 @@ import {
   RegisterPage,
   RegisterStep1,
   RegisterStep2,
+  RegisterStep3,
+  RegisterStep4,
   BrowsingPage,
   TipsPage,
   RecipeDetailPage
@@ -41,7 +48,9 @@ const RegisterStack = createStackNavigator(
   {
     RegisterMain: RegisterPage,
     RegisterStep1,
-    RegisterStep2
+    RegisterStep2,
+    RegisterStep3,
+    RegisterStep4
   },
   {
     initialRouteName: 'RegisterMain',

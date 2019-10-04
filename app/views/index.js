@@ -11,6 +11,8 @@ export { default as SRecordPage } from './SRecordPage';
 export { default as RegisterPage } from './RegisterPage';
 export { default as RegisterStep1 } from './RegisterPage/RegisterStep1';
 export { default as RegisterStep2 } from './RegisterPage/RegisterStep2';
+export { default as RegisterStep3 } from './RegisterPage/RegisterStep3';
+export { default as RegisterStep4 } from './RegisterPage/RegisterStep4';
 export { default as BlogPage } from './BlogPage';
 export { default as StatsPage } from './StatsPage';
 export { default as BrowsingPage } from './BrowsingPage';

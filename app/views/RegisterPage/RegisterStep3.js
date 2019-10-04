@@ -5,9 +5,9 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './styles';
 
-class RegisterStep2 extends Component {
+class RegisterStep3 extends Component {
   static navigationOptions = {
-    title: 'Activity Level',
+    title: 'Diet type',
     headerTitleStyle: styles.headerStyle
   };
 
@@ -18,7 +18,8 @@ class RegisterStep2 extends Component {
         name: 'Default'
       }),
       goal: this.props.navigation.getParam('activityLevel', 'Default'),
-      activityLevel: null
+      activityLevel: this.props.navigation.getParam('activityLevel', 'Default'),
+      dietType: null
     };
   }
 
@@ -38,83 +39,53 @@ class RegisterStep2 extends Component {
     return (
       <View style={registerContainer}>
         <Text style={{ ...textStyles, textAlign: 'center' }}>
-          How active are you?
+          Do you want to follow a specific type of diet?
         </Text>
         <View style={contentContainer}>
           <Button
             type="outline"
-            title="Sedentary"
+            title="Anything"
             buttonStyle={
-              this.state.activityLevel === '1'
+              this.state.dietType === '1'
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.activityLevel === '1'
+              this.state.dietType === '1'
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ activityLevel: '1' })}
+            onPress={() => this.setState({ dietType: '1' })}
           />
           <Button
             type="outline"
-            title="Lightly Active"
+            title="Vegetarian"
             buttonStyle={
-              this.state.activityLevel === '2'
+              this.state.dietType === '2'
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.activityLevel === '2'
+              this.state.dietType === '2'
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ activityLevel: '2' })}
+            onPress={() => this.setState({ dietType: '2' })}
           />
           <Button
             type="outline"
-            title="Moderately Active"
+            title="Mediterranean"
             buttonStyle={
-              this.state.activityLevel === '3'
+              this.state.dietType === '3'
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.activityLevel === '3'
+              this.state.dietType === '3'
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ activityLevel: '3' })}
-          />
-          <Button
-            type="outline"
-            title="Very Active"
-            buttonStyle={
-              this.state.activityLevel === '4'
-                ? commonChosenButtonStyle
-                : commonNotChosenButtonStyle
-            }
-            titleStyle={
-              this.state.activityLevel === '4'
-                ? commonChosenThirdButtonTextStyle
-                : commonThirdButtonTextStyle
-            }
-            onPress={() => this.setState({ activityLevel: '4' })}
-          />
-          <Button
-            type="outline"
-            title="Extremely Active"
-            buttonStyle={
-              this.state.activityLevel === '5'
-                ? commonChosenButtonStyle
-                : commonNotChosenButtonStyle
-            }
-            titleStyle={
-              this.state.activityLevel === '5'
-                ? commonChosenThirdButtonTextStyle
-                : commonThirdButtonTextStyle
-            }
-            onPress={() => this.setState({ activityLevel: '5' })}
+            onPress={() => this.setState({ dietType: '3' })}
           />
         </View>
         <Button
@@ -124,10 +95,11 @@ class RegisterStep2 extends Component {
           titleStyle={commonButtonTextStyle}
           title="Next"
           onPress={() =>
-            this.props.navigation.navigate('RegisterStep3', {
+            this.props.navigation.navigate('RegisterStep4', {
               physicalProfile: this.state.physicalProfile,
               goal: this.state.goal,
-              activityLevel: this.state.activityLevel
+              activityLevel: this.state.activityLevel,
+              dietType: this.state.dietType
             })
           }
         />
@@ -136,4 +108,4 @@ class RegisterStep2 extends Component {
   }
 }
 
-export default RegisterStep2;
+export default RegisterStep3;

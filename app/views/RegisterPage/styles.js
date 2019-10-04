@@ -46,9 +46,9 @@ export default StyleSheet.create({
   },
   commonButtonStyle: {
     marginVertical: margin.sm,
-    borderColor: darkPalette.darkCyan,
+    borderColor: darkPalette.darkYellow,
     borderWidth: 0.9,
-    backgroundColor: darkPalette.darkCyan,
+    backgroundColor: darkPalette.darkYellow,
     borderRadius: sizes.roundedButtonRadius,
     height: sizes.buttonHeight
   },
@@ -57,6 +57,13 @@ export default StyleSheet.create({
     borderColor: darkPalette.darkCyan,
     borderWidth: 0.9,
     backgroundColor: darkPalette.white,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight,
+    width: dimensions.fitWidth - 2 * margin.md
+  },
+  commonChosenButtonStyle: {
+    marginVertical: margin.sm,
+    backgroundColor: darkPalette.darkCyan,
     borderRadius: sizes.roundedButtonRadius,
     height: sizes.buttonHeight,
     width: dimensions.fitWidth - 2 * margin.md
