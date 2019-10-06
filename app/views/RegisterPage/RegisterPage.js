@@ -35,24 +35,24 @@ class RegisterPage extends Component {
     };
   }
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      Alert.alert('Are you sure you want to log out?', null, [
-        {
-          text: 'Cancel',
-          style: 'cancel'
-        },
-        {
-          text: 'Log Out',
-          onPress: () => {
-            this.handleBackButton();
-            this.props.navigation.navigate('Login');
-          }
-        }
-      ]);
-      return true;
-    });
-  }
+  // componentDidMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', () => {
+  //     Alert.alert('Are you sure you want to log out?', null, [
+  //       {
+  //         text: 'Cancel',
+  //         style: 'cancel'
+  //       },
+  //       {
+  //         text: 'Log Out',
+  //         onPress: () => {
+  //           this.handleBackButton();
+  //           this.props.navigation.navigate('Login');
+  //         }
+  //       }
+  //     ]);
+  //     return true;
+  //   });
+  // }
 
   handleBackButton = () => {
     this.logout();

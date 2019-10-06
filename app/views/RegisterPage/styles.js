@@ -50,7 +50,8 @@ export default StyleSheet.create({
     borderWidth: 0.9,
     backgroundColor: darkPalette.darkYellow,
     borderRadius: sizes.roundedButtonRadius,
-    height: sizes.buttonHeight
+    height: sizes.buttonHeight,
+    width: dimensions.fitWidth
   },
   commonNotChosenButtonStyle: {
     marginVertical: margin.sm,
