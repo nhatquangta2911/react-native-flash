@@ -100,7 +100,7 @@ class RegisterPage extends Component {
       <View style={registerContainer}>
         <Text style={textStyles}>
           Let us know about yourself,{' '}
-          {this.props.navigation.getParam('user', { name: 'buddy' }).name}!
+          {this.props.navigation.getParam('user', { name: 'buddy' }).name}
         </Text>
         <View style={contentContainer}>
           <View style={rowButton}>
