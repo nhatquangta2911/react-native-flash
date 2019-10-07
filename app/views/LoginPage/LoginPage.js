@@ -91,7 +91,7 @@ class LoginPage extends Component {
     this.setState({ isModalVisible: status });
   };
 
-  _responseInfoCallback = (error, result) => {
+  _responseInfoCallback = async (error, result) => {
     if (error) {
       Alert.alert('Error fetching data', error.toString());
       this.setState({
@@ -102,7 +102,8 @@ class LoginPage extends Component {
         user: result,
         isFBLoading: false
       });
-      // Alert.alert('Success fetching data', result.name.toString());
+      console.log(this.state.user);
+      await tokenHandler.storeData('user', this.state.user);
       this.props.navigation.navigate('Register', { user: this.state.user });
     }
   };
@@ -119,16 +120,18 @@ class LoginPage extends Component {
           isFBLoading: false
         });
       } else {
-        const infoRequest = new GraphRequest(
-          '/me',
-          null,
-          this._responseInfoCallback
-        );
-        new GraphRequestManager().addRequest(infoRequest).start();
-        // Alert.alert(
-        //   'Login successfully with permissions',
-        //   result.grantedPermissions.toString()
-        // );
+        AccessToken.getCurrentAccessToken().then(data => {
+          this.setState({
+            token: data.accessToken.toString()
+          });
+          const infoRequest = new GraphRequest(
+            '/me?fields=name,picture.type(large)',
+            null,
+            this._responseInfoCallback
+          );
+          new GraphRequestManager().addRequest(infoRequest).start();
+          this.saveToken();
+        });
       }
     } catch (error) {
       Alert.alert('Login fail with error', error.toString());

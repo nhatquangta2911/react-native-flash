@@ -7,11 +7,13 @@ import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 import { StatusCard } from '../../components';
+import { tokenHandler } from '../../utils/token';
 
 class SettingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: '',
       settingList: [
         {
           title: 'Change Your Info',
@@ -33,6 +35,14 @@ class SettingPage extends Component {
     };
   }
 
+  async componentDidMount() {
+    this.setState({
+      user:
+        this.props.navigation.getParam('user', { name: 'Shawnnnnnn' }) ||
+        (await AsyncStorage.getItem('user'))
+    });
+  }
+
   handleLogout = async () => {
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');
@@ -47,10 +57,15 @@ class SettingPage extends Component {
       scrollContainer,
       settingItem
     } = styles;
-    const { settingList } = this.state;
+    const { user, settingList } = this.state;
+    console.log(user);
     return (
       <View style={settingContainer}>
-        <StatusCard title="Hi Shawn" content="How's your day going, buddy?" percent={89} />
+        <StatusCard
+          title={user && user.name}
+          content="How's your day going, buddy?"
+          percent={89}
+        />
         <ScrollView style={scrollContainer}>
           {settingList.map((item, i) => (
             <ListItem

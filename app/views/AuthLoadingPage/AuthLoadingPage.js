@@ -2,7 +2,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { StyleSheet, ActivityIndicator, StatusBar, View, Text } from 'react-native';
+import {
+  StyleSheet,
+  ActivityIndicator,
+  StatusBar,
+  View,
+  Text
+} from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { fonts, darkPalette, margin } from '../../styles/base';
@@ -38,7 +44,12 @@ class AuthLoadingScreen extends React.Component {
   };
 
   render() {
-    const { greetingContainer, greetingText, contentText, percentText } = styles;
+    const {
+      greetingContainer,
+      greetingText,
+      contentText,
+      percentText
+    } = styles;
     const { value } = this.state;
     const percentValue = Math.round(value * 20) * 5;
     return (

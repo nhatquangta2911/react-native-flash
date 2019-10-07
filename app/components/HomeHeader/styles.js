@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../styles/base';
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette,
+  shadow
+} from '../../styles/base';
 
 export default StyleSheet.create({
   homeHeaderContainer: {

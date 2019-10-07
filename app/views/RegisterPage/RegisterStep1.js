@@ -17,6 +17,7 @@ class RegisterStep1 extends Component {
       physicalProfile: this.props.navigation.getParam('physicalProfile', {
         name: 'Default'
       }),
+      name: this.props.navigation.getParam('name', 'Default'),
       goal: null
     };
   }
