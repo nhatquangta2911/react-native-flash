@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable import/imports-first */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
@@ -11,10 +12,15 @@ import {
   RecipeDetailPage,
   QuestionPage,
   SRecordPage,
-  BlogPage
+  BlogPage,
+  InfoPage
 } from '../../views';
 import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createAppContainer,
+  createSwitchNavigator
+} from 'react-navigation';
 
 // const HomeStack = createAppContainer(
 //   createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
@@ -70,7 +76,17 @@ export default class BottomTabNavigator extends Component {
     Home: HomePage,
     Question: QuestionPage,
     SRecord: SRecordPage,
-    Setting: SettingPage,
+    Setting: createAppContainer(
+      createStackNavigator(
+        {
+          Setting: SettingPage,
+          Info: InfoPage
+        },
+        {
+          initialRouteName: 'Setting'
+        }
+      )
+    ),
     Community: BlogPage
   });
 

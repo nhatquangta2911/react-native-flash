@@ -18,6 +18,12 @@ export const sizes = {
   special: 100
 };
 
+export const text = {
+  fontFamily: 'Nunito-ExtraLight',
+  fontSize: 14,
+  color: '#444'
+};
+
 export const shadow = {
   shadowColor: '#000',
   shadowOffset: {

@@ -16,18 +16,22 @@ class SettingPage extends Component {
       user: '',
       settingList: [
         {
+          route: 'Info',
           title: 'Change Your Info',
           icon: 'list'
         },
         {
+          route: 'Doctor',
           title: 'Your Private Doctor ',
           icon: 'list'
         },
         {
+          route: 'Remainder',
           title: 'Reminder',
           icon: 'list'
         },
         {
+          route: 'About',
           title: 'About us',
           icon: 'list'
         }
@@ -75,6 +79,7 @@ class SettingPage extends Component {
               titleStyle={textStyles}
               leftIcon={{ name: item.icon }}
               containerStyle={settingItem}
+              onPress={() => this.props.jumpTo(item.route)}
             />
           ))}
           <Button
