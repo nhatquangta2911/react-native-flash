@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
-import { View, Text, BackHandler, Alert } from 'react-native';
+import { View, Text, BackHandler, Alert, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput, HelperText, TouchableRipple } from 'react-native-paper';
 import {
@@ -13,8 +13,10 @@ import {
   GraphRequest,
   GraphRequestManager
 } from 'react-native-fbsdk';
+import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import { darkPalette } from '../../styles/base';
+import { tokenHandler } from '../../utils/token';
 
 class RegisterPage extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -26,6 +28,7 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: props.navigation.getParam('user', { name: 'Shawnnn' }),
       height: null,
       weight: null,
       gender: null,
@@ -288,6 +291,23 @@ class RegisterPage extends Component {
                   .name
               });
             }
+          }}
+        />
+        <Button
+          type="solid"
+          title="SKIP"
+          buttonStyle={commonButtonStyle}
+          titleStyle={commonButtonTextStyle}
+          onPress={() => {
+            this.props.navigation.dispatch(
+              NavigationActions.navigate({
+                routeName: 'App',
+                params: { user: this.state.user },
+                action: NavigationActions.navigate({
+                  routeName: 'Home'
+                })
+              })
+            );
           }}
         />
         <Text
