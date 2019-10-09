@@ -1,9 +1,6 @@
 /* eslint-disable object-shorthand */
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { BottomTabNavigator } from './app/components';
 import {
   AuthLoadingPage,

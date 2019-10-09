@@ -18,3 +18,6 @@ export { default as StatsPage } from './StatsPage';
 export { default as BrowsingPage } from './BrowsingPage';
 export { default as TipsPage } from './TipsPage';
 export { default as InfoPage } from './InfoPage';
+export { default as DoctorPage } from './DoctorPage';
+export { default as ReminderPage } from './ReminderPage';
+export { default as AboutPage } from './AboutPage';

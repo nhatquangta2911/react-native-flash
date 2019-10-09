@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { Button, ListItem } from 'react-native-elements';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
@@ -10,6 +10,10 @@ import { StatusCard } from '../../components';
 import { tokenHandler } from '../../utils/token';
 
 class SettingPage extends Component {
+  static navigationOptions = {
+    header: null
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +30,7 @@ class SettingPage extends Component {
           icon: 'list'
         },
         {
-          route: 'Remainder',
+          route: 'Reminder',
           title: 'Reminder',
           icon: 'list'
         },
@@ -79,7 +83,11 @@ class SettingPage extends Component {
               titleStyle={textStyles}
               leftIcon={{ name: item.icon }}
               containerStyle={settingItem}
-              onPress={() => this.props.jumpTo(item.route)}
+              onPress={() =>
+                this.props.navigation.navigate(item.route, {
+                  title: item.route
+                })
+              }
             />
           ))}
           <Button

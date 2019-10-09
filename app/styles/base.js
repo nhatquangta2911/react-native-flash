@@ -42,7 +42,7 @@ export const headerStyle = {
   fontSize: 16,
   color: '#444',
   padding: 0,
-  margin: 0
+  marginLeft: -2
 };
 
 export const dimensions = {
@@ -97,7 +97,7 @@ export const darkPalette = {
   black: '#000',
   darkGray: '#444',
   lightGray: '#888',
-  superLightgray: '#f3f3f3'
+  superLightgray: '#f9f9f9'
 };
 
 export const notification = {

@@ -1,15 +1,13 @@
-/* eslint-disable arrow-body-style */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
-import { darkPalette, headerStyle } from '../../styles/base';
 
-class InfoPage extends Component {
+class AboutPage extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Your Info'
+      title: 'About us'
     };
   };
 
@@ -19,13 +17,13 @@ class InfoPage extends Component {
   }
 
   render() {
-    const { infoContainer, textStyle } = styles;
+    const { aboutContainer, textStyle } = styles;
     return (
-      <View style={infoContainer}>
-        <Text style={textStyle}> Info </Text>
+      <View style={aboutContainer}>
+        <Text style={textStyle}> About </Text>
       </View>
     );
   }
 }
 
-export default InfoPage;
+export default AboutPage;
