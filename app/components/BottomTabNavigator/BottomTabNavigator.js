@@ -85,24 +85,7 @@ export default class BottomTabNavigator extends Component {
     Home: HomePage,
     Question: QuestionPage,
     SRecord: SRecordPage,
-    Setting: createAppContainer(
-      createStackNavigator(
-        {
-          Main: SettingPage,
-          Info: InfoPage,
-          Doctor: DoctorPage,
-          Reminder: ReminderPage,
-          About: AboutPage
-        },
-        {
-          initialRouteName: 'Main',
-          defaultNavigationOptions: {
-            headerTitleStyle: { ...headerStyle },
-            headerStyle: { justifyContent: 'space' }
-          }
-        }
-      )
-    ),
+    Setting: SettingPage,
     Community: BlogPage
   });
 

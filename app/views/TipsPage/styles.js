@@ -33,9 +33,9 @@ export default StyleSheet.create({
     marginVertical: margin.sm
   },
   textStyles: {
-    fontFamily: fonts.thin,
+    fontFamily: fonts.light,
     fontSize: fonts.sm,
-    color: darkPalette.darkGray,
-    marginBottom: margin.md
+    color: darkPalette.lightGray,
+    marginBottom: margin.lg
   }
 });

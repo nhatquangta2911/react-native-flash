@@ -1,9 +1,20 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { Button, ListItem } from 'react-native-elements';
 import { View, Text, ScrollView, Alert } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import {
+  GraphRequestManager,
+  GraphRequest,
+  LoginManager
+} from 'react-native-fbsdk';
+import {
+  withNavigation,
+  StackActions,
+  SwitchActions,
+  NavigationActions
+} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 import { StatusCard } from '../../components';
@@ -52,6 +63,19 @@ class SettingPage extends Component {
   }
 
   handleLogout = async () => {
+    const logout = new GraphRequest(
+      '/me/permissions/',
+      { httpMethod: 'DELETE' },
+      (error, result) => {
+        console.log(result);
+        if (error) {
+          console.log('Error fetching data: ' + error.toString());
+        } else {
+          LoginManager.logOut();
+        }
+      }
+    );
+    new GraphRequestManager().addRequest(logout).start();
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');
   };

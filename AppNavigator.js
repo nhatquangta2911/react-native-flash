@@ -13,8 +13,14 @@ import {
   RegisterStep4,
   BrowsingPage,
   TipsPage,
-  RecipeDetailPage
+  InfoPage,
+  DoctorPage,
+  AboutPage,
+  ReminderPage,
+  RecipeDetailPage,
+  SettingPage
 } from './app/views';
+import { headerStyle } from './app/styles/base';
 
 const BrowsingStack = createStackNavigator(
   {
@@ -29,12 +35,34 @@ const BrowsingStack = createStackNavigator(
   }
 );
 
+const SettingStack = createStackNavigator(
+  {
+    Main: SettingPage,
+    Info: InfoPage,
+    Doctor: DoctorPage,
+    Reminder: ReminderPage,
+    About: AboutPage
+  },
+  {
+    initialRouteName: 'Main',
+    defaultNavigationOptions: {
+      headerTitleStyle: { ...headerStyle, marginLeft: -5 }
+    }
+  }
+);
+
 const AppStack = createStackNavigator(
   {
     Home: BottomTabNavigator,
     Stats: StatsPage,
     Browsing: BrowsingStack,
-    Tips: TipsPage
+    Tips: TipsPage,
+    Settings: {
+      screen: SettingStack,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     initialRouteName: 'Home'

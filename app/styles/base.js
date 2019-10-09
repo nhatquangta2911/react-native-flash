@@ -42,7 +42,7 @@ export const headerStyle = {
   fontSize: 16,
   color: '#444',
   padding: 0,
-  marginLeft: -2
+  marginLeft: 8
 };
 
 export const dimensions = {

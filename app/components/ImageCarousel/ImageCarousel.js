@@ -19,8 +19,8 @@ class ImageCarousel extends Component {
       entries: [
         {
           id: 1,
-          title: 'The blood sugar diet',
-          image: 'https://www.getthegloss.com/media/image/800-calorie-meal-plan.jpg'
+          title: 'I Still Have Concussion Symptoms — 3 Years Later',
+          image: 'https://miro.medium.com/max/6016/0*-iEYxPmRW5QXaQxN'
         },
         {
           id: 2,
@@ -36,10 +36,9 @@ class ImageCarousel extends Component {
         },
         {
           id: 4,
-          title:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, ex? Dicta adipisci debitis voluptatem optio delectus consectetur cupiditate commodi assumenda libero eum a impedit repudiandae consequuntur quisquam voluptate, laboriosam itaque.',
+          title: 'How to Tell If You Can Trust Online Health Information',
           image:
-            'http://isanidad.com/wp-content/uploads/2019/03/doctor-cultivo-estetoscopio_23-2147796554.jpg'
+            'https://miro.medium.com/max/7360/1*m6mqOKBN-2y-aBsJeY6VpQ.jpeg'
         }
       ]
     };

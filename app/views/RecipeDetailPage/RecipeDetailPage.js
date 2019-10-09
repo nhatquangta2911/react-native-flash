@@ -12,7 +12,7 @@ import { headerStyle, nutrientColor } from '../../styles/base';
 class RecipeDetailPage extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('name', 'Recipe Detail'),
-    headerTitleStyle: { ...headerStyle }
+    headerTitleStyle: { ...headerStyle, marginLeft: -4 }
   });
 
   constructor(props) {
