@@ -13,14 +13,23 @@ import {
   QuestionPage,
   SRecordPage,
   BlogPage,
-  InfoPage
+  InfoPage,
+  DoctorPage,
+  ReminderPage,
+  AboutPage
 } from '../../views';
-import { darkPalette, dimensions, bottomTabNav } from '../../styles/base';
+import {
+  darkPalette,
+  dimensions,
+  bottomTabNav,
+  headerStyle
+} from '../../styles/base';
 import {
   createStackNavigator,
   createAppContainer,
   createSwitchNavigator
 } from 'react-navigation';
+import { HeaderBackButton } from 'react-navigation-stack';
 
 // const HomeStack = createAppContainer(
 //   createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
@@ -79,11 +88,18 @@ export default class BottomTabNavigator extends Component {
     Setting: createAppContainer(
       createStackNavigator(
         {
-          Setting: SettingPage,
-          Info: InfoPage
+          Main: SettingPage,
+          Info: InfoPage,
+          Doctor: DoctorPage,
+          Reminder: ReminderPage,
+          About: AboutPage
         },
         {
-          initialRouteName: 'Setting'
+          initialRouteName: 'Main',
+          defaultNavigationOptions: {
+            headerTitleStyle: { ...headerStyle },
+            headerStyle: { justifyContent: 'space' }
+          }
         }
       )
     ),
