@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable object-shorthand */
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -21,6 +22,7 @@ import {
   SettingPage
 } from './app/views';
 import { headerStyle } from './app/styles/base';
+import RemainderPage from './app/views/ReminderPage';
 
 const BrowsingStack = createStackNavigator(
   {
@@ -28,44 +30,7 @@ const BrowsingStack = createStackNavigator(
     Details: RecipeDetailPage
   },
   {
-    initialRouteName: 'Browsing',
-    navigationOptions: {
-      header: null
-    }
-  }
-);
-
-const SettingStack = createStackNavigator(
-  {
-    Main: SettingPage,
-    Info: InfoPage,
-    Doctor: DoctorPage,
-    Reminder: ReminderPage,
-    About: AboutPage
-  },
-  {
-    initialRouteName: 'Main',
-    defaultNavigationOptions: {
-      headerTitleStyle: { ...headerStyle, marginLeft: -5 }
-    }
-  }
-);
-
-const AppStack = createStackNavigator(
-  {
-    Home: BottomTabNavigator,
-    Stats: StatsPage,
-    Browsing: BrowsingStack,
-    Tips: TipsPage,
-    Settings: {
-      screen: SettingStack,
-      navigationOptions: {
-        header: null
-      }
-    }
-  },
-  {
-    initialRouteName: 'Home'
+    initialRouteName: 'Browsing'
   }
 );
 
@@ -81,6 +46,25 @@ const RegisterStack = createStackNavigator(
     initialRouteName: 'RegisterMain',
     navigationOptions: {
       header: null
+    }
+  }
+);
+
+const AppStack = createStackNavigator(
+  {
+    Home: BottomTabNavigator,
+    Stats: StatsPage,
+    Browsing: BrowsingStack,
+    Tips: TipsPage,
+    Info: InfoPage,
+    Doctor: DoctorPage,
+    Reminder: RemainderPage,
+    About: AboutPage
+  },
+  {
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      headerTitleStyle: { ...headerStyle, marginLeft: -5 }
     }
   }
 );

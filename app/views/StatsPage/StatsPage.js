@@ -17,8 +17,7 @@ import {
 
 export class StatsPage extends Component {
   static navigationOptions = {
-    title: 'Statistic',
-    headerTitleStyle: { ...headerStyle }
+    title: 'Statistic'
   };
 
   constructor(props) {

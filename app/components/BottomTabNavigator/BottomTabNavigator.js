@@ -3,33 +3,16 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
+import { BackHandler, Alert } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 import {
-  OrderPage,
-  DemoReduxPage,
   SettingPage,
   HomePage,
-  RecipeDetailPage,
   QuestionPage,
   SRecordPage,
-  BlogPage,
-  InfoPage,
-  DoctorPage,
-  ReminderPage,
-  AboutPage
+  BlogPage
 } from '../../views';
-import {
-  darkPalette,
-  dimensions,
-  bottomTabNav,
-  headerStyle
-} from '../../styles/base';
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator
-} from 'react-navigation';
-import { HeaderBackButton } from 'react-navigation-stack';
+import { darkPalette, dimensions } from '../../styles/base';
 
 // const HomeStack = createAppContainer(
 //   createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
@@ -78,6 +61,12 @@ export default class BottomTabNavigator extends Component {
       ]
     };
   }
+
+  // componentDidMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', () => {
+  //     Alert.alert(this.props.navigation.dangerouslyGetParent().state);
+  //   });
+  // }
 
   handleIndexChange = index => this.setState({ index });
 
