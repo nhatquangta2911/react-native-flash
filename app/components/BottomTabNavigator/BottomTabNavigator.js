@@ -14,10 +14,6 @@ import {
 } from '../../views';
 import { darkPalette, dimensions } from '../../styles/base';
 
-// const HomeStack = createAppContainer(
-//   createStackNavigator({ Landing: HomePage, RecipeDetail: RecipeDetailPage })
-// );
-
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
     header: null
@@ -61,12 +57,6 @@ export default class BottomTabNavigator extends Component {
       ]
     };
   }
-
-  // componentDidMount() {
-  //   BackHandler.addEventListener('hardwareBackPress', () => {
-  //     Alert.alert(this.props.navigation.dangerouslyGetParent().state);
-  //   });
-  // }
 
   handleIndexChange = index => this.setState({ index });
 

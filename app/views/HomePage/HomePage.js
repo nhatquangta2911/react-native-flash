@@ -1,9 +1,18 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable prefer-template */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/sort-comp */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
-import { Text, View, ScrollView, RefreshControl } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  RefreshControl,
+  Alert,
+  BackHandler
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Button, Divider } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
@@ -39,6 +48,22 @@ export class HomePage extends Component {
       });
     }, 500);
   };
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      console.log(this.props.navigation.dangerouslyGetParent().state);
+      if (this.props.navigation.dangerouslyGetParent().state.index == 0) {
+        Alert.alert('Exit App', 'Are you sure you want to log out?', [
+          {
+            text: 'No',
+            style: 'cancel'
+          },
+          { text: 'Yes', onPress: () => BackHandler.exitApp() }
+        ]);
+        return true;
+      }
+    });
+  }
 
   render() {
     const { homeContainer, title, scrollContainer } = styles;
