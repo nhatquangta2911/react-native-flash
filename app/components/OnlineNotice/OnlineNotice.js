@@ -21,11 +21,10 @@ class OnlineNotice extends PureComponent {
   }
 
   componentDidMount() {
-    NetInfo.isConnected.addEventListener('connectionChange', this.handleConectivityChange);
-  }
-
-  componentWillUnmount() {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConectivityChange);
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      this.handleConectivityChange
+    );
   }
 
   handleConectivityChange = isConnected => {

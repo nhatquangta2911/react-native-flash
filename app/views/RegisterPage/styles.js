@@ -39,8 +39,8 @@ export default StyleSheet.create({
     color: darkPalette.darkGray
   },
   explain: {
-    fontFamily: 'Nunito-ExtraLightItalic',
-    fontSize: 10,
+    fontFamily: 'Nunito-ExtraLight',
+    fontSize: 12,
     color: darkPalette.darkGray,
     textAlign: 'right'
   },
@@ -82,9 +82,9 @@ export default StyleSheet.create({
   logoutStyle: {
     fontFamily: fonts.thin,
     fontSize: fonts.xsm,
-    color: darkPalette.darkOrange,
+    color: darkPalette.darkCyan,
     textAlign: 'center',
-    marginHorizontal: margin.sm
+    marginVertical: margin.sm
   },
   contentContainer: {
     backgroundColor: darkPalette.superLightgray,
@@ -99,6 +99,20 @@ export default StyleSheet.create({
     paddingVertical: padding.lg,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  buttonSkipStyle: {
+    marginVertical: margin.sm,
+    borderColor: darkPalette.darkYellow,
+    borderWidth: 0.9,
+    backgroundColor: darkPalette.white,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight,
+    width: dimensions.fitWidth
+  },
+  buttonSkipTextStyle: {
+    color: darkPalette.darkYellow,
+    fontSize: fonts.sm,
+    fontFamily: fonts.regular
   },
   row: {
     marginBottom: margin.xsm

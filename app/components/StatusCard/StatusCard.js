@@ -26,7 +26,7 @@ export class StatusCard extends Component {
           <Avatar isOnline={this.props.isOnline} uri={this.props.uri} />
         </View>
         <View style={statusCardCenter}>
-          <Text style={titleStyles}>{this.props.title || 'Title'}</Text>
+          <Text style={titleStyles}>{this.props.title || 'Shawn'}</Text>
           <Text style={contentStyles}>{this.props.content || 'Content'}</Text>
         </View>
         <View style={statusCardRight}>

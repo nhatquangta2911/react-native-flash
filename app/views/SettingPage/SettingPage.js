@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 /* eslint-disable prefer-template */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -28,7 +29,8 @@ class SettingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
+      name: '',
+      image: '',
       settingList: [
         {
           route: 'Info',
@@ -55,12 +57,14 @@ class SettingPage extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      user:
-        this.props.navigation.getParam('user', { name: 'Shawnnnnnn' }) ||
-        (await AsyncStorage.getItem('user'))
-    });
+    await this.getUser();
   }
+
+  getUser = async () => {
+    const name = await AsyncStorage.getItem('name');
+    const image = await AsyncStorage.getItem('image');
+    this.setState({ name, image });
+  };
 
   handleLogout = async () => {
     const logout = new GraphRequest(
@@ -89,15 +93,16 @@ class SettingPage extends Component {
       scrollContainer,
       settingItem
     } = styles;
-    const { user, settingList } = this.state;
-    console.log(user);
+    const { name, image, settingList } = this.state;
     return (
       <View style={settingContainer}>
         <StatusCard
-          title={user && user.name}
+          title={name}
           content="How's your day going, buddy?"
           percent={89}
+          uri={image}
         />
+
         <ScrollView style={scrollContainer}>
           {settingList.map((item, i) => (
             <ListItem

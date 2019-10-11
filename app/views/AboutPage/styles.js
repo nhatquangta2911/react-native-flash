@@ -11,9 +11,11 @@ import {
 
 export default StyleSheet.create({
   aboutContainer: {
-    backgroundColor: darkPalette.superLightgray,
-    width: dimensions.fitWidth,
-    height: dimensions.containerHeight
+    backgroundColor: darkPalette.white,
+    width: dimensions.fullWidth,
+    height: dimensions.containerHeight,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textStyle: { ...text }
 });

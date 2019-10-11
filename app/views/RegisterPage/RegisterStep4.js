@@ -13,6 +13,7 @@ import {
   padding,
   sizes
 } from '../../styles/base';
+import { tokenHandler } from '../../utils/token';
 
 class RegisterStep4 extends Component {
   static navigationOptions = {
@@ -23,12 +24,6 @@ class RegisterStep4 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      physicalProfile: this.props.navigation.getParam('physicalProfile', {
-        name: 'Default'
-      }),
-      goal: this.props.navigation.getParam('activityLevel', 'Default'),
-      activityLevel: this.props.navigation.getParam('activityLevel', 'Default'),
-      dietType: this.props.navigation.getParam('dietType', 'Default'),
       tags: {
         tag: '',
         tagsArray: ['Apple', 'Watermelon']
@@ -127,15 +122,10 @@ class RegisterStep4 extends Component {
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
           title="Next"
-          onPress={() =>
-            this.props.navigation.navigate('App', {
-              physicalProfile: this.state.physicalProfile,
-              goal: this.state.goal,
-              activityLevel: this.state.activityLevel,
-              dietType: this.state.dietType,
-              tags: this.state.tags.tagsArray
-            })
-          }
+          onPress={async () => {
+            await tokenHandler.storeData('tags', this.state.tags.tagsArray);
+            this.props.navigation.navigate('Home');
+          }}
         />
       </View>
     );

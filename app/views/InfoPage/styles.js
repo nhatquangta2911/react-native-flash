@@ -8,12 +8,20 @@ import {
   dimensions,
   text
 } from '../../styles/base';
+import { relative } from 'path';
 
 export default StyleSheet.create({
   infoContainer: {
     backgroundColor: darkPalette.superLightgray,
-    width: dimensions.fitWidth,
-    height: dimensions.containerHeight
+    width: dimensions.fullWidth,
+    height: dimensions.containerHeight,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
-  textStyle: { ...text }
+  textStyle: { ...text },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative'
+  }
 });

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './styles';
+import { tokenHandler } from '../../utils/token';
 
 class RegisterStep3 extends Component {
   static navigationOptions = {
@@ -14,11 +15,6 @@ class RegisterStep3 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      physicalProfile: this.props.navigation.getParam('physicalProfile', {
-        name: 'Default'
-      }),
-      goal: this.props.navigation.getParam('activityLevel', 'Default'),
-      activityLevel: this.props.navigation.getParam('activityLevel', 'Default'),
       dietType: null
     };
   }
@@ -94,14 +90,10 @@ class RegisterStep3 extends Component {
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
           title="Next"
-          onPress={() =>
-            this.props.navigation.navigate('RegisterStep4', {
-              physicalProfile: this.state.physicalProfile,
-              goal: this.state.goal,
-              activityLevel: this.state.activityLevel,
-              dietType: this.state.dietType
-            })
-          }
+          onPress={async () => {
+            await tokenHandler.storeData('dietType', this.state.dietType);
+            this.props.navigation.navigate('RegisterStep4');
+          }}
         />
       </View>
     );

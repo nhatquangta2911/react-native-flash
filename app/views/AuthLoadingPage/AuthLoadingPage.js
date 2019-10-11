@@ -26,18 +26,6 @@ class AuthLoadingScreen extends React.Component {
     this.doAuth();
   }
 
-  // componentWillUnmount() {
-  //   setInterval(() => {
-  //     if (this.state.value >= 1) {
-  //       this.props.navigation.navigate('AuthLoading');
-  //       return;
-  //     }
-  //     this.setState({
-  //       value: this.state.value + 0.01
-  //     });
-  //   }, 1);
-  // }
-
   doAuth = async () => {
     const userToken = await AsyncStorage.getItem('token');
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');

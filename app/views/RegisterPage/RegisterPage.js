@@ -21,7 +21,7 @@ import { tokenHandler } from '../../utils/token';
 class RegisterPage extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Physical Profile',
-    headerTitleStyle: styles.headerStyle,
+    headerTitleStyle: { ...styles.headerStyle },
     headerLeft: null
   });
 
@@ -29,33 +29,14 @@ class RegisterPage extends Component {
     super(props);
     this.state = {
       user: props.navigation.getParam('user', { name: 'Shawnnn' }),
-      height: null,
-      weight: null,
-      gender: null,
-      age: null,
-      bodyFat: null,
+      height: 169,
+      weight: 58,
+      gender: 'Male',
+      age: 22,
+      bodyFat: 'Low',
       inputError: false
     };
   }
-
-  // componentDidMount() {
-  //   BackHandler.addEventListener('hardwareBackPress', () => {
-  //     Alert.alert('Are you sure you want to log out?', null, [
-  //       {
-  //         text: 'Cancel',
-  //         style: 'cancel'
-  //       },
-  //       {
-  //         text: 'Log Out',
-  //         onPress: () => {
-  //           this.handleBackButton();
-  //           this.props.navigation.navigate('Login');
-  //         }
-  //       }
-  //     ]);
-  //     return true;
-  //   });
-  // }
 
   handleBackButton = () => {
     this.logout();
@@ -95,6 +76,8 @@ class RegisterPage extends Component {
       commonChosenThirdButtonTextStyle,
       logoutStyle,
       contentContainer,
+      buttonSkipTextStyle,
+      buttonSkipStyle,
       row,
       rowButton,
       explain
@@ -157,17 +140,14 @@ class RegisterPage extends Component {
               type="error"
               style={{
                 color: darkPalette.darkOrange,
-                fontSize: 10,
-                fontFamily: 'Nunito-ExtraLightItalic'
+                fontSize: 12,
+                fontFamily: 'Nunito-ExtraLight'
               }}
-              visible={() => {
-                this.setState({ inputError: true });
-                return (
-                  isNaN(this.state.height) ||
-                  this.state.height < 0 ||
-                  this.state.height > 250
-                );
-              }}
+              visible={
+                isNaN(this.state.height) ||
+                this.state.height < 0 ||
+                this.state.height > 250
+              }
             >
               Height must be a valid number
             </HelperText>
@@ -178,6 +158,7 @@ class RegisterPage extends Component {
               style={{ backgroundColor: darkPalette.superLightgray }}
               selectionColor={darkPalette.darkCyan}
               underlineColorAndroid={darkPalette.darkCyan}
+              defaultValue={this.state.weight}
               value={this.state.weight}
               selectTextOnFocus
               keyboardType="decimal-pad"
@@ -187,8 +168,8 @@ class RegisterPage extends Component {
               type="error"
               style={{
                 color: darkPalette.darkOrange,
-                fontSize: 10,
-                fontFamily: 'Nunito-ExtraLightItalic'
+                fontSize: 12,
+                fontFamily: 'Nunito-ExtraLight'
               }}
               visible={
                 isNaN(this.state.weight) ||
@@ -214,8 +195,8 @@ class RegisterPage extends Component {
               type="error"
               style={{
                 color: darkPalette.darkOrange,
-                fontSize: 10,
-                fontFamily: 'Nunito-ExtraLightItalic'
+                fontSize: 12,
+                fontFamily: 'Nunito-ExtraLight'
               }}
               visible={
                 isNaN(this.state.age) ||
@@ -281,23 +262,24 @@ class RegisterPage extends Component {
           title="Next Step"
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
-          onPress={() => {
+          onPress={async () => {
             if (this.state.inputError || false) {
               Alert.alert('Take your time to rectify your profile, buddy!');
             } else {
-              this.props.navigation.navigate('RegisterStep1', {
-                physicalProfile: this.state,
-                name: this.props.navigation.getParam('user', { name: 'buddy' })
-                  .name
-              });
+              await tokenHandler.storeData('height', this.state.height);
+              await tokenHandler.storeData('weight', this.state.weight);
+              await tokenHandler.storeData('gender', this.state.gender);
+              await tokenHandler.storeData('age', this.state.age);
+              await tokenHandler.storeData('bodyFat', this.state.bodyFat);
+              this.props.navigation.navigate('RegisterStep1');
             }
           }}
         />
         <Button
           type="solid"
-          title="SKIP"
-          buttonStyle={commonButtonStyle}
-          titleStyle={commonButtonTextStyle}
+          title="Skip"
+          buttonStyle={buttonSkipStyle}
+          titleStyle={buttonSkipTextStyle}
           onPress={() => {
             this.props.navigation.dispatch(
               NavigationActions.navigate({

@@ -1,8 +1,10 @@
+/* eslint-disable global-require */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { Image } from 'react-native-elements';
 import styles from './styles';
 
 class AboutPage extends Component {
@@ -21,7 +23,10 @@ class AboutPage extends Component {
     const { aboutContainer, textStyle } = styles;
     return (
       <View style={aboutContainer}>
-        <Text style={textStyle}> About </Text>
+        <Image
+          source={require('../../assets/icons/comming-soon.png')}
+          style={{ width: 300, height: 225 }}
+        />
       </View>
     );
   }

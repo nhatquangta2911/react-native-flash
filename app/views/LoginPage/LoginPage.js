@@ -91,6 +91,10 @@ class LoginPage extends Component {
     this.setState({ isModalVisible: status });
   };
 
+  saveInfo = async () => {
+    await tokenHandler.storeData('user', this.state.user);
+  };
+
   _responseInfoCallback = async (error, result) => {
     if (error) {
       Alert.alert('Error fetching data', error.toString());
@@ -102,8 +106,9 @@ class LoginPage extends Component {
         user: result,
         isFBLoading: false
       });
-      console.log(this.state.user);
-      await tokenHandler.storeData('user', this.state.user);
+      await tokenHandler.storeData('name', this.state.user.name);
+      await tokenHandler.storeData('image', this.state.user.picture.data.url);
+      console.log(this.state.user.picture);
       this.props.navigation.navigate('Register', { user: this.state.user });
     }
   };

@@ -30,7 +30,10 @@ const BrowsingStack = createStackNavigator(
     Details: RecipeDetailPage
   },
   {
-    initialRouteName: 'Browsing'
+    initialRouteName: 'Browsing',
+    navigationOptions: {
+      header: null
+    }
   }
 );
 
