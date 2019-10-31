@@ -21,6 +21,7 @@ import styles from './styles';
 import { fonts, darkPalette } from '../../styles/base';
 import { Modal, SocialButton } from '../../components';
 import { tokenHandler } from '../../utils/token';
+import { ApiCaller } from '../../utils/api';
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -106,10 +107,18 @@ class LoginPage extends Component {
         user: result,
         isFBLoading: false
       });
-      await tokenHandler.storeData('name', this.state.user.name);
-      await tokenHandler.storeData('image', this.state.user.picture.data.url);
-      console.log(this.state.user.picture);
-      this.props.navigation.navigate('Register', { user: this.state.user });
+      const user = this.state.user;
+      axios.post('http://192.168.20.216:3000/api/users/register', {
+        email: user.email,
+        name: user.name,
+        picture: user.picture.data.url,
+      }).then(res => {
+        if(res.status === 201) {
+          this.props.navigation.navigate('Home', { user: res.data })
+        } else {
+          this.props.navigation.navigate('Register', { user: res.data })
+        }
+      }).catch(err => Alert.alert(err.message));
     }
   };
 
@@ -117,7 +126,7 @@ class LoginPage extends Component {
     this.setState({ isFBLoading: true });
     try {
       const result = await LoginManager.logInWithPermissions([
-        'public_profile'
+        'email'
       ]);
       if (result.isCancelled) {
         Alert.alert('Login was cancelled.');
@@ -130,8 +139,15 @@ class LoginPage extends Component {
             token: data.accessToken.toString()
           });
           const infoRequest = new GraphRequest(
-            '/me?fields=name,picture.type(large)',
-            null,
+            '/me',
+            {
+              accessToken: data.accessToken.toString(),
+              parameters: {
+                fields: {
+                  string: 'id,name,email,last_name,birthday,picture.type(large)'
+                }
+              }
+            },
             this._responseInfoCallback
           );
           new GraphRequestManager().addRequest(infoRequest).start();

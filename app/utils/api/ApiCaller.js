@@ -1,18 +1,14 @@
-export default number => {
-  console.log(number);
+import axios from 'axios';
+
+const baseUrl = 'https://localhost:3000/api';
+
+export default function Caller(endpoint, method = 'GET', body = {}, token='') {
+   return axios(
+      `${baseUrl}/${endpoint}`,
+      {
+         method: method,
+         data: body,
+         headers: {'x-access-token': token}
+      }
+   );
 };
-
-// import axios from 'axios';
-
-// const baseUrl = 'https://shawn-movie-rental.herokuapp.com/api';
-
-// export default function Caller(endpoint, method = 'GET', body = {}, token='') {
-//    return axios(
-//       `${baseUrl}/${endpoint}`,
-//       {
-//          method: method,
-//          data: body,
-//          headers: {'x-auth-token': token}
-//       }
-//    );
-// };

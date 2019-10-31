@@ -8,7 +8,6 @@ import {
   dimensions,
   text
 } from '../../styles/base';
-import { relative } from 'path';
 
 export default StyleSheet.create({
   infoContainer: {
