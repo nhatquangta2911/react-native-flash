@@ -38,13 +38,18 @@ class LoginPage extends Component {
       isFBLoading: false,
       hidden: true,
       isModalVisible: false,
-      user: ''
+      user: '',
+      id: ''
     };
   }
 
   saveToken = async () => {
     await tokenHandler.storeData('token', this.state.token);
   };
+
+  saveId = async () => {
+    await tokenHandler.storeData('id', this.state.id)
+  }
 
   login() {
     Keyboard.dismiss();
@@ -112,11 +117,12 @@ class LoginPage extends Component {
         email: user.email,
         name: user.name,
         picture: user.picture.data.url,
-      }).then(res => {
+      }).then(async res => {
+        await tokenHandler.storeData('id', res.data.id.toString());
         if(res.status === 201) {
-          this.props.navigation.navigate('Home', { user: res.data })
+          this.props.navigation.navigate('Home')
         } else {
-          this.props.navigation.navigate('Register', { user: res.data })
+          this.props.navigation.navigate('Register')
         }
       }).catch(err => Alert.alert(err.message));
     }

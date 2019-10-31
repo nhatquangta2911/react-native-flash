@@ -16,6 +16,7 @@ import {
   SwitchActions,
   NavigationActions
 } from 'react-navigation';
+import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 import { StatusCard } from '../../components';
@@ -29,8 +30,8 @@ class SettingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      image: '',
+      id: '',
+      user: '',
       settingList: [
         {
           route: 'Info',
@@ -57,13 +58,15 @@ class SettingPage extends Component {
   }
 
   async componentDidMount() {
-    await this.getUser();
+    await this.getId();
+    axios.get(`http://192.168.20.216:3000/api/users/user/${this.state.id}`)
+         .then(res => this.setState({user: res.data}))
+         .catch(err => Alert.alert(err.message));
   }
 
-  getUser = async () => {
-    const name = await AsyncStorage.getItem('name');
-    const image = await AsyncStorage.getItem('image');
-    this.setState({ name, image });
+  getId = async () => {
+    const id = await AsyncStorage.getItem('id');
+    this.setState({ id });
   };
 
   handleLogout = async () => {
@@ -71,11 +74,11 @@ class SettingPage extends Component {
       '/me/permissions/',
       { httpMethod: 'DELETE' },
       (error, result) => {
-        console.log(result);
         if (error) {
           console.log('Error fetching data: ' + error.toString());
         } else {
-          LoginManager.logOut();
+
+            LoginManager.logOut();
         }
       }
     );
@@ -93,14 +96,15 @@ class SettingPage extends Component {
       scrollContainer,
       settingItem
     } = styles;
-    const { name, image, settingList } = this.state;
+    const { id, user, settingList } = this.state;
+    console.log(id, user)
     return (
       <View style={settingContainer}>
         <StatusCard
-          title={name}
+          title={user.name}
           content="How's your day going, buddy?"
           percent={89}
-          uri={image}
+          uri={user.picture}
         />
 
         <ScrollView style={scrollContainer}>
