@@ -8,12 +8,13 @@ import { Snackbar } from 'react-native-paper';
 import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
 import { questions } from '../../statics/questions';
+import { QuestionApi } from '../../utils/api';
 
 export class QuestionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionList: questions,
+      questionList: [],
       modal: '',
       isSingleVisible: false,
       isMultiVisible: false,
@@ -24,9 +25,18 @@ export class QuestionPage extends Component {
     };
   }
 
+  componentDidMount() {
+    QuestionApi.getAll()
+      .then(res => {
+        console.log(res.data);
+        this.setState({ questionList: res.data });
+      })
+      .catch(err => console.log(err));
+  }
+
   callback = modal => {
     switch (modal.type) {
-      case 'single':
+      case 'Single-choice':
         this.setState({
           modal,
           isMultiVisible: this.state.isSingleVisible,
@@ -34,7 +44,7 @@ export class QuestionPage extends Component {
           isSingleVisible: !this.state.isSingleVisible
         });
         break;
-      case 'multi':
+      case 'Multi-choice':
         this.setState({
           modal,
           isSingleVisible: this.state.isMultiVisible,
@@ -42,7 +52,7 @@ export class QuestionPage extends Component {
           isMultiVisible: !this.state.isMultiVisible
         });
         break;
-      case 'yn':
+      case 'Yes/No':
         Alert.alert(
           modal.title,
           modal.question,
@@ -68,7 +78,7 @@ export class QuestionPage extends Component {
           { cancelable: true }
         );
         break;
-      case 'drop':
+      case 'Deopdown List':
         this.setState({
           modal,
           isSingleVisible: this.state.isDropVisible,
@@ -108,10 +118,14 @@ export class QuestionPage extends Component {
       questionList: []
     });
     setTimeout(() => {
-      this.setState({
-        refreshing: false,
-        questionList: questions
-      });
+      QuestionApi.getAll()
+      .then(res => {
+        this.setState({ 
+          refreshing: false,
+          questionList: res.data
+        });
+      })
+      .catch(err => console.log(err));
     }, 500);
   };
 
@@ -138,10 +152,10 @@ export class QuestionPage extends Component {
       questionList.map(q => (
         <Question
           key={q && q.id}
-          type={q && q.type}
-          title={q && q.title}
-          question={q && q.question}
-          choices={q && q.choices}
+          type={q && q.typeQuestion.name}
+          title={q && q.ingredient.name}
+          question={q && q.extraInfo}
+          choices={q && q.choices || null}
           jumpTo={this.props.jumpTo}
           showModal={this.callback}
         />

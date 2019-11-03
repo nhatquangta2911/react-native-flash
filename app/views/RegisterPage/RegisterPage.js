@@ -127,7 +127,7 @@ class RegisterPage extends Component {
               label="Height (cm)"
               selectionColor={darkPalette.darkCyan}
               underlineColorAndroid={darkPalette.darkCyan}
-              value={this.state.height}
+              value={this.state.height.toString()}
               style={{
                 backgroundColor: darkPalette.superLightgray
               }}
@@ -158,8 +158,8 @@ class RegisterPage extends Component {
               style={{ backgroundColor: darkPalette.superLightgray }}
               selectionColor={darkPalette.darkCyan}
               underlineColorAndroid={darkPalette.darkCyan}
-              defaultValue={this.state.weight}
-              value={this.state.weight}
+              defaultValue={this.state.weight.toString()}
+              value={this.state.weight.toString()}
               selectTextOnFocus
               keyboardType="decimal-pad"
               onChangeText={weight => this.setState({ weight })}

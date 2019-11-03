@@ -11,6 +11,7 @@ import styles from './styles';
 import { darkPalette, headerStyle, text } from '../../styles/base';
 import { tokenHandler } from '../../utils/token';
 import ItemInfo from './sections/ItemInfo';
+import { UserApi } from '../../utils/api';
 
 class InfoPage extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -23,63 +24,35 @@ class InfoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      image: '',
-      height: '',
-      weight: '',
-      gender: '',
-      age: '',
-      bodyFat: '',
-      goal: '',
-      activityLevel: '',
-      dietType: '',
-      tags: []
+      id: '',
+      user: ''
     };
   }
 
   async componentDidMount() {
-    this.setState({
-      name: await AsyncStorage.getItem('name'),
-      image: await AsyncStorage.getItem('image'),
-      height: await AsyncStorage.getItem('height'),
-      weight: await AsyncStorage.getItem('weight'),
-      gender: await AsyncStorage.getItem('gender'),
-      age: await AsyncStorage.getItem('age'),
-      bodyFat: await AsyncStorage.getItem('bodyFat'),
-      goal: await AsyncStorage.getItem('goal'),
-      activityLevel: await AsyncStorage.getItem('activityLevel'),
-      dietType: await AsyncStorage.getItem('dietType'),
-      tags: await AsyncStorage.getItem('tags')
-    });
+    await this.getInfo();
+    UserApi.get(this.state.id)
+         .then(res => this.setState({ user: res.data }))
+         .catch(err => console.log(err));
   }
 
   getInfo = async () => {
-    const user = await tokenHandler.getData('user');
-    this.setState({ data: user });
+    const id = await tokenHandler.getData('id');
+    this.setState({ id });
   };
 
   render() {
     const { infoContainer, textStyle, imageContainer } = styles;
     const {
-      name,
-      image,
-      height,
-      weight,
-      gender,
-      age,
-      bodyFat,
-      goal,
-      activityLevel,
-      dietType,
-      tags
+      id, user
     } = this.state;
-    const tagsResult =
-      tags && tags.map(t => <Text style={textStyle}>{t}</Text>);
+    // const tagsResult =
+    //   tags && tags.map(t => <Text style={textStyle}>{t}</Text>);
     return (
       <View style={infoContainer}>
         <View style={imageContainer}>
           <Image
-            source={{ uri: image }}
+            source={{ uri: user.picture }}
             style={{
               width: 100,
               height: 100,
@@ -90,13 +63,14 @@ class InfoPage extends Component {
           />
         </View>
         <ScrollView>
-          <ItemInfo name="Name" value={name} />
-          <ItemInfo name="Age" value={age} />
-          <ItemInfo name="Gender" value={gender} />
-          <ItemInfo name="Height" value={height} />
-          <ItemInfo name="Weight" value={weight} />
-          <ItemInfo name="Activity Level" value={activityLevel} />
-          <ItemInfo name="bodyFat" value={bodyFat} />
+          <ItemInfo name="Name" value={user.name} />
+          <ItemInfo name="Email" value={user.email} />
+          <ItemInfo name="Age" value={user.age} />
+          <ItemInfo name="Height" value={user && user.userInfo && user.infoUser.height} />
+          <ItemInfo name="Gender" value={user && user.userInfo && user.infoUser.gender} />
+          <ItemInfo name="Weight" value={user && user.userInfo && user.infoUser.weight} />
+          <ItemInfo name="Activity Level" value={user && user.userInfo && user.infoUser.activityLevel} />
+          <ItemInfo name="bodyFat" value={user && user.userInfo && user.infoUser.bodyFat} />
         </ScrollView>
       </View>
     );

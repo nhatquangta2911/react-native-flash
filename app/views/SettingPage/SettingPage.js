@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 import { StatusCard } from '../../components';
 import { tokenHandler } from '../../utils/token';
+import { UserApi } from '../../utils/api';
 
 class SettingPage extends Component {
   static navigationOptions = {
@@ -59,9 +60,9 @@ class SettingPage extends Component {
 
   async componentDidMount() {
     await this.getId();
-    axios.get(`http://192.168.20.216:3000/api/users/user/${this.state.id}`)
+    UserApi.get(this.state.id)
          .then(res => this.setState({user: res.data}))
-         .catch(err => Alert.alert(err.message));
+         .catch(err => console.log(err));
   }
 
   getId = async () => {

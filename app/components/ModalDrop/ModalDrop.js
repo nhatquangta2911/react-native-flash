@@ -26,6 +26,7 @@ class ModalDrop extends React.Component {
   render() {
     const { isDropVisible, title, question, choices, sendStatus, goTo } = this.props;
     const { checked, isButtonVisible } = this.state;
+    console.log(choices)
     return (
       <Overlay
         width="90%"

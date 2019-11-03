@@ -21,7 +21,7 @@ import styles from './styles';
 import { fonts, darkPalette } from '../../styles/base';
 import { Modal, SocialButton } from '../../components';
 import { tokenHandler } from '../../utils/token';
-import { ApiCaller } from '../../utils/api';
+import { ApiCaller, AuthApi } from '../../utils/api';
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -113,7 +113,7 @@ class LoginPage extends Component {
         isFBLoading: false
       });
       const user = this.state.user;
-      axios.post('http://192.168.20.216:3000/api/users/register', {
+      AuthApi.register({
         email: user.email,
         name: user.name,
         picture: user.picture.data.url,
