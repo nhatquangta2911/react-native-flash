@@ -9,6 +9,7 @@ import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
 import { questions } from '../../statics/questions';
 import { QuestionApi } from '../../utils/api';
+import { makeQuestion, handleDateTime } from '../../utils/string';
 
 export class QuestionPage extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ export class QuestionPage extends Component {
           { cancelable: true }
         );
         break;
-      case 'Deopdown List':
+      case 'Dropdown List':
         this.setState({
           modal,
           isSingleVisible: this.state.isDropVisible,
@@ -154,7 +155,7 @@ export class QuestionPage extends Component {
           key={q && q.id}
           type={q && q.typeQuestion.name}
           title={q && q.ingredient.name}
-          question={q && q.extraInfo}
+          question={q && makeQuestion.generate(q.typeQuestion.name, q.amount, q.ingredient.name, handleDateTime.transfer(q.consumedTime))}
           choices={q && q.choices || null}
           jumpTo={this.props.jumpTo}
           showModal={this.callback}
