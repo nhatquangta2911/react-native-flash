@@ -2,32 +2,34 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-import React, { Component } from 'react';
-import { Text, View, ScrollView, Alert, RefreshControl } from 'react-native';
-import { Snackbar } from 'react-native-paper';
-import styles from './styles';
-import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
-import { questions } from '../../statics/questions';
-import { QuestionApi } from '../../utils/api';
-import { makeQuestion, handleDateTime } from '../../utils/string';
+import React, { Component } from "react";
+import { Text, View, ScrollView, Alert, RefreshControl } from "react-native";
+import { Snackbar } from "react-native-paper";
+import styles from "./styles";
+import { Question, ModalSingle, ModalMulti, ModalDrop } from "../../components";
+import { questions } from "../../statics/questions";
+import { QuestionApi } from "../../utils/api";
+import { makeQuestion, handleDateTime } from "../../utils/string";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export class QuestionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questionList: [],
-      modal: '',
+      modal: "",
       isSingleVisible: false,
       isMultiVisible: false,
       isDropVisible: false,
       isSnackbarVisible: false,
-      choice: '',
+      choice: "",
       refreshing: false
     };
   }
 
-  componentDidMount() {
-    QuestionApi.getAll()
+  async componentDidMount() {
+    const id = await AsyncStorage.getItem("id");
+    QuestionApi.getAll(id)
       .then(res => {
         console.log(res.data);
         this.setState({ questionList: res.data });
@@ -37,7 +39,7 @@ export class QuestionPage extends Component {
 
   callback = modal => {
     switch (modal.type) {
-      case 'Single-choice':
+      case "Single-choice":
         this.setState({
           modal,
           isMultiVisible: this.state.isSingleVisible,
@@ -45,7 +47,7 @@ export class QuestionPage extends Component {
           isSingleVisible: !this.state.isSingleVisible
         });
         break;
-      case 'Multi-choice':
+      case "Multi-choice":
         this.setState({
           modal,
           isSingleVisible: this.state.isMultiVisible,
@@ -53,33 +55,33 @@ export class QuestionPage extends Component {
           isMultiVisible: !this.state.isMultiVisible
         });
         break;
-      case 'Yes/No':
+      case "Yes/No":
         Alert.alert(
           modal.title,
           modal.question,
           [
             // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
             {
-              text: 'No',
+              text: "No",
               onPress: () =>
                 this.setState({
                   isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: 'NO'
+                  choice: "NO"
                 })
             },
             {
-              text: 'Yes',
+              text: "Yes",
               onPress: () =>
                 this.setState({
                   isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: 'YES'
+                  choice: "YES"
                 })
             }
           ],
           { cancelable: true }
         );
         break;
-      case 'Dropdown List':
+      case "Dropdown List":
         this.setState({
           modal,
           isSingleVisible: this.state.isDropVisible,
@@ -96,7 +98,7 @@ export class QuestionPage extends Component {
       isSingleVisible: status,
       isMultiVisible: status,
       isDropVisible: status,
-      modal: ''
+      modal: ""
     });
   };
 
@@ -120,13 +122,13 @@ export class QuestionPage extends Component {
     });
     setTimeout(() => {
       QuestionApi.getAll()
-      .then(res => {
-        this.setState({ 
-          refreshing: false,
-          questionList: res.data
-        });
-      })
-      .catch(err => console.log(err));
+        .then(res => {
+          this.setState({
+            refreshing: false,
+            questionList: res.data
+          });
+        })
+        .catch(err => console.log(err));
     }, 500);
   };
 
@@ -154,9 +156,17 @@ export class QuestionPage extends Component {
         <Question
           key={q && q.id}
           type={q && q.typeQuestion.name}
-          title={q && q.ingredient.name}
-          question={q && makeQuestion.generate(q.typeQuestion.name, q.amount, q.ingredient.name, handleDateTime.transfer(q.consumedTime))}
-          choices={q && q.choices || null}
+          title={q && q.ingredients[0].name}
+          question={
+            q &&
+            makeQuestion.generate(
+              q.typeQuestion.name,
+              q.amount,
+              q.ingredients[0].name,
+              handleDateTime.transfer(q.consumedTime)
+            )
+          }
+          choices={(q && q.ingredients) || null}
           jumpTo={this.props.jumpTo}
           showModal={this.callback}
         />
@@ -211,13 +221,13 @@ export class QuestionPage extends Component {
           onDismiss={() => this.setState({ isSnackbarVisible: false })}
           duration={1500}
           action={{
-            label: 'Undo',
+            label: "Undo",
             onPress: () => {
               this.setState({ isSnackbarVisible: false });
             }
           }}
         >
-          {choice === 'empty' ? 'Choose one, buddy!' : `You chose ${choice}`}
+          {choice === "empty" ? "Choose one, buddy!" : `You chose ${choice}`}
         </Snackbar>
       </View>
     );

@@ -2,26 +2,26 @@
 /* eslint-disable prefer-template */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from 'react';
-import { Button, ListItem } from 'react-native-elements';
-import { View, Text, ScrollView, Alert } from 'react-native';
+import React, { Component } from "react";
+import { Button, ListItem } from "react-native-elements";
+import { View, Text, ScrollView, Alert } from "react-native";
 import {
   GraphRequestManager,
   GraphRequest,
   LoginManager
-} from 'react-native-fbsdk';
+} from "react-native-fbsdk";
 import {
   withNavigation,
   StackActions,
   SwitchActions,
   NavigationActions
-} from 'react-navigation';
-import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
-import styles from './styles';
-import { StatusCard } from '../../components';
-import { tokenHandler } from '../../utils/token';
-import { UserApi } from '../../utils/api';
+} from "react-navigation";
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+import styles from "./styles";
+import { StatusCard } from "../../components";
+import { tokenHandler } from "../../utils/token";
+import { UserApi } from "../../utils/api";
 
 class SettingPage extends Component {
   static navigationOptions = {
@@ -31,28 +31,28 @@ class SettingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      user: '',
+      id: "",
+      user: "",
       settingList: [
         {
-          route: 'Info',
-          title: 'Change Your Info',
-          icon: 'list'
+          route: "Info",
+          title: "Change Your Info",
+          icon: "list"
         },
         {
-          route: 'Doctor',
-          title: 'Your Private Doctor ',
-          icon: 'list'
+          route: "Doctor",
+          title: "Your Private Doctor ",
+          icon: "list"
         },
         {
-          route: 'Reminder',
-          title: 'Reminder',
-          icon: 'list'
+          route: "Reminder",
+          title: "Reminder",
+          icon: "list"
         },
         {
-          route: 'About',
-          title: 'About us',
-          icon: 'list'
+          route: "About",
+          title: "About us",
+          icon: "list"
         }
       ]
     };
@@ -61,31 +61,30 @@ class SettingPage extends Component {
   async componentDidMount() {
     await this.getId();
     UserApi.get(this.state.id)
-         .then(res => this.setState({user: res.data}))
-         .catch(err => console.log(err));
+      .then(res => this.setState({ user: res.data }))
+      .catch(err => console.log(err));
   }
 
   getId = async () => {
-    const id = await AsyncStorage.getItem('id');
+    const id = await AsyncStorage.getItem("id");
     this.setState({ id });
   };
 
   handleLogout = async () => {
     const logout = new GraphRequest(
-      '/me/permissions/',
-      { httpMethod: 'DELETE' },
+      "/me/permissions/",
+      { httpMethod: "DELETE" },
       (error, result) => {
         if (error) {
-          console.log('Error fetching data: ' + error.toString());
+          console.log("Error fetching data: " + error.toString());
         } else {
-
-            LoginManager.logOut();
+          LoginManager.logOut();
         }
       }
     );
     new GraphRequestManager().addRequest(logout).start();
     await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate("Auth");
   };
 
   render() {
@@ -98,7 +97,7 @@ class SettingPage extends Component {
       settingItem
     } = styles;
     const { id, user, settingList } = this.state;
-    console.log(id, user)
+    console.log(id, user);
     return (
       <View style={settingContainer}>
         <StatusCard

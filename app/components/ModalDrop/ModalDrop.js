@@ -1,12 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
-import React from 'react';
-import { Overlay, CheckBox, Button } from 'react-native-elements';
-import { View, Text, ScrollView } from 'react-native';
-import MultiSelect from 'react-native-multiple-select';
-import styles from '../ModalMulti/styles';
-import { darkPalette, fonts, margin } from '../../styles/base';
+import React from "react";
+import { Overlay, CheckBox, Button } from "react-native-elements";
+import { View, Text, ScrollView, Alert } from "react-native";
+import MultiSelect from "react-native-multiple-select";
+import styles from "../ModalMulti/styles";
+import { darkPalette, fonts, margin } from "../../styles/base";
+import { UserApi } from "../../utils/api";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const { modalContainer, modalTitle, modalContent, scrollContainer } = styles;
 
@@ -24,9 +26,16 @@ class ModalDrop extends React.Component {
   };
 
   render() {
-    const { isDropVisible, title, question, choices, sendStatus, goTo } = this.props;
+    const {
+      isDropVisible,
+      title,
+      question,
+      choices,
+      sendStatus,
+      goTo
+    } = this.props;
     const { checked, isButtonVisible } = this.state;
-    console.log(choices)
+    console.log(choices);
     return (
       <Overlay
         width="90%"
@@ -63,7 +72,10 @@ class ModalDrop extends React.Component {
               selectedItemFontFamily={fonts.thin}
               selectText="Pick Items"
               searchInputPlaceholderText="Search Items..."
-              searchInputStyle={{ color: darkPalette.darkGray, fontFamily: fonts.thin }}
+              searchInputStyle={{
+                color: darkPalette.darkGray,
+                fontFamily: fonts.thin
+              }}
               altFontFamily={fonts.thin}
               seletedItemTextColor={darkPalette.darkCyan}
               selectedItemFontFamily={fonts.thin}
@@ -81,11 +93,27 @@ class ModalDrop extends React.Component {
               title="Send"
               type="outline"
               titleStyle={{
-                fontFamily: 'Nunito-Light',
+                fontFamily: "Nunito-Light",
                 color: darkPalette.darkCyan
               }}
-              buttonStyle={{ borderColor: darkPalette.darkCyan, marginTop: margin.md }}
-              onPress={() => goTo('SRecord', checked.join(', '))}
+              buttonStyle={{
+                borderColor: darkPalette.darkCyan,
+                marginTop: margin.md
+              }}
+              onPress={async () => {
+                const id = await AsyncStorage.getItem("id");
+                const answer = {
+                  answerContent: "Test",
+                  positiveId: 1,
+                  ingredients: checked
+                };
+                UserApi.submit(answer, id)
+                  .then(res => {
+                    Alert.alert("Success.");
+                    goTo("SRecord", checked.join(", "));
+                  })
+                  .catch(error => Alert.alert("Something went wrong."));
+              }}
             />
           )}
         </View>

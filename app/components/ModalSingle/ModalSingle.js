@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { Overlay, CheckBox, Button } from 'react-native-elements';
-import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
-import styles from './styles';
-import { darkPalette, fonts } from '../../styles/base';
+import { Overlay, CheckBox, Button } from "react-native-elements";
+import { View, Text, ScrollView, Alert } from "react-native";
+import React from "react";
+import styles from "./styles";
+import { darkPalette, fonts } from "../../styles/base";
+import AsyncStorage from "@react-native-community/async-storage";
+import { UserApi } from "../../utils/api";
 
 const { modalContainer, modalTitle, modalContent, scrollContainer } = styles;
 
@@ -11,11 +13,18 @@ class ModalSingle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: ''
+      checked: ""
     };
   }
   render() {
-    const { isSingleVisible, title, question, choices, sendStatus, goTo } = this.props;
+    const {
+      isSingleVisible,
+      title,
+      question,
+      choices,
+      sendStatus,
+      goTo
+    } = this.props;
     const { checked } = this.state;
     return (
       <Overlay
@@ -31,20 +40,20 @@ class ModalSingle extends React.Component {
             {choices &&
               choices.map(c => (
                 <CheckBox
-                  key={c}
-                  title={c}
-                  checked={checked.includes(c)}
+                  key={c.id}
+                  title={c.name}
+                  checked={checked === c.id}
                   checkedIcon="dot-circle-o"
                   checkedColor="gray"
                   uncheckedIcon="circle-o"
                   onPress={() => {
-                    if (checked === c) {
+                    if (checked === c.id) {
                       this.setState({
-                        checked: ''
+                        checked: ""
                       });
                     } else {
                       this.setState({
-                        checked: c
+                        checked: c.id
                       });
                     }
                   }}
@@ -54,10 +63,28 @@ class ModalSingle extends React.Component {
           <Button
             title="Send"
             type="outline"
-            titleStyle={{ fontFamily: 'Nunito-Light', color: darkPalette.darkCyan }}
+            titleStyle={{
+              fontFamily: "Nunito-Light",
+              color: darkPalette.darkCyan
+            }}
             buttonStyle={{ borderColor: darkPalette.darkCyan }}
             //TODO: Check user don't choose anything
-            onPress={() => (checked ? goTo('SRecord', checked) : goTo('Question', 'empty'))}
+            onPress={async () => {
+              const id = await AsyncStorage.getItem("id");
+              const answer = {
+                answerContent: "Test",
+                positiveId: 1,
+                ingredients: checked
+              };
+              UserApi.submit(answer, id)
+                .then(res => {
+                  Alert.alert("Success.");
+                  goTo("SRecord", checked);
+                })
+                .catch(error =>
+                  Alert.alert("Something went wrong.", error.message)
+                );
+            }}
           />
         </View>
       </Overlay>

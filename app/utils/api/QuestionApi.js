@@ -1,9 +1,9 @@
-import Caller from './ApiCaller';
+import Caller from "./ApiCaller";
 
-const prefix = 'questions/';
+const prefix = "questions/";
 
 export default {
-    getAll() {
-        return Caller(prefix, 'GET');
-    }
-}
+  getAll(id) {
+    return Caller(`${prefix}1`, "GET");
+  }
+};
