@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-undef */
-import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import React, { Component } from "react";
+import { Text, TouchableOpacity } from "react-native";
+import styles from "./styles";
 
 export class Answer extends Component {
   render() {
@@ -11,6 +11,9 @@ export class Answer extends Component {
       <TouchableOpacity style={answerContainer}>
         <Text style={textStyle} numberOfLines={1}>
           {this.props.answer}
+        </Text>
+        <Text style={textStyle} numberOfLines={2}>
+          {this.props.image}
         </Text>
       </TouchableOpacity>
     );

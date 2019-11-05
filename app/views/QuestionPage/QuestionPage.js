@@ -11,6 +11,7 @@ import { questions } from "../../statics/questions";
 import { QuestionApi } from "../../utils/api";
 import { makeQuestion, handleDateTime } from "../../utils/string";
 import AsyncStorage from "@react-native-community/async-storage";
+import { tokenHandler } from "../../utils/token";
 
 export class QuestionPage extends Component {
   constructor(props) {
@@ -28,8 +29,8 @@ export class QuestionPage extends Component {
   }
 
   async componentDidMount() {
-    const id = await AsyncStorage.getItem("id");
-    QuestionApi.getAll(id)
+    const id = await tokenHandler.getData("id");
+    QuestionApi.getAll(id || 1)
       .then(res => {
         console.log(res.data);
         this.setState({ questionList: res.data });
@@ -115,21 +116,20 @@ export class QuestionPage extends Component {
     }, 1500);
   };
 
-  _onRefresh = () => {
+  _onRefresh = async () => {
     this.setState({
       refreshing: true,
       questionList: []
     });
-    setTimeout(() => {
-      QuestionApi.getAll()
-        .then(res => {
-          this.setState({
-            refreshing: false,
-            questionList: res.data
-          });
-        })
-        .catch(err => console.log(err));
-    }, 500);
+    const id = await tokenHandler.getData("id");
+    QuestionApi.getAll(id || 1)
+      .then(res => {
+        this.setState({
+          refreshing: false,
+          questionList: res.data
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {

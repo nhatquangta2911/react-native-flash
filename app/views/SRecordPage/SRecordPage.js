@@ -1,34 +1,56 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-import React, { Component, Fragment } from 'react';
-import { Text, View, ScrollView, RefreshControl } from 'react-native';
-import { Searchbar, Snackbar } from 'react-native-paper';
-import Collapsible from 'react-native-collapsible';
-import { Answer } from '../../components';
-import styles from './styles';
-import { answers } from '../../statics/answers';
+import React, { Component, Fragment } from "react";
+import { Text, View, ScrollView, RefreshControl, Alert } from "react-native";
+import { Searchbar, Snackbar } from "react-native-paper";
+import Collapsible from "react-native-collapsible";
+import { Answer } from "../../components";
+import styles from "./styles";
+import { answers } from "../../statics/answers";
+import AsyncStorage from "@react-native-community/async-storage";
+import { AnswerApi } from "../../utils/api";
 
 export class SRecordPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      answerData: answers,
-      firstQuery: '',
+      answerData: [],
+      firstQuery: "",
       isVisible: false,
       refreshing: false,
-      isCollapsed: true
+      isCollapsed: false
     };
   }
 
-  _onRefresh = () => {
-    this.setState({ refreshing: true, answerData: [] });
-    setTimeout(() => {
-      this.setState({
-        refreshing: false,
-        answerData: answers
+  async componentDidMount() {
+    const id = await AsyncStorage.getItem("id");
+    AnswerApi.getMyAnswers(id || 1)
+      .then(res => {
+        this.setState({
+          answerData: res.data && res.data.map(d => d.ingredients)
+        });
+        Alert.alert("Success", res.data.length.toString());
+      })
+      .catch(err => {
+        Alert.alert("Something went wrong", err.message);
       });
-    }, 500);
+  }
+
+  _onRefresh = async () => {
+    this.setState({ refreshing: true, answerData: [], isCollapsed: true });
+    const id = await AsyncStorage.getItem("id");
+    AnswerApi.getMyAnswers(id || 1)
+      .then(res => {
+        this.setState({
+          refreshing: false,
+          isCollapsed: false,
+          answerData: res.data && res.data.map(d => d.ingredients)
+        });
+      })
+      .catch(err => {
+        Alert.alert("Something went wrong", err.message);
+      });
   };
 
   render() {
@@ -43,8 +65,14 @@ export class SRecordPage extends Component {
       dateStyle
     } = styles;
     const answerResult = answerData
-      .filter(a => a.answer.includes(firstQuery))
-      .map(a => <Answer key={a && a.id} answer={a && a.answer} />);
+      // .filter(a => a[0].includes(firstQuery))
+      .map(a => (
+        <Answer
+          key={answerData.indexOf(a)}
+          answer={a && a.map(a => a.name).join(", ")}
+          image={a && a[0] && a[0].image}
+        />
+      ));
     return (
       <Fragment>
         <View style={questionContainer}>
@@ -52,47 +80,49 @@ export class SRecordPage extends Component {
             <Text style={titleStyles}>SRecord</Text>
             <Text style={textStyles}>This is all you need</Text>
           </View>
-          <Text
-            style={dateStyle}
-            onPress={() =>
-              this.setState({ isCollapsed: !this.state.isCollapsed })
-            }
-          >
-            26th September 2019
-          </Text>
-          <Collapsible collapsed={this.state.isCollapsed}>
-            <View style={searchBar}>
-              <Searchbar
-                //TODO: Dropdown later
-                placeholder="Search"
-                onChangeText={query => this.setState({ firstQuery: query })}
-                value={firstQuery}
-                inputStyle={textStyles}
-                style={{ height: 50 }}
-                onSubmitEditing={() => this.setState({ isVisible: true })}
-              />
-            </View>
-            <View style={scrollContainer}>
-              <ScrollView
-                style={scrollContainer}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={() => this._onRefresh()}
-                  />
-                }
-              >
-                {answerResult}
-              </ScrollView>
-            </View>
-          </Collapsible>
+          <View style={searchBar}>
+            <Searchbar
+              //TODO: Dropdown later
+              placeholder="Search"
+              onChangeText={query => this.setState({ firstQuery: query })}
+              value={firstQuery}
+              inputStyle={textStyles}
+              style={{ height: 50 }}
+              onSubmitEditing={() => this.setState({ isVisible: true })}
+            />
+          </View>
+          <ScrollView>
+            <Text
+              style={dateStyle}
+              onPress={() =>
+                this.setState({ isCollapsed: !this.state.isCollapsed })
+              }
+            >
+              26th September 2019
+            </Text>
+            <Collapsible collapsed={this.state.isCollapsed}>
+              <View style={scrollContainer}>
+                <ScrollView
+                  style={scrollContainer}
+                  refreshControl={
+                    <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={() => this._onRefresh()}
+                    />
+                  }
+                >
+                  {answerResult}
+                </ScrollView>
+              </View>
+            </Collapsible>
+          </ScrollView>
         </View>
         <Snackbar
           visible={isVisible}
           onDismiss={() => this.setState({ isVisible: false })}
           duration={5000}
           action={{
-            label: 'OK',
+            label: "OK",
             onPress: () => {
               this.setState({ isVisible: false });
             }

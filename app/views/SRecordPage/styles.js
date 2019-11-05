@@ -1,21 +1,20 @@
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 import {
   dimensions,
   fonts,
   margin,
   padding,
   darkPalette
-} from '../../styles/base';
+} from "../../styles/base";
 
 export default StyleSheet.create({
   questionContainer: {
     height: dimensions.containerHeight,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
     margin: margin.md
   },
   scrollContainer: {
-    height: 350,
     marginBottom: margin.sm,
     marginHorizontal: 1
   },
@@ -23,7 +22,7 @@ export default StyleSheet.create({
     marginVertical: margin.sm
   },
   mainContent: {
-    justifyContent: 'flex-start'
+    justifyContent: "flex-start"
   },
   titleStyles: {
     fontSize: fonts.md,
