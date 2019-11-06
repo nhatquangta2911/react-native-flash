@@ -4,23 +4,23 @@
 /* eslint-disable no-new */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from 'react';
-import { View, Text, BackHandler, Alert, AsyncStorage } from 'react-native';
-import { Button } from 'react-native-elements';
-import { TextInput, HelperText, TouchableRipple } from 'react-native-paper';
+import React, { Component } from "react";
+import { View, Text, BackHandler, Alert, AsyncStorage } from "react-native";
+import { Button } from "react-native-elements";
+import { TextInput, HelperText, TouchableRipple } from "react-native-paper";
 import {
   LoginManager,
   GraphRequest,
   GraphRequestManager
-} from 'react-native-fbsdk';
-import { NavigationActions } from 'react-navigation';
-import styles from './styles';
-import { darkPalette } from '../../styles/base';
-import { tokenHandler } from '../../utils/token';
+} from "react-native-fbsdk";
+import { NavigationActions } from "react-navigation";
+import styles from "./styles";
+import { darkPalette } from "../../styles/base";
+import { tokenHandler } from "../../utils/token";
 
 class RegisterPage extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Physical Profile',
+    title: "Physical Profile",
     headerTitleStyle: { ...styles.headerStyle },
     headerLeft: null
   });
@@ -28,12 +28,12 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.navigation.getParam('user', { name: 'Shawnnn' }),
+      user: props.navigation.getParam("user", { name: "Shawnnn" }),
       height: 169,
       weight: 58,
-      gender: 'Male',
+      gender: "Male",
       age: 22,
-      bodyFat: 'Low',
+      bodyFat: "Low",
       inputError: false
     };
   }
@@ -44,12 +44,12 @@ class RegisterPage extends Component {
 
   logout = () => {
     const logout = new GraphRequest(
-      '/me/permissions/',
-      { httpMethod: 'DELETE' },
+      "/me/permissions/",
+      { httpMethod: "DELETE" },
       (error, result) => {
         console.log(result);
         if (error) {
-          console.log('Error fetching data: ' + error.toString());
+          console.log("Error fetching data: " + error.toString());
         } else {
           LoginManager.logOut();
         }
@@ -85,8 +85,8 @@ class RegisterPage extends Component {
     return (
       <View style={registerContainer}>
         <Text style={textStyles}>
-          Let us know about yourself,{' '}
-          {this.props.navigation.getParam('user', { name: 'buddy' }).name}
+          Let us know about yourself,{" "}
+          {this.props.navigation.getParam("user", { name: "buddy" }).name}
         </Text>
         <View style={contentContainer}>
           <View style={rowButton}>
@@ -94,31 +94,31 @@ class RegisterPage extends Component {
               title="Male"
               type="outline"
               buttonStyle={
-                this.state.gender === 'Male'
+                this.state.gender === "Male"
                   ? commonChosenHalfButtonStyle
                   : commonHalfButtonStyle
               }
               titleStyle={
-                this.state.gender === 'Male'
+                this.state.gender === "Male"
                   ? commonChosenHalfButtonTextStyle
                   : commonHalfButtonTextStyle
               }
-              onPress={() => this.setState({ gender: 'Male' })}
+              onPress={() => this.setState({ gender: "Male" })}
             />
             <Button
               type="outline"
               title="Female"
               buttonStyle={
-                this.state.gender === 'Female'
+                this.state.gender === "Female"
                   ? commonChosenHalfButtonStyle
                   : commonHalfButtonStyle
               }
               titleStyle={
-                this.state.gender === 'Female'
+                this.state.gender === "Female"
                   ? commonChosenHalfButtonTextStyle
                   : commonHalfButtonTextStyle
               }
-              onPress={() => this.setState({ gender: 'Female' })}
+              onPress={() => this.setState({ gender: "Female" })}
             />
           </View>
 
@@ -141,7 +141,7 @@ class RegisterPage extends Component {
               style={{
                 color: darkPalette.darkOrange,
                 fontSize: 12,
-                fontFamily: 'Nunito-ExtraLight'
+                fontFamily: "Nunito-ExtraLight"
               }}
               visible={
                 isNaN(this.state.height) ||
@@ -169,7 +169,7 @@ class RegisterPage extends Component {
               style={{
                 color: darkPalette.darkOrange,
                 fontSize: 12,
-                fontFamily: 'Nunito-ExtraLight'
+                fontFamily: "Nunito-ExtraLight"
               }}
               visible={
                 isNaN(this.state.weight) ||
@@ -196,7 +196,7 @@ class RegisterPage extends Component {
               style={{
                 color: darkPalette.darkOrange,
                 fontSize: 12,
-                fontFamily: 'Nunito-ExtraLight'
+                fontFamily: "Nunito-ExtraLight"
               }}
               visible={
                 isNaN(this.state.age) ||
@@ -213,46 +213,46 @@ class RegisterPage extends Component {
               type="outline"
               title="Low"
               buttonStyle={
-                this.state.bodyFat === 'Low'
+                this.state.bodyFat === "Low"
                   ? commonChosenThirdButtonStyle
                   : commonThirdButtonStyle
               }
               titleStyle={
-                this.state.bodyFat === 'Low'
+                this.state.bodyFat === "Low"
                   ? commonChosenThirdButtonTextStyle
                   : commonThirdButtonTextStyle
               }
-              onPress={() => this.setState({ bodyFat: 'Low' })}
+              onPress={() => this.setState({ bodyFat: "Low" })}
             />
             <Button
               type="outline"
               title="Medium"
               buttonStyle={
-                this.state.bodyFat === 'Medium'
+                this.state.bodyFat === "Medium"
                   ? commonChosenThirdButtonStyle
                   : commonThirdButtonStyle
               }
               titleStyle={
-                this.state.bodyFat === 'Medium'
+                this.state.bodyFat === "Medium"
                   ? commonChosenThirdButtonTextStyle
                   : commonThirdButtonTextStyle
               }
-              onPress={() => this.setState({ bodyFat: 'Medium' })}
+              onPress={() => this.setState({ bodyFat: "Medium" })}
             />
             <Button
               type="outline"
               title="High"
               buttonStyle={
-                this.state.bodyFat === 'High'
+                this.state.bodyFat === "High"
                   ? commonChosenThirdButtonStyle
                   : commonThirdButtonStyle
               }
               titleStyle={
-                this.state.bodyFat === 'High'
+                this.state.bodyFat === "High"
                   ? commonChosenThirdButtonTextStyle
                   : commonThirdButtonTextStyle
               }
-              onPress={() => this.setState({ bodyFat: 'High' })}
+              onPress={() => this.setState({ bodyFat: "High" })}
             />
           </View>
           <Text style={explain}>You can skip these steps</Text>
@@ -264,14 +264,22 @@ class RegisterPage extends Component {
           titleStyle={commonButtonTextStyle}
           onPress={async () => {
             if (this.state.inputError || false) {
-              Alert.alert('Take your time to rectify your profile, buddy!');
+              Alert.alert("Take your time to rectify your profile, buddy!");
             } else {
-              await tokenHandler.storeData('height', this.state.height);
-              await tokenHandler.storeData('weight', this.state.weight);
-              await tokenHandler.storeData('gender', this.state.gender);
-              await tokenHandler.storeData('age', this.state.age);
-              await tokenHandler.storeData('bodyFat', this.state.bodyFat);
-              this.props.navigation.navigate('RegisterStep1');
+              // await tokenHandler.storeData('height', this.state.height);
+              // await tokenHandler.storeData('weight', this.state.weight);
+              // await tokenHandler.storeData('gender', this.state.gender);
+              // await tokenHandler.storeData('age', this.state.age);
+              // await tokenHandler.storeData('bodyFat', this.state.bodyFat);
+              this.props.navigation.navigate("RegisterStep1", {
+                register1: {
+                  height: this.state.height,
+                  weight: this.state.weight,
+                  gender: this.state.gender,
+                  age: this.state.age,
+                  bodyFat: this.state.bodyFat
+                }
+              });
             }
           }}
         />
@@ -283,10 +291,10 @@ class RegisterPage extends Component {
           onPress={() => {
             this.props.navigation.dispatch(
               NavigationActions.navigate({
-                routeName: 'App',
+                routeName: "App",
                 params: { user: this.state.user },
                 action: NavigationActions.navigate({
-                  routeName: 'Home'
+                  routeName: "Home"
                 })
               })
             );
@@ -295,16 +303,16 @@ class RegisterPage extends Component {
         <Text
           style={logoutStyle}
           onPress={() => {
-            Alert.alert('Are you sure you want to log out?', null, [
+            Alert.alert("Are you sure you want to log out?", null, [
               {
-                text: 'Cancel',
-                style: 'cancel'
+                text: "Cancel",
+                style: "cancel"
               },
               {
-                text: 'Log Out',
+                text: "Log Out",
                 onPress: () => {
                   this.logout();
-                  this.props.navigation.navigate('Login');
+                  this.props.navigation.navigate("Login");
                 }
               }
             ]);

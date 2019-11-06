@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import styles from './styles';
-import { tokenHandler } from '../../utils/token';
+import React, { Component } from "react";
+import { View, Text } from "react-native";
+import { Button } from "react-native-elements";
+import styles from "./styles";
+import { tokenHandler } from "../../utils/token";
 
 class RegisterStep3 extends Component {
   static navigationOptions = {
-    title: 'Diet type',
+    title: "Diet type",
     headerTitleStyle: styles.headerStyle
   };
 
@@ -32,9 +32,10 @@ class RegisterStep3 extends Component {
       contentContainer,
       commonChosenButtonStyle
     } = styles;
+    const { navigation } = this.props;
     return (
       <View style={registerContainer}>
-        <Text style={{ ...textStyles, textAlign: 'center' }}>
+        <Text style={{ ...textStyles, textAlign: "center" }}>
           Do you want to follow a specific type of diet?
         </Text>
         <View style={contentContainer}>
@@ -42,46 +43,46 @@ class RegisterStep3 extends Component {
             type="outline"
             title="Anything"
             buttonStyle={
-              this.state.dietType === '1'
+              this.state.dietType === "1"
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.dietType === '1'
+              this.state.dietType === "1"
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ dietType: '1' })}
+            onPress={() => this.setState({ dietType: "1" })}
           />
           <Button
             type="outline"
             title="Vegetarian"
             buttonStyle={
-              this.state.dietType === '2'
+              this.state.dietType === "2"
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.dietType === '2'
+              this.state.dietType === "2"
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ dietType: '2' })}
+            onPress={() => this.setState({ dietType: "2" })}
           />
           <Button
             type="outline"
             title="Mediterranean"
             buttonStyle={
-              this.state.dietType === '3'
+              this.state.dietType === "3"
                 ? commonChosenButtonStyle
                 : commonNotChosenButtonStyle
             }
             titleStyle={
-              this.state.dietType === '3'
+              this.state.dietType === "3"
                 ? commonChosenThirdButtonTextStyle
                 : commonThirdButtonTextStyle
             }
-            onPress={() => this.setState({ dietType: '3' })}
+            onPress={() => this.setState({ dietType: "3" })}
           />
         </View>
         <Button
@@ -91,8 +92,12 @@ class RegisterStep3 extends Component {
           titleStyle={commonButtonTextStyle}
           title="Next"
           onPress={async () => {
-            await tokenHandler.storeData('dietType', this.state.dietType);
-            this.props.navigation.navigate('RegisterStep4');
+            this.props.navigation.navigate("RegisterStep4", {
+              dietType: this.state.dietType,
+              activityLevel: navigation.getParam("activityLevel", null),
+              goal: navigation.getParam("goal", null),
+              register1: navigation.getParam("register1", null)
+            });
           }}
         />
       </View>

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
-import TagInput from 'react-native-tags-input';
-import styles from './styles';
+import React, { Component } from "react";
+import { View, Text, Alert } from "react-native";
+import { Button, Icon } from "react-native-elements";
+import TagInput from "react-native-tags-input";
+import styles from "./styles";
 import {
   darkPalette,
   fonts,
@@ -12,12 +12,13 @@ import {
   margin,
   padding,
   sizes
-} from '../../styles/base';
-import { tokenHandler } from '../../utils/token';
+} from "../../styles/base";
+import { tokenHandler } from "../../utils/token";
+import UserApi from "../../utils/api/UserApi";
 
 class RegisterStep4 extends Component {
   static navigationOptions = {
-    title: 'Allergies',
+    title: "Allergies",
     headerTitleStyle: styles.headerStyle
   };
 
@@ -25,8 +26,8 @@ class RegisterStep4 extends Component {
     super(props);
     this.state = {
       tags: {
-        tag: '',
-        tagsArray: ['Apple', 'Watermelon']
+        tag: "",
+        tagsArray: ["Apple", "Watermelon"]
       }
     };
   }
@@ -50,15 +51,16 @@ class RegisterStep4 extends Component {
       contentContainer,
       commonChosenButtonStyle
     } = styles;
+    const { navigation } = this.props;
     return (
       <View
         style={{
           ...registerContainer,
-          alignItems: 'center'
+          alignItems: "center"
         }}
       >
         <View style={contentContainer}>
-          <Text style={{ ...textStyles, textAlign: 'center' }}>
+          <Text style={{ ...textStyles, textAlign: "center" }}>
             I don't want to eat:
           </Text>
           <TagInput
@@ -87,33 +89,33 @@ class RegisterStep4 extends Component {
               fontFamily: fonts.thin,
               fontSize: fonts.sm - 3,
               color: darkPalette.darkGray,
-              overflow: 'hidden',
-              justifyContent: 'flex-start'
+              overflow: "hidden",
+              justifyContent: "flex-start"
             }}
             tagStyle={{
               backgroundColor: darkPalette.white,
               borderColor: darkPalette.white,
               minHeight: fonts.xl,
-              flexDirection: 'row',
+              flexDirection: "row",
               marginHorizontal: margin.sm - 2,
               marginVertical: margin.smd,
-              justifyContent: 'flex-start',
+              justifyContent: "flex-start",
               paddingHorizontal: 3
             }}
             leftElement={
               <Icon
-                name={'tag-multiple'}
-                type={'material-community'}
+                name={"tag-multiple"}
+                type={"material-community"}
                 color={darkPalette.darkCyan}
                 size={fonts.md}
               />
             }
             leftElementContainerStyle={{
-              justifyContent: 'center',
+              justifyContent: "center",
               marginTop: margin.sm - 2,
               marginRight: 0
             }}
-            keysForTag={' '}
+            keysForTag={" "}
           />
         </View>
         <Button
@@ -121,10 +123,28 @@ class RegisterStep4 extends Component {
           title="Next Step"
           buttonStyle={commonButtonStyle}
           titleStyle={commonButtonTextStyle}
-          title="Next"
+          title="Finish"
           onPress={async () => {
-            await tokenHandler.storeData('tags', this.state.tags.tagsArray);
-            this.props.navigation.navigate('Home');
+            // const id = await tokenHandler.getParam("id");
+            const registerInfo = navigation.getParam("register1", null);
+            const info = {
+              weight: registerInfo.weight || null,
+              height: registerInfo.height || null,
+              gender: registerInfo.gender || null,
+              bodyFat: registerInfo.bodyFat || null,
+              goal: navigation.getParam("goal", null),
+              activityLevel: navigation.getParam("activityLevel", null),
+              dietType: navigation.getParam("dietType", null)
+            };
+            // await tokenHandler.storeData('tags', this.state.tags.tagsArray);
+            UserApi.submitInfo(info, 6)
+              .then(res => {
+                Alert.alert("Success", res.data.toString());
+                // this.props.navigation.navigate("Home");
+              })
+              .catch(err => {
+                Alert.alert("Something went wrong", err.message);
+              });
           }}
         />
       </View>
