@@ -17,6 +17,7 @@ import { NavigationActions } from "react-navigation";
 import styles from "./styles";
 import { darkPalette } from "../../styles/base";
 import { tokenHandler } from "../../utils/token";
+import UserApi from "../../utils/api/UserApi";
 
 class RegisterPage extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -82,11 +83,12 @@ class RegisterPage extends Component {
       rowButton,
       explain
     } = styles;
+    const { navigation } = this.props;
     return (
       <View style={registerContainer}>
         <Text style={textStyles}>
           Let us know about yourself,{" "}
-          {this.props.navigation.getParam("user", { name: "buddy" }).name}
+          {navigation.getParam("user", { name: "buddy" }).name}
         </Text>
         <View style={contentContainer}>
           <View style={rowButton}>
@@ -271,7 +273,7 @@ class RegisterPage extends Component {
               // await tokenHandler.storeData('gender', this.state.gender);
               // await tokenHandler.storeData('age', this.state.age);
               // await tokenHandler.storeData('bodyFat', this.state.bodyFat);
-              this.props.navigation.navigate("RegisterStep1", {
+              navigation.navigate("RegisterStep1", {
                 register1: {
                   height: this.state.height,
                   weight: this.state.weight,
@@ -288,16 +290,25 @@ class RegisterPage extends Component {
           title="Skip"
           buttonStyle={buttonSkipStyle}
           titleStyle={buttonSkipTextStyle}
-          onPress={() => {
-            this.props.navigation.dispatch(
-              NavigationActions.navigate({
-                routeName: "App",
-                params: { user: this.state.user },
-                action: NavigationActions.navigate({
-                  routeName: "Home"
-                })
+          onPress={async () => {
+            const id = await tokenHandler.getData("id");
+            const info = {};
+            UserApi.submitInfo(info, id)
+              .then(res => {
+                Alert.alert("Success", res.data.toString());
+                navigation.dispatch(
+                  NavigationActions.navigate({
+                    routeName: "App",
+                    params: { user: this.state.user },
+                    action: NavigationActions.navigate({
+                      routeName: "Home"
+                    })
+                  })
+                );
               })
-            );
+              .catch(err => {
+                Alert.alert("Something went wrong", err.message);
+              });
           }}
         />
         <Text
@@ -312,7 +323,7 @@ class RegisterPage extends Component {
                 text: "Log Out",
                 onPress: () => {
                   this.logout();
-                  this.props.navigation.navigate("Login");
+                  navigation.navigate("Login");
                 }
               }
             ]);

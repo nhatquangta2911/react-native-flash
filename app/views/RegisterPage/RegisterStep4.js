@@ -125,7 +125,7 @@ class RegisterStep4 extends Component {
           titleStyle={commonButtonTextStyle}
           title="Finish"
           onPress={async () => {
-            // const id = await tokenHandler.getParam("id");
+            const id = await tokenHandler.getData("id");
             const registerInfo = navigation.getParam("register1", null);
             const info = {
               weight: registerInfo.weight || null,
@@ -137,10 +137,10 @@ class RegisterStep4 extends Component {
               dietType: navigation.getParam("dietType", null)
             };
             // await tokenHandler.storeData('tags', this.state.tags.tagsArray);
-            UserApi.submitInfo(info, 6)
+            UserApi.submitInfo(info, id)
               .then(res => {
                 Alert.alert("Success", res.data.toString());
-                // this.props.navigation.navigate("Home");
+                this.props.navigation.navigate("Home");
               })
               .catch(err => {
                 Alert.alert("Something went wrong", err.message);
