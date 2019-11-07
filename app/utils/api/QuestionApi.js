@@ -4,6 +4,6 @@ const prefix = "questions/";
 
 export default {
   getAll(id) {
-    return Caller(`${prefix}1`, "GET");
+    return Caller(`${prefix}${id}`, "GET");
   }
 };

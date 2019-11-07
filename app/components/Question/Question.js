@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-undef */
-import React, { Component } from 'react';
-import { Text, TouchableOpacity, Alert } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import styles from './styles';
+import React, { Component } from "react";
+import { Text, TouchableOpacity, Alert } from "react-native";
+import { withNavigation } from "react-navigation";
+import styles from "./styles";
 
 export class Question extends Component {
   // expandQuestion = ({ type, content, jumpTo }) => {
@@ -19,7 +19,10 @@ export class Question extends Component {
   render() {
     const { questionContainer, titleStyle, textStyle } = styles;
     return (
-      <TouchableOpacity style={questionContainer} onPress={() => this.props.showModal(this.props)}>
+      <TouchableOpacity
+        style={questionContainer}
+        onPress={() => this.props.showModal(this.props)}
+      >
         <Text style={titleStyle} numberOfLines={1}>
           {this.props.title}
         </Text>

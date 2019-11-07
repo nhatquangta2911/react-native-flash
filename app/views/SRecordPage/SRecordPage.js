@@ -10,6 +10,7 @@ import styles from "./styles";
 import { answers } from "../../statics/answers";
 import AsyncStorage from "@react-native-community/async-storage";
 import { AnswerApi } from "../../utils/api";
+import handleDateTime from "../../utils/string/handleDateTime";
 
 export class SRecordPage extends Component {
   constructor(props) {
@@ -25,7 +26,10 @@ export class SRecordPage extends Component {
 
   async componentDidMount() {
     const id = await AsyncStorage.getItem("id");
-    AnswerApi.getMyAnswers(id || 1)
+    AnswerApi.getMyAnswers(
+      id,
+      handleDateTime.transferDate(new Date(Date.now()))
+    )
       .then(res => {
         this.setState({
           answerData: res.data && res.data.map(d => d.ingredients)
@@ -40,7 +44,7 @@ export class SRecordPage extends Component {
   _onRefresh = async () => {
     this.setState({ refreshing: true, answerData: [], isCollapsed: true });
     const id = await AsyncStorage.getItem("id");
-    AnswerApi.getMyAnswers(id || 1)
+    AnswerApi.getMyAnswers(id, "2019-11-07")
       .then(res => {
         this.setState({
           refreshing: false,
@@ -69,6 +73,7 @@ export class SRecordPage extends Component {
       .map(a => (
         <Answer
           key={answerData.indexOf(a)}
+          question={a}
           answer={a && a.map(a => a.name).join(", ")}
           image={a && a[0] && a[0].image}
         />
@@ -82,7 +87,6 @@ export class SRecordPage extends Component {
           </View>
           <View style={searchBar}>
             <Searchbar
-              //TODO: Dropdown later
               placeholder="Search"
               onChangeText={query => this.setState({ firstQuery: query })}
               value={firstQuery}
@@ -98,7 +102,7 @@ export class SRecordPage extends Component {
                 this.setState({ isCollapsed: !this.state.isCollapsed })
               }
             >
-              26th September 2019
+              {handleDateTime.transferDate(new Date(Date.now()))}
             </Text>
             <Collapsible collapsed={this.state.isCollapsed}>
               <View style={scrollContainer}>
