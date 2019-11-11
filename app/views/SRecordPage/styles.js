@@ -17,6 +17,7 @@ export default StyleSheet.create({
   scrollContainer: {
     marginBottom: margin.sm,
     marginHorizontal: 1
+    // height: dimensions.containerHeight / 3.5
   },
   searchBar: {
     marginVertical: margin.sm

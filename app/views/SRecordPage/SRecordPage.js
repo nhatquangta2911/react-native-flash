@@ -10,50 +10,59 @@ import styles from "./styles";
 import { answers } from "../../statics/answers";
 import AsyncStorage from "@react-native-community/async-storage";
 import { AnswerApi } from "../../utils/api";
-import handleDateTime from "../../utils/string/handleDateTime";
+import { HandleDateTime } from "../../utils/date";
 
 export class SRecordPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dates: [],
       answerData: [],
       firstQuery: "",
       isVisible: false,
       refreshing: false,
-      isCollapsed: false
+      isCollapsed: true
     };
   }
 
   async componentDidMount() {
+    this.setState({
+      dates: HandleDateTime.generateRecentDates(3)
+    });
     const id = await AsyncStorage.getItem("id");
-    AnswerApi.getMyAnswers(
-      id,
-      handleDateTime.transferDate(new Date(Date.now()))
-    )
-      .then(res => {
-        this.setState({
-          answerData: res.data && res.data.map(d => d.ingredients)
-        });
-        Alert.alert("Success", res.data.length.toString());
-      })
-      .catch(err => {
-        Alert.alert("Something went wrong", err.message);
+    this.state.dates &&
+      this.state.dates.forEach(d => {
+        AnswerApi.getMyAnswers(id, d)
+          .then(res => {
+            this.setState({
+              answerData: [...this.state.answerData, { ...res.data, date: d }]
+            });
+          })
+          .catch(err => {
+            Alert.alert("Something went wrong", err.message);
+          });
       });
   }
 
   _onRefresh = async () => {
-    this.setState({ refreshing: true, answerData: [], isCollapsed: true });
+    this.setState({
+      refreshing: true,
+      answerData: [],
+      isCollapsed: true,
+      dates: HandleDateTime.generateRecentDates(3)
+    });
     const id = await AsyncStorage.getItem("id");
-    AnswerApi.getMyAnswers(id, "2019-11-07")
-      .then(res => {
-        this.setState({
-          refreshing: false,
-          isCollapsed: false,
-          answerData: res.data && res.data.map(d => d.ingredients)
-        });
-      })
-      .catch(err => {
-        Alert.alert("Something went wrong", err.message);
+    this.state.dates &&
+      this.state.dates.forEach(d => {
+        AnswerApi.getMyAnswers(id, d)
+          .then(res => {
+            this.setState({
+              answerData: [...this.state.answerData, { ...res.data, date: d }]
+            });
+          })
+          .catch(err => {
+            Alert.alert("Something went wrong", err.message);
+          });
       });
   };
 
@@ -68,18 +77,55 @@ export class SRecordPage extends Component {
       scrollContainer,
       dateStyle
     } = styles;
-    const answerResult = answerData
-      // .filter(a => a[0].includes(firstQuery))
-      .map(a => (
-        <Answer
-          key={answerData.indexOf(a)}
-          question={a}
-          answer={a && a.map(a => a.name).join(", ")}
-          image={a && a[0] && a[0].image}
-        />
+    const answerResult =
+      answerData &&
+      answerData.map(day => (
+        <View key={answerData.indexOf(day)}>
+          <Text
+            style={dateStyle}
+            onPress={() => this.setState({ isCollapsed: false })}
+          >
+            {day && day.date}
+          </Text>
+          <Collapsible collapsed={this.state.isCollapsed}>
+            <View style={scrollContainer}>
+              <ScrollView
+                style={scrollContainer}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => this._onRefresh()}
+                  />
+                }
+              >
+                {day &&
+                  day.answers &&
+                  day.answers.map(answer => (
+                    <Answer
+                      key={answer.id}
+                      question={answer.id}
+                      answer={
+                        answer &&
+                        answer.ingredients &&
+                        answer.ingredients.reduce(
+                          (prev, curr) => `${prev}, ${curr.name}`,
+                          ""
+                        )
+                      }
+                      image={
+                        answer &&
+                        answer.ingredients &&
+                        answer.ingredients[0].image
+                      }
+                    />
+                  ))}
+              </ScrollView>
+            </View>
+          </Collapsible>
+        </View>
       ));
     return (
-      <Fragment>
+      <ScrollView>
         <View style={questionContainer}>
           <View style={mainContent}>
             <Text style={titleStyles}>SRecord</Text>
@@ -95,31 +141,7 @@ export class SRecordPage extends Component {
               onSubmitEditing={() => this.setState({ isVisible: true })}
             />
           </View>
-          <ScrollView>
-            <Text
-              style={dateStyle}
-              onPress={() =>
-                this.setState({ isCollapsed: !this.state.isCollapsed })
-              }
-            >
-              {handleDateTime.transferDate(new Date(Date.now()))}
-            </Text>
-            <Collapsible collapsed={this.state.isCollapsed}>
-              <View style={scrollContainer}>
-                <ScrollView
-                  style={scrollContainer}
-                  refreshControl={
-                    <RefreshControl
-                      refreshing={refreshing}
-                      onRefresh={() => this._onRefresh()}
-                    />
-                  }
-                >
-                  {answerResult}
-                </ScrollView>
-              </View>
-            </Collapsible>
-          </ScrollView>
+          <ScrollView>{answerResult}</ScrollView>
         </View>
         <Snackbar
           visible={isVisible}
@@ -134,7 +156,7 @@ export class SRecordPage extends Component {
         >
           {firstQuery}
         </Snackbar>
-      </Fragment>
+      </ScrollView>
     );
   }
 }
