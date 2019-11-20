@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette } from '../../styles/base';
+import { StyleSheet } from "react-native";
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette
+} from "../../styles/base";
 
 export default StyleSheet.create({
   browsingContainer: {

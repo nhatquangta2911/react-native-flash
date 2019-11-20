@@ -5,25 +5,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  RefreshControl,
-  Alert,
-  BackHandler
-} from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
-import { Button, Divider } from "react-native-elements";
+import { Text, View, Alert, BackHandler } from "react-native";
+import { Image } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import styles from "./styles";
-import {
-  StatusCard,
-  CustomCarousel,
-  Recipe,
-  HomeHeader,
-  ImageCarousel
-} from "../../components";
+import { HomeHeader, ImageCarousel } from "../../components";
 import { tokenHandler } from "../../utils/token";
 import { AnswerApi } from "../../utils/api";
 import { HandleDateTime } from "../../utils/date";
@@ -84,13 +70,20 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { homeContainer, title, scrollContainer, tipContainer } = styles;
-    const { refreshing, total } = this.state;
+    const {
+      homeContainer,
+      title,
+      tipContainer,
+      imageStyle,
+      oneThird,
+      twoThird
+    } = styles;
+    const { total } = this.state;
     return (
       <View style={homeContainer}>
-        <View>
+        <View style={oneThird}>
           <HomeHeader navigation={this.props} answerNumber={total} />
-          <ScrollView
+          {/* <ScrollView
             style={scrollContainer}
             refreshControl={
               <RefreshControl
@@ -100,7 +93,13 @@ export class HomePage extends Component {
             }
           >
             {/* <Divider /> */}
-          </ScrollView>
+          {/* </ScrollView> */}
+        </View>
+        <View style={twoThird}>
+          <Image
+            source={require("../../assets/banners/instruction.png")}
+            style={imageStyle}
+          />
         </View>
         <View style={tipContainer}>
           <Text style={title}>Tips & Advice</Text>

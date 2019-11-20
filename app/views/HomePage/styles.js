@@ -6,20 +6,35 @@ import {
   margin,
   darkPalette,
   sizes,
-  padding
+  padding,
+  shadow
 } from "../../styles/base";
 
 export default StyleSheet.create({
   homeContainer: {
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
-    height: dimensions.containerHeight / 1.5
+    height: dimensions.containerHeight
   },
-  scrollContainer: {},
-  tipContainer: {},
+  oneThird: {
+    flex: 1
+  },
+  twoThird: {
+    flex: 1.5
+  },
+  tipContainer: {
+    flex: 1.5,
+    alignItems: "center"
+  },
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.md
+  },
+  imageStyle: {
+    width: dimensions.fullWidth - 2 * margin.sm,
+    height: dimensions.containerHeight / 3,
+    ...shadow,
+    marginVertical: margin.md
   },
   buttonLoginStyle: {
     margin: margin.md,
