@@ -9,11 +9,11 @@ export class Answer extends Component {
     const { answerContainer, titleStyle, textStyle } = styles;
     return (
       <TouchableOpacity style={answerContainer}>
-        <Text style={textStyle} numberOfLines={1}>
+        <Text style={titleStyle} numberOfLines={1}>
           {this.props.answer}
         </Text>
         <Text style={textStyle} numberOfLines={2}>
-          {this.props.image}
+          {this.props.answerTime}
         </Text>
       </TouchableOpacity>
     );

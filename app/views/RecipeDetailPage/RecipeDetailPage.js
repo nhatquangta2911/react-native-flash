@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import Collapsible from 'react-native-collapsible';
-import { Image } from 'react-native-elements';
-import { Text as CustomText } from '../../components';
-import styles from './styles';
-import { headerStyle, nutrientColor } from '../../styles/base';
+import React, { Component } from "react";
+import { Text, View, ScrollView } from "react-native";
+import { withNavigation } from "react-navigation";
+import Collapsible from "react-native-collapsible";
+import { Image } from "react-native-elements";
+import { Text as CustomText } from "../../components";
+import styles from "./styles";
+import { headerStyle, nutrientColor } from "../../styles/base";
 
 class RecipeDetailPage extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('name', 'Recipe Detail'),
+    title: navigation.getParam("name", "Recipe Detail"),
     headerTitleStyle: { ...headerStyle, marginLeft: -4 }
   });
 
@@ -34,7 +34,7 @@ class RecipeDetailPage extends Component {
       nutrientContainer
     } = styles;
     const { navigation } = this.props;
-    const nutrients = navigation.getParam('nutrients', {
+    const nutrients = navigation.getParam("nutrients", {
       cal: 0,
       carbs: 0,
       fat: 0,
@@ -46,8 +46,8 @@ class RecipeDetailPage extends Component {
         <Image
           source={{
             uri: navigation.getParam(
-              'image',
-              'https://wpes.org.uk/wp-content/uploads/2018/02/default-banner.jpg'
+              "image",
+              "https://wpes.org.uk/wp-content/uploads/2018/02/default-banner.jpg"
             )
           }}
           style={imageStyle}
@@ -63,18 +63,7 @@ class RecipeDetailPage extends Component {
           </Text>
           <Collapsible collapsed={this.state.is1Collapsed}>
             <View style={nutrientStyle}>
-              <Text style={textStyles}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                dignissimos corrupti dolore, quae tempora ducimus quaerat, amet
-                libero non maxime fuga sunt pariatur, aliquid omnis dicta quod?
-                Nostrum, praesentium adipisci!
-              </Text>
-              <Text style={textStyles}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                dignissimos corrupti dolore, quae tempora ducimus quaerat, amet
-                libero non maxime fuga sunt pariatur, aliquid omnis dicta quod?
-                Nostrum, praesentium adipisci!
-              </Text>
+              <Text style={textStyles}>Update soon...</Text>
             </View>
           </Collapsible>
           <Text

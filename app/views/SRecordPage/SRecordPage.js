@@ -130,10 +130,12 @@ export class SRecordPage extends Component {
                           ""
                         )
                       }
-                      image={
+                      answerTime={
                         answer &&
-                        answer.ingredients &&
-                        answer.ingredients[0].image
+                        answer.answerTime &&
+                        answer.answerTime.split("T")[1].substring(0, 5)
+                        // answer.ingredients &&
+                        // answer.ingredients[0].image
                       }
                     />
                   ))}

@@ -1,12 +1,19 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette, textStyles } from '../../styles/base';
+import { StyleSheet } from "react-native";
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette,
+  textStyles
+} from "../../styles/base";
 
 export default StyleSheet.create({
   recipeDetailContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: padding.md
   },
   scrollContainer: {

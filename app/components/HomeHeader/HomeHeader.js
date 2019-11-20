@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
-import React from 'react';
-import { Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
-import { HomeHeaderItem } from '..';
-import styles from './styles';
-import { darkPalette } from '../../styles/base';
+import React from "react";
+import { Text, View } from "react-native";
+import { Button } from "react-native-paper";
+import { HomeHeaderItem } from "..";
+import styles from "./styles";
+import { darkPalette } from "../../styles/base";
 
 const {
   homeHeaderContainer,
@@ -31,36 +31,36 @@ const HomeHeader = props => (
         <Button
           icon="arrow-forward"
           color={darkPalette.darkGray}
-          onPress={() => props.navigation.navigation.navigate('Stats')}
+          onPress={() => props.navigation.navigation.navigate("Stats")}
         />
       </View>
     </View>
     <View style={listItem}>
       <HomeHeaderItem
-        title="Answer More"
+        title="Questions +"
         linkTo="Question"
         jumpTo={props.navigation}
-        icon={require('../../assets/icons/icon1.png')}
+        icon={require("../../assets/icons/icon1.png")}
       />
       <HomeHeaderItem
-        title="Your Answers"
+        title="Answers"
         linkTo="SRecord"
         jumpTo={props.navigation}
-        icon={require('../../assets/icons/icon2.png')}
+        icon={require("../../assets/icons/icon2.png")}
       />
       <HomeHeaderItem
         outside
-        title="Statistic"
+        title="Statistics"
         linkTo="Stats"
         jumpTo={props.navigation}
-        icon={require('../../assets/icons/icon3.png')}
+        icon={require("../../assets/icons/icon3.png")}
       />
       <HomeHeaderItem
         outside
-        title="Browse Food"
+        title="Nutrients"
         linkTo="Browsing"
         jumpTo={props.navigation}
-        icon={require('../../assets/icons/icon4.png')}
+        icon={require("../../assets/icons/icon4.png")}
       />
     </View>
   </View>
