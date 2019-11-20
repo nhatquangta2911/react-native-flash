@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// const baseUrl = "http://54.169.190.136:5000/api";
-const baseUrl = "http://192.168.20.216:5000/api";
+// PROD
+const baseUrl = "http://54.169.190.136:5000/api";
+
+// DEV (Only with ADB Virtual Machine)
+// const baseUrl = "http://192.168.20.216:5000/api";
 
 export default function Caller(
   endpoint,

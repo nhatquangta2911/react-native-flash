@@ -4,24 +4,24 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { Component, Fragment } from 'react';
-import { View, Keyboard, Alert } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import React, { Component, Fragment } from "react";
+import { View, Keyboard, Alert } from "react-native";
+import { withNavigation } from "react-navigation";
 import {
   LoginButton,
   AccessToken,
   LoginManager,
   GraphRequest,
   GraphRequestManager
-} from 'react-native-fbsdk';
-import axios from 'axios';
-import { Input, Text, Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import styles from './styles';
-import { fonts, darkPalette } from '../../styles/base';
-import { Modal, SocialButton } from '../../components';
-import { tokenHandler } from '../../utils/token';
-import { ApiCaller, AuthApi } from '../../utils/api';
+} from "react-native-fbsdk";
+import axios from "axios";
+import { Input, Text, Button } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import styles from "./styles";
+import { fonts, darkPalette } from "../../styles/base";
+import { Modal, SocialButton } from "../../components";
+import { tokenHandler } from "../../utils/token";
+import { ApiCaller, AuthApi } from "../../utils/api";
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -31,25 +31,25 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      token: '',
+      email: "",
+      password: "",
+      token: "",
       isLoading: false,
       isFBLoading: false,
       hidden: true,
       isModalVisible: false,
-      user: '',
-      id: ''
+      user: "",
+      id: ""
     };
   }
 
   saveToken = async () => {
-    await tokenHandler.storeData('token', this.state.token);
+    await tokenHandler.storeData("token", this.state.token);
   };
 
   saveId = async () => {
-    await tokenHandler.storeData('id', this.state.id)
-  }
+    await tokenHandler.storeData("id", this.state.id);
+  };
 
   login() {
     Keyboard.dismiss();
@@ -57,7 +57,7 @@ class LoginPage extends Component {
       isLoading: true
     });
     axios
-      .post('https://shawn-movie-rental.herokuapp.com/api/auth', {
+      .post("https://shawn-movie-rental.herokuapp.com/api/auth", {
         email: this.state.email,
         password: this.state.password
       })
@@ -68,7 +68,7 @@ class LoginPage extends Component {
           isModalVisible: false
         });
         this.saveToken();
-        this.props.navigation.navigate('Home', {
+        this.props.navigation.navigate("Home", {
           token: this.state.token
         });
       })
@@ -76,7 +76,7 @@ class LoginPage extends Component {
         this.setState({
           isLoading: false,
           isModalVisible: true,
-          password: ''
+          password: ""
         });
         console.log(err);
       });
@@ -98,12 +98,12 @@ class LoginPage extends Component {
   };
 
   saveInfo = async () => {
-    await tokenHandler.storeData('user', this.state.user);
+    await tokenHandler.storeData("user", this.state.user);
   };
 
   _responseInfoCallback = async (error, result) => {
     if (error) {
-      Alert.alert('Error fetching data', error.toString());
+      Alert.alert("Error fetching data", error.toString());
       this.setState({
         isFBLoading: false
       });
@@ -116,26 +116,26 @@ class LoginPage extends Component {
       AuthApi.register({
         email: user.email,
         name: user.name,
-        picture: user.picture.data.url,
-      }).then(async res => {
-        await tokenHandler.storeData('id', res.data.id.toString());
-        if(res.status === 201) {
-          this.props.navigation.navigate('Home')
-        } else {
-          this.props.navigation.navigate('Register')
-        }
-      }).catch(err => Alert.alert(err.message));
+        picture: user.picture.data.url
+      })
+        .then(async res => {
+          await tokenHandler.storeData("id", res.data.id.toString());
+          if (res.status === 201) {
+            this.props.navigation.navigate("Home");
+          } else {
+            this.props.navigation.navigate("Register");
+          }
+        })
+        .catch(err => Alert.alert(err.message));
     }
   };
 
   handleFacebookLogin = async () => {
     this.setState({ isFBLoading: true });
     try {
-      const result = await LoginManager.logInWithPermissions([
-        'email'
-      ]);
+      const result = await LoginManager.logInWithPermissions(["email"]);
       if (result.isCancelled) {
-        Alert.alert('Login was cancelled.');
+        Alert.alert("Login was cancelled.");
         this.setState({
           isFBLoading: false
         });
@@ -145,12 +145,12 @@ class LoginPage extends Component {
             token: data.accessToken.toString()
           });
           const infoRequest = new GraphRequest(
-            '/me',
+            "/me",
             {
               accessToken: data.accessToken.toString(),
               parameters: {
                 fields: {
-                  string: 'id,name,email,last_name,birthday,picture.type(large)'
+                  string: "id,name,email,last_name,birthday,picture.type(large)"
                 }
               }
             },
@@ -161,7 +161,7 @@ class LoginPage extends Component {
         });
       }
     } catch (error) {
-      Alert.alert('Login fail with error', error.toString());
+      Alert.alert("Login fail with error", error.toString());
       this.setState({
         isFBLoading: false
       });
@@ -239,7 +239,7 @@ class LoginPage extends Component {
               rightIconContainerStyle={{ marginRight: 20, width: 25 }}
               rightIcon={
                 <Icon
-                  name={hidden ? 'eye' : 'eye-slash'}
+                  name={hidden ? "eye" : "eye-slash"}
                   color={darkPalette.darkCyan}
                   size={fonts.md}
                   onPress={() => this.handleEyeSlash()}
@@ -272,7 +272,7 @@ class LoginPage extends Component {
               titleStyle={titleButtonLoginStyle}
               buttonStyle={buttonLoginStyle}
               onPress={() => {
-                this.props.navigation.navigate('Register');
+                this.props.navigation.navigate("Register");
               }}
             />
             <Button

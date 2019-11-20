@@ -57,7 +57,9 @@ export class SRecordPage extends Component {
         AnswerApi.getMyAnswers(id, d)
           .then(res => {
             this.setState({
-              answerData: [...this.state.answerData, { ...res.data, date: d }]
+              answerData: [...this.state.answerData, { ...res.data, date: d }],
+              refreshing: false,
+              isCollapsed: false
             });
           })
           .catch(err => {
@@ -83,21 +85,15 @@ export class SRecordPage extends Component {
         <View key={answerData.indexOf(day)}>
           <Text
             style={dateStyle}
-            onPress={() => this.setState({ isCollapsed: false })}
+            onPress={() =>
+              this.setState({ isCollapsed: !this.state.isCollapsed })
+            }
           >
             {day && day.date}
           </Text>
           <Collapsible collapsed={this.state.isCollapsed}>
             <View style={scrollContainer}>
-              <ScrollView
-                style={scrollContainer}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={() => this._onRefresh()}
-                  />
-                }
-              >
+              <ScrollView style={scrollContainer}>
                 {day &&
                   day.answers &&
                   day.answers.map(answer => (
@@ -108,7 +104,7 @@ export class SRecordPage extends Component {
                         answer &&
                         answer.ingredients &&
                         answer.ingredients.reduce(
-                          (prev, curr) => `${prev}, ${curr.name}`,
+                          (prev, curr) => `${prev}${curr.name}  `,
                           ""
                         )
                       }
@@ -125,7 +121,7 @@ export class SRecordPage extends Component {
         </View>
       ));
     return (
-      <ScrollView>
+      <View>
         <View style={questionContainer}>
           <View style={mainContent}>
             <Text style={titleStyles}>SRecord</Text>
@@ -141,7 +137,16 @@ export class SRecordPage extends Component {
               onSubmitEditing={() => this.setState({ isVisible: true })}
             />
           </View>
-          <ScrollView>{answerResult}</ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => this._onRefresh()}
+              />
+            }
+          >
+            {answerResult}
+          </ScrollView>
         </View>
         <Snackbar
           visible={isVisible}
@@ -156,7 +161,7 @@ export class SRecordPage extends Component {
         >
           {firstQuery}
         </Snackbar>
-      </ScrollView>
+      </View>
     );
   }
 }
