@@ -2,6 +2,7 @@
 import { Overlay, CheckBox, Button } from "react-native-elements";
 import { View, Text, ScrollView, Alert } from "react-native";
 import React from "react";
+import { withNavigation } from "react-navigation";
 import styles from "./styles";
 import { darkPalette, fonts } from "../../styles/base";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -92,4 +93,4 @@ class ModalSingle extends React.Component {
   }
 }
 
-export default ModalSingle;
+export default withNavigation(ModalSingle);

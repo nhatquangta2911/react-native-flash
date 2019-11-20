@@ -5,6 +5,7 @@ import React, { Component, Fragment } from "react";
 import { Text, View, ScrollView, RefreshControl, Alert } from "react-native";
 import { Searchbar, Snackbar } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
+import { withNavigationFocus } from "react-navigation";
 import { Answer } from "../../components";
 import styles from "./styles";
 import { answers } from "../../statics/answers";
@@ -21,7 +22,8 @@ export class SRecordPage extends Component {
       firstQuery: "",
       isVisible: false,
       refreshing: false,
-      isCollapsed: true
+      isCollapsed: true,
+      isFocused: this.props.isFocused
     };
   }
 
@@ -44,32 +46,51 @@ export class SRecordPage extends Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this._onRefresh();
+    }
+  }
+
   _onRefresh = async () => {
-    this.setState({
-      refreshing: true,
-      answerData: [],
-      isCollapsed: true,
-      dates: HandleDateTime.generateRecentDates(3)
-    });
-    const id = await AsyncStorage.getItem("id");
-    this.state.dates &&
-      this.state.dates.forEach(d => {
-        AnswerApi.getMyAnswers(id, d)
-          .then(res => {
-            this.setState({
-              answerData: [...this.state.answerData, { ...res.data, date: d }],
-              refreshing: false,
-              isCollapsed: false
-            });
-          })
-          .catch(err => {
-            Alert.alert("Something went wrong", err.message);
-          });
+    if (this.state.isCollapsed) {
+      this.setState({ isCollapsed: false });
+    } else {
+      this.setState({
+        refreshing: true,
+        answerData: [],
+        isCollapsed: false,
+        dates: HandleDateTime.generateRecentDates(3)
       });
+      const id = await AsyncStorage.getItem("id");
+      this.state.dates &&
+        this.state.dates.forEach(d => {
+          AnswerApi.getMyAnswers(id, d)
+            .then(res => {
+              this.setState({
+                answerData: [
+                  ...this.state.answerData,
+                  { ...res.data, date: d }
+                ],
+                refreshing: false,
+                isCollapsed: true
+              });
+            })
+            .catch(err => {
+              Alert.alert("Something went wrong", err.message);
+            });
+        });
+    }
   };
 
   render() {
-    const { answerData, firstQuery, isVisible, refreshing } = this.state;
+    const {
+      answerData,
+      firstQuery,
+      isVisible,
+      refreshing,
+      isFocused
+    } = this.state;
     const {
       questionContainer,
       mainContent,
@@ -85,9 +106,10 @@ export class SRecordPage extends Component {
         <View key={answerData.indexOf(day)}>
           <Text
             style={dateStyle}
-            onPress={() =>
-              this.setState({ isCollapsed: !this.state.isCollapsed })
-            }
+            onPress={() => {
+              this._onRefresh();
+              this.setState({ isCollapsed: !this.state.isCollapsed });
+            }}
           >
             {day && day.date}
           </Text>
@@ -166,4 +188,4 @@ export class SRecordPage extends Component {
   }
 }
 
-export default SRecordPage;
+export default withNavigationFocus(SRecordPage);

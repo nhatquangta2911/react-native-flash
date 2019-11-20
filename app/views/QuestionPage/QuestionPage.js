@@ -5,12 +5,11 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, Alert, RefreshControl } from "react-native";
 import { Snackbar } from "react-native-paper";
+import { withNavigationFocus } from "react-navigation";
 import styles from "./styles";
 import { Question, ModalSingle, ModalMulti, ModalDrop } from "../../components";
-import { questions } from "../../statics/questions";
 import { QuestionApi } from "../../utils/api";
 import { makeQuestion, handleDateTime } from "../../utils/string";
-import AsyncStorage from "@react-native-community/async-storage";
 import { tokenHandler } from "../../utils/token";
 
 export class QuestionPage extends Component {
@@ -36,6 +35,12 @@ export class QuestionPage extends Component {
         this.setState({ questionList: res.data });
       })
       .catch(err => console.log(err));
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this._onRefresh();
+    }
   }
 
   callback = modal => {
@@ -234,4 +239,4 @@ export class QuestionPage extends Component {
   }
 }
 
-export default QuestionPage;
+export default withNavigationFocus(QuestionPage);

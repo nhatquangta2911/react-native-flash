@@ -7,5 +7,9 @@ export default {
       dates[i] = dates[i].toISOString().substring(0, 10);
     }
     return dates;
+  },
+  generateToday: () => {
+    var today = new Date();
+    return new Date(today.getTime()).toISOString().substring(0, 10);
   }
 };

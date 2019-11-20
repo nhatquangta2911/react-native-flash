@@ -1,16 +1,22 @@
 /* eslint-disable no-mixed-operators */
-import { StyleSheet } from 'react-native';
-import { fonts, dimensions, margin, darkPalette, sizes, padding } from '../../styles/base';
+import { StyleSheet } from "react-native";
+import {
+  fonts,
+  dimensions,
+  margin,
+  darkPalette,
+  sizes,
+  padding
+} from "../../styles/base";
 
 export default StyleSheet.create({
   homeContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    height: dimensions.containerHeight
-  },
-  scrollContainer: {
+    justifyContent: "space-between",
+    alignItems: "center",
     height: dimensions.containerHeight / 1.5
   },
+  scrollContainer: {},
+  tipContainer: {},
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.md
@@ -32,12 +38,12 @@ export default StyleSheet.create({
   title: {
     marginVertical: margin.md,
     width: dimensions.fullWidth - 2 * margin.md,
-    textAlign: 'center',
+    textAlign: "center",
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray,
     borderBottomColor: darkPalette.lightGray,
-    borderStyle: 'solid',
+    borderStyle: "solid",
     borderWidth: 0,
     borderBottomWidth: 1,
     paddingBottom: padding.sm
