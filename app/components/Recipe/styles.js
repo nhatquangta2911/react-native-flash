@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from 'react-native';
-import { fonts, darkPalette, margin, padding, dimensions } from '../../styles/base';
+import { StyleSheet } from "react-native";
+import {
+  fonts,
+  darkPalette,
+  margin,
+  padding,
+  dimensions
+} from "../../styles/base";
 
 export default StyleSheet.create({
   recipeContainer: {
@@ -14,8 +20,8 @@ export default StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.23,
-    shadowRadius: 2.62,
     elevation: 2,
+    shadowRadius: 2.62,
     borderRadius: 3,
     borderColor: darkPalette.white
   },
@@ -25,7 +31,7 @@ export default StyleSheet.create({
   recipeContent: {
     flex: 4,
     padding: padding.md,
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   titleStyles: {
     fontFamily: fonts.regular,
@@ -39,11 +45,11 @@ export default StyleSheet.create({
   },
   title: {
     flex: 1,
-    justifyContent: 'flex-start'
+    justifyContent: "flex-start"
   },
   buttonContainer: {
     flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'center'
+    alignItems: "flex-end",
+    justifyContent: "center"
   }
 });

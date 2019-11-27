@@ -2,17 +2,17 @@
 /* eslint-disable import/imports-first */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { Component } from 'react';
-import { BackHandler, Alert } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
+import React, { Component } from "react";
+import { BackHandler, Alert } from "react-native";
+import { BottomNavigation } from "react-native-paper";
 import {
   SettingPage,
   HomePage,
   QuestionPage,
   SRecordPage,
   BlogPage
-} from '../../views';
-import { darkPalette, dimensions } from '../../styles/base';
+} from "../../views";
+import { darkPalette, dimensions } from "../../styles/base";
 
 export default class BottomTabNavigator extends Component {
   static navigationOptions = {
@@ -25,33 +25,33 @@ export default class BottomTabNavigator extends Component {
       index: 0,
       routes: [
         {
-          key: 'Home',
-          title: 'Home',
-          icon: 'home',
+          key: "Home",
+          title: "Home",
+          icon: "home",
           color: darkPalette.darkCyan
         },
         {
-          key: 'Question',
-          title: 'Question',
-          icon: 'comment',
+          key: "Question",
+          title: "Question",
+          icon: "comment",
           color: darkPalette.darkCyan
         },
         {
-          key: 'SRecord',
-          title: 'SRecord',
-          icon: 'book',
+          key: "SRecord",
+          title: "SRecord",
+          icon: "book",
           color: darkPalette.darkCyan
         },
         {
-          key: 'Community',
-          title: 'Community',
-          icon: 'business',
+          key: "Community",
+          title: "Community",
+          icon: "business",
           color: darkPalette.darkCyan
         },
         {
-          key: 'Setting',
-          title: 'Setting',
-          icon: 'list',
+          key: "Setting",
+          title: "Setting",
+          icon: "list",
           color: darkPalette.darkCyan
         }
       ]
@@ -74,7 +74,7 @@ export default class BottomTabNavigator extends Component {
         navigationState={this.state}
         onIndexChange={this.handleIndexChange}
         renderScene={this.renderScene}
-        barStyle={{ height: (dimensions.fullHeight * 8) / 100 }}
+        barStyle={{ height: (dimensions.fullHeight * 6.5) / 100 }}
       />
     );
   }

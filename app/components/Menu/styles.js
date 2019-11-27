@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import { rates, padding, margin, fonts, darkPalette } from '../../styles/base';
-import { buttonDimensions, buttonColors } from '../../styles/buttons';
-import { shadow } from '../../styles/mixin';
+import { StyleSheet } from "react-native";
+import { rates, padding, margin, fonts, darkPalette } from "../../styles/base";
+import { buttonDimensions, buttonColors } from "../../styles/buttons";
+import { shadow } from "../../styles/mixin";
 
 export default StyleSheet.create({
   menuContainer: {
@@ -16,8 +16,8 @@ export default StyleSheet.create({
       height: 2
     },
     shadowOpacity: 0.23,
-    shadowRadius: 2.62,
     elevation: 2,
+    shadowRadius: 2.62,
     borderRadius: 3,
     borderColor: darkPalette.white
   },
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     color: darkPalette.darkGray,
     paddingVertical: padding.sm,
-    justifyContent: 'space-between'
+    justifyContent: "space-between"
   },
   buttonChooseStyle: {
     paddingVertical: buttonDimensions.buttonPadding,
@@ -47,6 +47,6 @@ export default StyleSheet.create({
     fontFamily: fonts.thin
   },
   buttonChooseContainer: {
-    alignItems: 'flex-end'
+    alignItems: "flex-end"
   }
 });

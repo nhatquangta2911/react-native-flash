@@ -9,29 +9,25 @@
  * @flow
  */
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from "react";
 import {
   Easing,
   Dimensions,
   StatusBar,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
-import { Provider as StoreProvider } from 'react-redux';
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { ModalProvider, createModalStack } from 'react-native-modalfy';
-import { OfflineNotice, ErrorModal } from './app/components';
-import store from './app/store';
-import { fonts } from './app/styles/base';
-import AppNavigator from './AppNavigator';
-import PushController from './app/utils/notification/PushController';
-
-// const modalConfig = {
-//   ErrorModal
-// };
-// const defaultOptions = { backdropOpacity: 0.6 };
-// const stack = createModalStack(modalConfig);
+  View,
+  Alert
+} from "react-native";
+import { Provider as StoreProvider } from "react-redux";
+import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
+import { ModalProvider, createModalStack } from "react-native-modalfy";
+import firebase from "react-native-firebase";
+import { OfflineNotice, ErrorModal } from "./app/components";
+import store from "./app/store";
+import { fonts } from "./app/styles/base";
+import AppNavigator from "./AppNavigator";
+import PushController from "./app/utils/notification/PushController";
 
 const theme = {
   ...DefaultTheme,
@@ -45,6 +41,61 @@ const theme = {
 };
 
 export default class App extends PureComponent {
+  async componentDidMount() {
+    this.checkPermission();
+    this.createNotificationListeners();
+  }
+  async componentWillUnmount() {
+    this.notificationListener();
+    this.notificationOpenedListener();
+  }
+  async checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    if (enabled) {
+      console.log("User has permission");
+    } else {
+      try {
+        await firebase.messaging().requestPermission();
+      } catch (error) {
+        console.log("User don't have permission");
+      }
+    }
+  }
+  async createNotificationListeners() {
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification(notification => {
+        const { title, body } = notification;
+        this.showAlert(title, body);
+      });
+    this.notificationOpenedListener = firebase
+      .notifications()
+      .onNotificationOpened(notificationOpen => {
+        const { title, body } = notificationOpen.notification;
+        this.showAlert(title, body);
+      });
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification();
+    if (notificationOpen) {
+      const { title, body } = notificationOpen.notification;
+      this.showAlert(title, body);
+    }
+    this.messageListener = firebase.messaging().onMessage(message => {
+      //process data message
+      console.log(JSON.stringify(message));
+    });
+  }
+
+  showAlert(title, body) {
+    Alert.alert(
+      title,
+      body,
+      [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+      { cancelable: false }
+    );
+  }
+
   render() {
     return (
       <StoreProvider store={store}>
