@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from "react";
+import { Alert } from "react-native";
+import { withNavigation } from "react-navigation";
 import PushNotification from "react-native-push-notification";
 
-export default class PushController extends Component {
+class PushController extends Component {
   componentDidMount() {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
@@ -13,7 +15,6 @@ export default class PushController extends Component {
       // (required) Called when a remote or local notification is opened or received
       onNotification(notification) {
         console.log("NOTIFICATION:", notification);
-        // process the notification here
       },
       // Android only
       senderID: "116963018082",
@@ -43,9 +44,15 @@ export default class PushController extends Component {
 
     PushNotification.localNotificationSchedule({
       message: "Recuring",
+      largeIcon:
+        "https://developers.google.com/site-assets/developers_64dp_72.png",
+
       // eslint-disable-next-line no-mixed-operators
-      date: new Date(Date.now() + 100 * 60 * 1000),
-      color: "green"
+      date: new Date(Date.now() + 5 * 1000),
+      color: "yellow",
+      bigText: "Sucks!",
+      subText: "Life sucks!",
+      ticker: "https://developers.google.com/site-assets/developers_64dp_72.png"
     });
   }
 
@@ -53,3 +60,5 @@ export default class PushController extends Component {
     return null;
   }
 }
+
+export default PushController;

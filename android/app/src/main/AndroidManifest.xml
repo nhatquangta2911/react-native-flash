@@ -67,11 +67,18 @@
         <action android:name="android.intent.action.BOOT_COMPLETED" />
       </intent-filter>
     </receiver>
-    <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingPackage">
+     <!-- <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingPackage">
         <intent-filter>
           <action android:name="com.google.firebase.MESSAGING_EVENT" />
         </intent-filter>
-      </service>
+      </service> -->
+      <!-- <service
+            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> -->
     </application>
 
 </manifest>
