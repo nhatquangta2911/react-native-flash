@@ -28,6 +28,8 @@ import store from "./app/store";
 import { fonts } from "./app/styles/base";
 import AppNavigator from "./AppNavigator";
 import PushController from "./app/utils/notification/PushController";
+import NavigationService from "./NavigationService";
+import { createStackNavigator } from "react-navigation";
 
 const theme = {
   ...DefaultTheme,
@@ -46,12 +48,12 @@ export default class App extends PureComponent {
     console.log(token);
     this.checkPermission();
     this.createNotificationListeners();
-    // this.messageListener = firebase
-    //   .messaging()
-    //   .onMessage(message => console.log(message));
+    this.messageListener = firebase
+      .messaging()
+      .onMessage(message => console.log(message));
   }
   async componentWillUnmount() {
-    // this.messageListener();
+    this.messageListener();
     this.notificationListener();
     this.notificationOpenedListener();
   }
@@ -72,21 +74,27 @@ export default class App extends PureComponent {
     this.notificationListener = firebase
       .notifications()
       .onNotification(notification => {
-        const { title, body } = notification;
-        this.showAlert(title, body);
+        const { title, body, data } = notification;
+        console.log(NavigationService.getCurrentRoute());
       });
     this.notificationOpenedListener = firebase
       .notifications()
       .onNotificationOpened(notificationOpen => {
         const { title, body } = notificationOpen.notification;
-        this.showAlert(title, body);
+        NavigationService.navigate("Stats");
+        this.showAlert(title + "2", body);
       });
     const notificationOpen = await firebase
       .notifications()
       .getInitialNotification();
     if (notificationOpen) {
-      const { title, body } = notificationOpen.notification;
-      this.showAlert(title, body);
+      const { title, body, data } = notificationOpen.notification;
+      NavigationService.navigate("Stats");
+
+      //TODO: Deep Navigation
+      // NavigationService.navigate("Browsing", {
+      //   action: NavigationService.navigate("Details")
+      // });
     }
     this.messageListener = firebase.messaging().onMessage(message => {
       //process data message
@@ -107,7 +115,11 @@ export default class App extends PureComponent {
     return (
       <StoreProvider store={store}>
         <PaperProvider theme={theme}>
-          <AppNavigator />
+          <AppNavigator
+            ref={navigatorRef =>
+              NavigationService.setTopLevelNavigator(navigatorRef)
+            }
+          />
           <OfflineNotice />
         </PaperProvider>
         <PushController />

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable object-shorthand */
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { BottomTabNavigator } from './app/components';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { BottomTabNavigator } from "./app/components";
 import {
   AuthLoadingPage,
   LoginPage,
@@ -20,9 +20,9 @@ import {
   ReminderPage,
   RecipeDetailPage,
   SettingPage
-} from './app/views';
-import { headerStyle } from './app/styles/base';
-import RemainderPage from './app/views/ReminderPage';
+} from "./app/views";
+import { headerStyle } from "./app/styles/base";
+import RemainderPage from "./app/views/ReminderPage";
 
 const BrowsingStack = createStackNavigator(
   {
@@ -30,7 +30,7 @@ const BrowsingStack = createStackNavigator(
     Details: RecipeDetailPage
   },
   {
-    initialRouteName: 'Browsing',
+    initialRouteName: "Browsing",
     navigationOptions: {
       header: null
     }
@@ -46,7 +46,7 @@ const RegisterStack = createStackNavigator(
     RegisterStep4
   },
   {
-    initialRouteName: 'RegisterMain',
+    initialRouteName: "RegisterMain",
     navigationOptions: {
       header: null
     }
@@ -65,7 +65,7 @@ const AppStack = createStackNavigator(
     About: AboutPage
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: "Home",
     defaultNavigationOptions: {
       headerTitleStyle: { ...headerStyle, marginLeft: -5 }
     }
@@ -74,7 +74,7 @@ const AppStack = createStackNavigator(
 
 const AuthStack = createStackNavigator(
   { Login: LoginPage, Register: RegisterStack },
-  { initialRouteName: 'Login' }
+  { initialRouteName: "Login" }
 );
 
 export default createAppContainer(
@@ -85,7 +85,7 @@ export default createAppContainer(
       Auth: AuthStack
     },
     {
-      initialRouteName: 'AuthLoading'
+      initialRouteName: "AuthLoading"
     }
   )
 );
