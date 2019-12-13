@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // PROD
-const baseUrl = "http://54.169.190.136:5000/api";
+const baseUrl = "http://shawnta.tech/api";
 
 // DEV (Only with ADB Virtual Machine)
 // const baseUrl = "http://192.168.20.216:5000/api";
