@@ -42,10 +42,16 @@ const theme = {
 
 export default class App extends PureComponent {
   async componentDidMount() {
+    const token = await firebase.messaging().getToken();
+    console.log(token);
     this.checkPermission();
     this.createNotificationListeners();
+    // this.messageListener = firebase
+    //   .messaging()
+    //   .onMessage(message => console.log(message));
   }
   async componentWillUnmount() {
+    // this.messageListener();
     this.notificationListener();
     this.notificationOpenedListener();
   }
@@ -61,6 +67,7 @@ export default class App extends PureComponent {
       }
     }
   }
+
   async createNotificationListeners() {
     this.notificationListener = firebase
       .notifications()
