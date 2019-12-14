@@ -6,7 +6,7 @@ import { Text, TouchableOpacity, Alert, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import { Avatar } from 'react-native-paper';
-import { fonts } from '../../styles/base';
+import { fonts, darkPalette } from '../../styles/base';
 
 export class Question extends Component {
   // expandQuestion = ({ type, content, jumpTo }) => {
@@ -30,12 +30,14 @@ export class Question extends Component {
             ? this.props.images.map(i => (
                 <Avatar.Image source={{ uri: i.toString() }} size={50} />
               ))
-            : this.props.images.slice(0, 4).map(i => (
+            : this.props.images.slice(0, 3).map(i => (
                 <Avatar.Image
                   source={{
                     uri: i
                   }}
-                  style={{ marginBottom: 4 }}
+                  style={{
+                    margin: -4
+                  }}
                   size={35}
                 />
               ))}

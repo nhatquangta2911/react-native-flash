@@ -6,7 +6,7 @@ export default StyleSheet.create({
     margin: margin.md
   },
   modalTitle: {
-    fontSize: fonts.xl,
+    fontSize: fonts.sxl,
     fontFamily: fonts.regular,
     color: darkPalette.darkGray,
     marginBottom: margin.sm

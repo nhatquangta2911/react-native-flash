@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     flex: 8,
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   },
   scroll: {
     height: (dimensions.containerHeight * 7) / 8

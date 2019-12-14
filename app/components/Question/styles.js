@@ -21,10 +21,9 @@ export default StyleSheet.create({
   left: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'stretch',
-    flexWrap: 'wrap',
-    marginRight: margin.sm,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: margin.md,
     marginLeft: 0
   },
   right: {

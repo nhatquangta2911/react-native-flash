@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
-import React from "react";
-import { Overlay, CheckBox, Button } from "react-native-elements";
-import { View, Text, ScrollView, Alert } from "react-native";
-import MultiSelect from "react-native-multiple-select";
-import styles from "../ModalMulti/styles";
-import { darkPalette, fonts, margin } from "../../styles/base";
-import { UserApi } from "../../utils/api";
-import AsyncStorage from "@react-native-community/async-storage";
+import React from 'react';
+import { Overlay, CheckBox, Button } from 'react-native-elements';
+import { View, Text, ScrollView, Alert } from 'react-native';
+import MultiSelect from 'react-native-multiple-select';
+import styles from '../ModalMulti/styles';
+import { darkPalette, fonts, margin } from '../../styles/base';
+import { UserApi } from '../../utils/api';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { modalContainer, modalTitle, modalContent, scrollContainer } = styles;
 
@@ -38,8 +38,8 @@ class ModalDrop extends React.Component {
     console.log(choices);
     return (
       <Overlay
-        width="90%"
-        height="auto"
+        width='90%'
+        height='auto'
         isVisible={isDropVisible}
         onBackdropPress={() => {
           sendStatus(!isDropVisible);
@@ -57,21 +57,21 @@ class ModalDrop extends React.Component {
         }}
       >
         <View style={modalContainer}>
-          <Text style={modalTitle}>{title}</Text>
-          <Text style={modalContent}>{question}</Text>
+          <Text style={modalTitle}>{question}</Text>
+          <Text style={modalContent}>{title}</Text>
           <ScrollView style={{ maxHeight: 500 }}>
             <MultiSelect
               items={choices}
-              uniqueKey="id"
-              displayKey="name"
+              uniqueKey='id'
+              displayKey='name'
               ref={component => {
                 this.multiSelect = component;
               }}
               onSelectedItemsChange={this.onSelectedItemsChange}
               selectedItems={checked}
               selectedItemFontFamily={fonts.thin}
-              selectText="Pick Items"
-              searchInputPlaceholderText="Search Items..."
+              selectText='Pick Items'
+              searchInputPlaceholderText='Search Items...'
               searchInputStyle={{
                 color: darkPalette.darkGray,
                 fontFamily: fonts.thin
@@ -85,15 +85,15 @@ class ModalDrop extends React.Component {
               tagTextColor={darkPalette.darkCyan}
               tagBorderColor={darkPalette.superLightgray}
               tagRemoveIconColor={darkPalette.darkGray}
-              submitButtonText="View"
+              submitButtonText='View'
             />
           </ScrollView>
           {isButtonVisible && (
             <Button
-              title="Send"
-              type="outline"
+              title='Send'
+              type='outline'
               titleStyle={{
-                fontFamily: "Nunito-Light",
+                fontFamily: 'Nunito-Light',
                 color: darkPalette.darkCyan
               }}
               buttonStyle={{
@@ -101,18 +101,18 @@ class ModalDrop extends React.Component {
                 marginTop: margin.md
               }}
               onPress={async () => {
-                const id = await AsyncStorage.getItem("id");
+                const id = await AsyncStorage.getItem('id');
                 const answer = {
-                  answerContent: "Test",
+                  answerContent: 'Test',
                   positiveId: 1,
                   ingredients: checked
                 };
                 UserApi.submit(answer, id)
                   .then(res => {
-                    Alert.alert("Success.");
-                    goTo("SRecord", checked.join(", "));
+                    Alert.alert('Success.');
+                    goTo('SRecord', checked.join(', '));
                   })
-                  .catch(error => Alert.alert("Something went wrong."));
+                  .catch(error => Alert.alert('Something went wrong.'));
               }}
             />
           )}

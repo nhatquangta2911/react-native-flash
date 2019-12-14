@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
-import { Overlay, CheckBox, Button } from "react-native-elements";
-import { View, Text, ScrollView, Alert } from "react-native";
-import React from "react";
-import styles from "./styles";
-import AsyncStorage from "@react-native-community/async-storage";
-import { darkPalette, fonts } from "../../styles/base";
-import { UserApi } from "../../utils/api";
+import { Overlay, CheckBox, Button } from 'react-native-elements';
+import { View, Text, ScrollView, Alert } from 'react-native';
+import React from 'react';
+import styles from './styles';
+import AsyncStorage from '@react-native-community/async-storage';
+import { darkPalette, fonts } from '../../styles/base';
+import { UserApi } from '../../utils/api';
 
 const { modalContainer, modalTitle, modalContent, scrollContainer } = styles;
 
@@ -29,8 +29,8 @@ class ModalMulti extends React.Component {
     const { checked } = this.state;
     return (
       <Overlay
-        width="90%"
-        height="auto"
+        width='90%'
+        height='auto'
         isVisible={isMultiVisible}
         onBackdropPress={() => {
           sendStatus(!isMultiVisible);
@@ -48,8 +48,8 @@ class ModalMulti extends React.Component {
         }}
       >
         <View style={modalContainer}>
-          <Text style={modalTitle}>{title}</Text>
-          <Text style={modalContent}>{question}</Text>
+          <Text style={modalTitle}>{question}</Text>
+          <Text style={modalContent}>{title}</Text>
           <ScrollView style={scrollContainer}>
             {choices &&
               choices.map(c => (
@@ -78,27 +78,27 @@ class ModalMulti extends React.Component {
               ))}
           </ScrollView>
           <Button
-            title="Send"
-            type="outline"
+            title='Send'
+            type='outline'
             titleStyle={{
-              fontFamily: "Nunito-Light",
+              fontFamily: 'Nunito-Light',
               color: darkPalette.darkCyan
             }}
             buttonStyle={{ borderColor: darkPalette.darkCyan }}
             onPress={async () => {
-              const id = await AsyncStorage.getItem("id");
+              const id = await AsyncStorage.getItem('id');
               const answer = {
-                answerContent: "Test",
+                answerContent: 'Test',
                 positiveId: 1,
                 ingredients: checked
               };
               UserApi.submit(answer, id)
                 .then(res => {
-                  Alert.alert("Success.");
-                  goTo("SRecord", checked.join(", "));
+                  Alert.alert('Success.');
+                  goTo('SRecord', checked.join(', '));
                 })
                 .catch(error =>
-                  Alert.alert("Something went wrong", error.message)
+                  Alert.alert('Something went wrong', error.message)
                 );
             }}
           />

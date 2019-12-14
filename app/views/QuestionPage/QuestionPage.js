@@ -3,7 +3,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import { Text, View, ScrollView, Alert, RefreshControl } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  Alert,
+  RefreshControl,
+  ActivityIndicator
+} from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { withNavigationFocus } from 'react-navigation';
 import styles from './styles';
@@ -11,6 +18,7 @@ import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
 import { QuestionApi } from '../../utils/api';
 import { makeQuestion, handleDateTime } from '../../utils/string';
 import { tokenHandler } from '../../utils/token';
+import { darkPalette } from '../../styles/base';
 
 export class QuestionPage extends Component {
   constructor(props) {
@@ -23,7 +31,8 @@ export class QuestionPage extends Component {
       isDropVisible: false,
       isSnackbarVisible: false,
       choice: '',
-      refreshing: false
+      refreshing: false,
+      isLoading: true
     };
   }
 
@@ -32,7 +41,10 @@ export class QuestionPage extends Component {
     QuestionApi.getAll(id || 1)
       .then(res => {
         console.log(res.data);
-        this.setState({ questionList: (res.data && res.data.questions) || [] });
+        this.setState({
+          isLoading: false,
+          questionList: (res.data && res.data.questions) || []
+        });
       })
       .catch(err => console.log(err));
   }
@@ -124,6 +136,7 @@ export class QuestionPage extends Component {
   _onRefresh = async () => {
     this.setState({
       refreshing: true,
+      isLoading: true,
       questionList: []
     });
     const id = await tokenHandler.getData('id');
@@ -131,6 +144,7 @@ export class QuestionPage extends Component {
       .then(res => {
         this.setState({
           refreshing: false,
+          isLoading: false,
           questionList: (res.data && res.data.questions) || []
         });
       })
@@ -153,7 +167,8 @@ export class QuestionPage extends Component {
       isMultiVisible,
       isDropVisible,
       choice,
-      refreshing
+      refreshing,
+      isLoading
     } = this.state;
     const questionResult =
       questionList &&
@@ -199,17 +214,21 @@ export class QuestionPage extends Component {
           </Text>
         </View>
         <View style={scrollContainer}>
-          <ScrollView
-            style={scroll}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={this._onRefresh}
-              />
-            }
-          >
-            {questionResult}
-          </ScrollView>
+          {isLoading ? (
+            <ActivityIndicator size='large' color={darkPalette.darkCyan} />
+          ) : (
+            <ScrollView
+              style={scroll}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={this._onRefresh}
+                />
+              }
+            >
+              {questionResult}
+            </ScrollView>
+          )}
         </View>
         <ModalSingle
           isSingleVisible={isSingleVisible}

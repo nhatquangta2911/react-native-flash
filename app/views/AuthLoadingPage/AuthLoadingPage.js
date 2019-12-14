@@ -42,7 +42,7 @@ class AuthLoadingScreen extends React.Component {
     const percentValue = Math.round(value * 20) * 5;
     return (
       <View style={greetingContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size='large' />
         {/* <View>
           <Text style={greetingText}>welcome</Text>
           <Text style={contentText}> how's your day going? </Text>
