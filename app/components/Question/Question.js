@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-undef */
-import React, { Component } from "react";
-import { Text, TouchableOpacity, Alert } from "react-native";
-import { withNavigation } from "react-navigation";
-import styles from "./styles";
+import React, { Component } from 'react';
+import { Text, TouchableOpacity, Alert, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import styles from './styles';
+import { Avatar } from 'react-native-paper';
+import { fonts } from '../../styles/base';
 
 export class Question extends Component {
   // expandQuestion = ({ type, content, jumpTo }) => {
@@ -17,18 +19,35 @@ export class Question extends Component {
   // };
 
   render() {
-    const { questionContainer, titleStyle, textStyle } = styles;
+    const { questionContainer, titleStyle, textStyle, left, right } = styles;
     return (
       <TouchableOpacity
         style={questionContainer}
         onPress={() => this.props.showModal(this.props)}
       >
-        <Text style={titleStyle} numberOfLines={1}>
-          {this.props.title}
-        </Text>
-        <Text style={textStyle} numberOfLines={2}>
-          {this.props.question}
-        </Text>
+        <View style={left}>
+          {this.props.images && this.props.images.length === 1
+            ? this.props.images.map(i => (
+                <Avatar.Image source={{ uri: i.toString() }} size={50} />
+              ))
+            : this.props.images.slice(0, 4).map(i => (
+                <Avatar.Image
+                  source={{
+                    uri: i
+                  }}
+                  style={{ marginBottom: 4 }}
+                  size={35}
+                />
+              ))}
+        </View>
+        <View style={right}>
+          <Text style={titleStyle} numberOfLines={1}>
+            {this.props.question}
+          </Text>
+          <Text style={textStyle} numberOfLines={1}>
+            {this.props.title}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   }

@@ -9,7 +9,7 @@
  * @flow
  */
 
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import {
   Easing,
   Dimensions,
@@ -18,18 +18,18 @@ import {
   Text,
   View,
   Alert
-} from "react-native";
-import { Provider as StoreProvider } from "react-redux";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-import { ModalProvider, createModalStack } from "react-native-modalfy";
-import firebase from "react-native-firebase";
-import { OfflineNotice, ErrorModal } from "./app/components";
-import store from "./app/store";
-import { fonts } from "./app/styles/base";
-import AppNavigator from "./AppNavigator";
-import PushController from "./app/utils/notification/PushController";
-import NavigationService from "./NavigationService";
-import { createStackNavigator } from "react-navigation";
+} from 'react-native';
+import { Provider as StoreProvider } from 'react-redux';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { ModalProvider, createModalStack } from 'react-native-modalfy';
+import firebase from 'react-native-firebase';
+import { OfflineNotice, ErrorModal } from './app/components';
+import store from './app/store';
+import { fonts } from './app/styles/base';
+import AppNavigator from './AppNavigator';
+import PushController from './app/utils/notification/PushController';
+import NavigationService from './NavigationService';
+import { createStackNavigator } from 'react-navigation';
 
 const theme = {
   ...DefaultTheme,
@@ -41,6 +41,9 @@ const theme = {
     thin: fonts.thin
   }
 };
+
+// console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
+console.disableYellowBox = true;
 
 export default class App extends PureComponent {
   async componentDidMount() {
@@ -60,7 +63,7 @@ export default class App extends PureComponent {
   async checkPermission() {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
-      console.log("User has permission");
+      console.log('User has permission');
     } else {
       try {
         await firebase.messaging().requestPermission();
@@ -75,21 +78,22 @@ export default class App extends PureComponent {
       .notifications()
       .onNotification(notification => {
         const { title, body, data } = notification;
-        console.log(NavigationService.getCurrentRoute());
+        this.showAlert(data && data.question);
       });
     this.notificationOpenedListener = firebase
       .notifications()
       .onNotificationOpened(notificationOpen => {
         const { title, body } = notificationOpen.notification;
-        NavigationService.navigate("Stats");
-        this.showAlert(title + "2", body);
+        this.showAlert(title + '2', body);
       });
+
+    // FROM OUTSIDE
     const notificationOpen = await firebase
       .notifications()
       .getInitialNotification();
     if (notificationOpen) {
       const { title, body, data } = notificationOpen.notification;
-      NavigationService.navigate("Stats");
+      // NavigationService.navigate('Stats');
 
       //TODO: Deep Navigation
       // NavigationService.navigate("Browsing", {
@@ -106,7 +110,7 @@ export default class App extends PureComponent {
     Alert.alert(
       title,
       body,
-      [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+      [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
       { cancelable: false }
     );
   }

@@ -2,37 +2,37 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
-import React, { Component } from "react";
-import { Text, View, ScrollView, Alert, RefreshControl } from "react-native";
-import { Snackbar } from "react-native-paper";
-import { withNavigationFocus } from "react-navigation";
-import styles from "./styles";
-import { Question, ModalSingle, ModalMulti, ModalDrop } from "../../components";
-import { QuestionApi } from "../../utils/api";
-import { makeQuestion, handleDateTime } from "../../utils/string";
-import { tokenHandler } from "../../utils/token";
+import React, { Component } from 'react';
+import { Text, View, ScrollView, Alert, RefreshControl } from 'react-native';
+import { Snackbar } from 'react-native-paper';
+import { withNavigationFocus } from 'react-navigation';
+import styles from './styles';
+import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
+import { QuestionApi } from '../../utils/api';
+import { makeQuestion, handleDateTime } from '../../utils/string';
+import { tokenHandler } from '../../utils/token';
 
 export class QuestionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questionList: [],
-      modal: "",
+      modal: '',
       isSingleVisible: false,
       isMultiVisible: false,
       isDropVisible: false,
       isSnackbarVisible: false,
-      choice: "",
+      choice: '',
       refreshing: false
     };
   }
 
   async componentDidMount() {
-    const id = await tokenHandler.getData("id");
+    const id = await tokenHandler.getData('id');
     QuestionApi.getAll(id || 1)
       .then(res => {
         console.log(res.data);
-        this.setState({ questionList: res.data });
+        this.setState({ questionList: (res.data && res.data.questions) || [] });
       })
       .catch(err => console.log(err));
   }
@@ -45,7 +45,7 @@ export class QuestionPage extends Component {
 
   callback = modal => {
     switch (modal.type) {
-      case "Single-choice":
+      case 'Single-choice':
         this.setState({
           modal,
           isMultiVisible: this.state.isSingleVisible,
@@ -53,7 +53,7 @@ export class QuestionPage extends Component {
           isSingleVisible: !this.state.isSingleVisible
         });
         break;
-      case "Multi-choice":
+      case 'Multi-choice':
         this.setState({
           modal,
           isSingleVisible: this.state.isMultiVisible,
@@ -61,33 +61,33 @@ export class QuestionPage extends Component {
           isMultiVisible: !this.state.isMultiVisible
         });
         break;
-      case "Yes/No":
+      case 'Yes/No':
         Alert.alert(
           modal.title,
           modal.question,
           [
             // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
             {
-              text: "No",
+              text: 'No',
               onPress: () =>
                 this.setState({
                   isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: "NO"
+                  choice: 'NO'
                 })
             },
             {
-              text: "Yes",
+              text: 'Yes',
               onPress: () =>
                 this.setState({
                   isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: "YES"
+                  choice: 'YES'
                 })
             }
           ],
           { cancelable: true }
         );
         break;
-      case "Dropdown List":
+      case 'Dropdown List':
         this.setState({
           modal,
           isSingleVisible: this.state.isDropVisible,
@@ -104,7 +104,7 @@ export class QuestionPage extends Component {
       isSingleVisible: status,
       isMultiVisible: status,
       isDropVisible: status,
-      modal: ""
+      modal: ''
     });
   };
 
@@ -126,12 +126,12 @@ export class QuestionPage extends Component {
       refreshing: true,
       questionList: []
     });
-    const id = await tokenHandler.getData("id");
+    const id = await tokenHandler.getData('id');
     QuestionApi.getAll(id || 1)
       .then(res => {
         this.setState({
           refreshing: false,
-          questionList: res.data
+          questionList: (res.data && res.data.questions) || []
         });
       })
       .catch(err => console.log(err));
@@ -157,25 +157,39 @@ export class QuestionPage extends Component {
     } = this.state;
     const questionResult =
       questionList &&
-      questionList.map(q => (
-        <Question
-          key={q && q.id}
-          type={q && q.typeQuestion.name}
-          title={q && q.ingredients[0].name}
-          question={
-            q &&
-            makeQuestion.generate(
-              q.typeQuestion.name,
-              q.amount,
-              q.ingredients[0].name,
-              handleDateTime.transfer(q.consumedTime)
-            )
-          }
-          choices={(q && q.ingredients) || null}
-          jumpTo={this.props.jumpTo}
-          showModal={this.callback}
-        />
-      ));
+      questionList.map(q => {
+        const imageList = q.ingredients.map(i => i.image);
+        return (
+          <Question
+            key={q && q.id}
+            type={q && q.typeQuestion.name}
+            images={imageList}
+            title={
+              q &&
+              q.ingredients &&
+              q.ingredients.reduce(
+                (prev, curr) =>
+                  q.ingredients.indexOf(curr) === 0
+                    ? prev + '' + curr.name
+                    : prev + ' | ' + curr.name,
+                ''
+              )
+            }
+            question={
+              q &&
+              makeQuestion.generate(
+                q.typeQuestion.name,
+                q.amount,
+                q.ingredients[0].name,
+                handleDateTime.transfer(q.consumedTime)
+              )
+            }
+            choices={(q && q.ingredients) || null}
+            jumpTo={this.props.jumpTo}
+            showModal={this.callback}
+          />
+        );
+      });
     return (
       <View style={questionContainer}>
         <View style={titleContainer}>
@@ -226,13 +240,13 @@ export class QuestionPage extends Component {
           onDismiss={() => this.setState({ isSnackbarVisible: false })}
           duration={1500}
           action={{
-            label: "Undo",
+            label: 'Undo',
             onPress: () => {
               this.setState({ isSnackbarVisible: false });
             }
           }}
         >
-          {choice === "empty" ? "Choose one, buddy!" : `You chose ${choice}`}
+          {choice === 'empty' ? 'Choose one, buddy!' : `You chose ${choice}`}
         </Snackbar>
       </View>
     );

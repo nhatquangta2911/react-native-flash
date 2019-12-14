@@ -2,9 +2,9 @@
 /* eslint-disable import/imports-first */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
-import { BackHandler, Alert } from "react-native";
-import { BottomNavigation } from "react-native-paper";
+import React, { Component } from 'react';
+import { BackHandler, Alert } from 'react-native';
+import { BottomNavigation } from 'react-native-paper';
 // import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import {
   SettingPage,
@@ -12,9 +12,9 @@ import {
   QuestionPage,
   SRecordPage,
   BlogPage
-} from "../../views";
-import { darkPalette, dimensions } from "../../styles/base";
-import NavigationService from "../../../NavigationService";
+} from '../../views';
+import { darkPalette, dimensions } from '../../styles/base';
+import NavigationService from '../../../NavigationService';
 
 // const Tab = createMaterialBottomTabNavigator();
 
@@ -26,36 +26,36 @@ export default class BottomTabNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      index: 1,
       routes: [
         {
-          key: "Home",
-          title: "Home",
-          icon: "home",
+          key: 'Home',
+          title: 'Home',
+          icon: 'home',
           color: darkPalette.darkCyan
         },
         {
-          key: "Question",
-          title: "Question",
-          icon: "comment",
+          key: 'Question',
+          title: 'Question',
+          icon: 'comment',
           color: darkPalette.darkCyan
         },
         {
-          key: "SRecord",
-          title: "SRecord",
-          icon: "book",
+          key: 'SRecord',
+          title: 'SRecord',
+          icon: 'book',
           color: darkPalette.darkCyan
         },
         {
-          key: "Community",
-          title: "Community",
-          icon: "business",
+          key: 'Community',
+          title: 'Community',
+          icon: 'business',
           color: darkPalette.darkCyan
         },
         {
-          key: "Setting",
-          title: "Setting",
-          icon: "list",
+          key: 'Setting',
+          title: 'Setting',
+          icon: 'list',
           color: darkPalette.darkCyan
         }
       ]
@@ -75,11 +75,10 @@ export default class BottomTabNavigator extends Component {
   render() {
     return (
       <BottomNavigation
-        ref={jumperRef => NavigationService.setTopLevelJumper(jumperRef)}
         navigationState={this.state}
         onIndexChange={this.handleIndexChange}
         renderScene={this.renderScene}
-        barStyle={{ height: (dimensions.fullHeight * 6.5) / 100 }}
+        // barStyle={{ height: (dimensions.fullHeight * 6) / 100 }}
       />
       // <Tab.Navigator
       //   initialRouteName="Home"

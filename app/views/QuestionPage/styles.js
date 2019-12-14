@@ -1,7 +1,14 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../styles/base';
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette,
+  shadow
+} from '../../styles/base';
 
 export default StyleSheet.create({
   questionContainer: {
@@ -24,9 +31,8 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   scrollContainer: {
-    flex: 7,
-    justifyContent: 'flex-start',
-    marginBottom: margin.xxl
+    flex: 8,
+    justifyContent: 'flex-start'
   },
   scroll: {
     height: (dimensions.containerHeight * 7) / 8

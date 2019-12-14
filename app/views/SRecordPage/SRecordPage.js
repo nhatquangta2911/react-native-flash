@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
-import React, { Component, Fragment } from "react";
-import { Text, View, ScrollView, RefreshControl, Alert } from "react-native";
-import { Searchbar, Snackbar } from "react-native-paper";
-import Collapsible from "react-native-collapsible";
-import { withNavigationFocus } from "react-navigation";
-import { Answer } from "../../components";
-import styles from "./styles";
-import { answers } from "../../statics/answers";
-import AsyncStorage from "@react-native-community/async-storage";
-import { AnswerApi } from "../../utils/api";
-import { HandleDateTime } from "../../utils/date";
+import React, { Component, Fragment } from 'react';
+import { Text, View, ScrollView, RefreshControl, Alert } from 'react-native';
+import { Searchbar, Snackbar } from 'react-native-paper';
+import Collapsible from 'react-native-collapsible';
+import { withNavigationFocus } from 'react-navigation';
+import { Answer } from '../../components';
+import styles from './styles';
+import { answers } from '../../statics/answers';
+import AsyncStorage from '@react-native-community/async-storage';
+import { AnswerApi } from '../../utils/api';
+import { HandleDateTime } from '../../utils/date';
 
 export class SRecordPage extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export class SRecordPage extends Component {
     this.state = {
       dates: [],
       answerData: [],
-      firstQuery: "",
+      firstQuery: '',
       isVisible: false,
       refreshing: false,
       isCollapsed: true,
@@ -31,7 +31,7 @@ export class SRecordPage extends Component {
     this.setState({
       dates: HandleDateTime.generateRecentDates(3)
     });
-    const id = await AsyncStorage.getItem("id");
+    const id = await AsyncStorage.getItem('id');
     this.state.dates &&
       this.state.dates.forEach(d => {
         AnswerApi.getMyAnswers(id, d)
@@ -41,7 +41,7 @@ export class SRecordPage extends Component {
             });
           })
           .catch(err => {
-            Alert.alert("Something went wrong", err.message);
+            Alert.alert('Something went wrong', err.message);
           });
       });
   }
@@ -62,7 +62,7 @@ export class SRecordPage extends Component {
         isCollapsed: false,
         dates: HandleDateTime.generateRecentDates(3)
       });
-      const id = await AsyncStorage.getItem("id");
+      const id = await AsyncStorage.getItem('id');
       this.state.dates &&
         this.state.dates.forEach(d => {
           AnswerApi.getMyAnswers(id, d)
@@ -77,7 +77,7 @@ export class SRecordPage extends Component {
               });
             })
             .catch(err => {
-              Alert.alert("Something went wrong", err.message);
+              Alert.alert('Something went wrong', err.message);
             });
         });
     }
@@ -127,13 +127,13 @@ export class SRecordPage extends Component {
                         answer.ingredients &&
                         answer.ingredients.reduce(
                           (prev, curr) => `${prev}${curr.name}  `,
-                          ""
+                          ''
                         )
                       }
                       answerTime={
                         answer &&
                         answer.answerTime &&
-                        answer.answerTime.split("T")[1].substring(0, 5)
+                        answer.answerTime.split('T')[1].substring(0, 5)
                         // answer.ingredients &&
                         // answer.ingredients[0].image
                       }
@@ -153,7 +153,7 @@ export class SRecordPage extends Component {
           </View>
           <View style={searchBar}>
             <Searchbar
-              placeholder="Search"
+              placeholder='Search'
               onChangeText={query => this.setState({ firstQuery: query })}
               value={firstQuery}
               inputStyle={textStyles}
@@ -177,7 +177,7 @@ export class SRecordPage extends Component {
           onDismiss={() => this.setState({ isVisible: false })}
           duration={5000}
           action={{
-            label: "OK",
+            label: 'OK',
             onPress: () => {
               this.setState({ isVisible: false });
             }
