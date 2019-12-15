@@ -26,7 +26,7 @@ export default class BottomTabNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 1,
+      index: 0,
       routes: [
         {
           key: 'Home',

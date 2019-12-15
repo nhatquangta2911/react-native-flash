@@ -63,12 +63,14 @@ const AppStack = createStackNavigator(
     Info: InfoPage,
     Doctor: DoctorPage,
     Reminder: RemainderPage,
-    About: AboutPage
+    About: AboutPage,
+    QuickQuestion: QuestionPage
   },
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
-      headerTitleStyle: { ...headerStyle, marginLeft: -5 }
+      headerTitleStyle: { ...headerStyle, marginLeft: -5 },
+      title: 'Get your time, buddy!'
     }
   }
 );

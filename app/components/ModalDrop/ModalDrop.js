@@ -3,8 +3,16 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { Overlay, CheckBox, Button } from 'react-native-elements';
-import { View, Text, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Alert,
+  BackHandler,
+  ToastAndroid
+} from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+import { withNavigation } from 'react-navigation';
 import styles from '../ModalMulti/styles';
 import { darkPalette, fonts, margin } from '../../styles/base';
 import { UserApi } from '../../utils/api';
@@ -35,7 +43,6 @@ class ModalDrop extends React.Component {
       goTo
     } = this.props;
     const { checked, isButtonVisible } = this.state;
-    console.log(choices);
     return (
       <Overlay
         width='90%'
@@ -109,8 +116,13 @@ class ModalDrop extends React.Component {
                 };
                 UserApi.submit(answer, id)
                   .then(res => {
-                    Alert.alert('Success.');
-                    goTo('SRecord', checked.join(', '));
+                    ToastAndroid.show(
+                      'Thanks for taking your time answering!',
+                      ToastAndroid.LONG
+                    );
+                    this.props.navigation.state.routeName === 'Home'
+                      ? goTo('SRecord', checked.join(', '))
+                      : BackHandler.exitApp();
                   })
                   .catch(error => Alert.alert('Something went wrong.'));
               }}
@@ -122,4 +134,4 @@ class ModalDrop extends React.Component {
   }
 }
 
-export default ModalDrop;
+export default withNavigation(ModalDrop);

@@ -12,7 +12,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { Snackbar } from 'react-native-paper';
-import { withNavigationFocus } from 'react-navigation';
+import { withNavigationFocus, withNavigation } from 'react-navigation';
 import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
 import { QuestionApi } from '../../utils/api';
@@ -26,6 +26,7 @@ export class QuestionPage extends Component {
     this.state = {
       questionList: [],
       modal: '',
+      isYesNo: false,
       isSingleVisible: false,
       isMultiVisible: false,
       isDropVisible: false,
@@ -47,6 +48,21 @@ export class QuestionPage extends Component {
         });
       })
       .catch(err => console.log(err));
+    const questionData = this.props.navigation.getParam('payload', 'DEFAULT');
+    this.setState({
+      isYesNo: questionData.isYesNoVisible,
+      isSingleVisible: questionData.isSingleVisible,
+      isDropVisible: questionData.isDropVisible,
+      isMultiVisible: questionData.isMultiVisible,
+      modal: {
+        question: questionData.question,
+        title: questionData.title,
+        choice: questionData.choices
+      }
+    });
+    questionData && questionData.isYesNo
+      ? Alert.alert(this.modal.title, this.modal.choices)
+      : null;
   }
 
   async componentDidUpdate(prevProps) {
@@ -272,4 +288,4 @@ export class QuestionPage extends Component {
   }
 }
 
-export default withNavigationFocus(QuestionPage);
+export default withNavigation(withNavigationFocus(QuestionPage));

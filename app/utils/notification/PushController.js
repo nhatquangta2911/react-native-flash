@@ -1,23 +1,21 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
-import { Alert } from "react-native";
-import { withNavigation } from "react-navigation";
-import PushNotification from "react-native-push-notification";
+import React, { Component } from 'react';
+import { Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import PushNotification from 'react-native-push-notification';
 
 class PushController extends Component {
   componentDidMount() {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister(token) {
-        console.log("TOKEN:", token);
+        console.log('TOKEN:', token);
       },
 
       // (required) Called when a remote or local notification is opened or received
-      onNotification(notification) {
-        Alert.alert(notification.salute);
-      },
+      onNotification(notification) {},
       // Android only
-      senderID: "116963018082",
+      senderID: '116963018082',
       popInitialNotification: true,
       requestPermissions: true
     });

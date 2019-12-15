@@ -8,7 +8,7 @@ export default {
         return `Did you eat any of these ${time}?`;
         break;
       case 'Yes/No':
-        return `Did you ${ingredient === 'Water' ? 'drunk' : 'ate'} ${
+        return `Did you ${ingredient === 'Water' ? 'drink' : 'eat'} ${
           amount < 10 ? ` ${amount}` : `${amount}ml`
         } ${ingredient} ${time}?`;
         break;

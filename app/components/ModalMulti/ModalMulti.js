@@ -1,8 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 import { Overlay, CheckBox, Button } from 'react-native-elements';
-import { View, Text, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Alert,
+  BackHandler,
+  ToastAndroid
+} from 'react-native';
 import React from 'react';
+import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { darkPalette, fonts } from '../../styles/base';
@@ -94,8 +102,13 @@ class ModalMulti extends React.Component {
               };
               UserApi.submit(answer, id)
                 .then(res => {
-                  Alert.alert('Success.');
-                  goTo('SRecord', checked.join(', '));
+                  ToastAndroid.show(
+                    'Thanks for taking your time answering!',
+                    ToastAndroid.LONG
+                  );
+                  this.props.navigation.state.routeName === 'Home'
+                    ? goTo('SRecord', checked.join(', '))
+                    : BackHandler.exitApp();
                 })
                 .catch(error =>
                   Alert.alert('Something went wrong', error.message)
@@ -108,4 +121,4 @@ class ModalMulti extends React.Component {
   }
 }
 
-export default ModalMulti;
+export default withNavigation(ModalMulti);

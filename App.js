@@ -78,13 +78,12 @@ export default class App extends PureComponent {
       .notifications()
       .onNotification(notification => {
         const { title, body, data } = notification;
-        this.showAlert(data && data.question);
       });
     this.notificationOpenedListener = firebase
       .notifications()
       .onNotificationOpened(notificationOpen => {
         const { title, body } = notificationOpen.notification;
-        this.showAlert(title + '2', body);
+        // this.showAlert(title + '2', body);
       });
 
     // FROM OUTSIDE
@@ -93,8 +92,32 @@ export default class App extends PureComponent {
       .getInitialNotification();
     if (notificationOpen) {
       const { title, body, data } = notificationOpen.notification;
-      // NavigationService.navigate('Stats');
-
+      const payload = {
+        isYesNoVisible: data.isYesNoVisible === 'true',
+        isSingleVisible: data.isSingleVisible === 'true',
+        isMultiVisible: data.isMultiVisible === 'true',
+        isDropVisible: data.isDropVisible === 'true',
+        modal: {
+          title: data.title,
+          question: data.question,
+          choices: [
+            {
+              id: 7,
+              name: 'Water',
+              image:
+                'https://s-report.s3.amazonaws.com/157633068983884353960x0.jpg',
+              cal: 0,
+              carbs: 0,
+              protein: 0,
+              fiber: 0,
+              sugar: 0,
+              fat: 0,
+              description: 'update soon...'
+            }
+          ]
+        }
+      };
+      NavigationService.deepNavigate({ payload });
       //TODO: Deep Navigation
       // NavigationService.navigate("Browsing", {
       //   action: NavigationService.navigate("Details")

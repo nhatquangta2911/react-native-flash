@@ -3,8 +3,8 @@ import {
   SwitchActions,
   TabActions,
   crea
-} from "react-navigation";
-import { BottomNavigation } from "react-native-paper";
+} from 'react-navigation';
+import { BottomNavigation } from 'react-native-paper';
 
 let _navigator;
 
@@ -24,6 +24,14 @@ function navigate(routeName, params) {
     })
   );
 }
+function deepNavigate(params) {
+  _navigator.dispatch(
+    NavigationActions.navigate({
+      routeName: 'QuickQuestion',
+      params
+    })
+  );
+}
 
 function getCurrentRoute() {
   return _navigator.state.routeName;
@@ -38,5 +46,6 @@ export default {
   navigate,
   setTopLevelNavigator,
   setTopLevelJumper,
-  getCurrentRoute
+  getCurrentRoute,
+  deepNavigate
 };

@@ -1,6 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { Overlay, CheckBox, Button } from 'react-native-elements';
-import { View, Text, ScrollView, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Alert,
+  BackHandler,
+  ToastAndroid
+} from 'react-native';
 import React from 'react';
 import { withNavigation } from 'react-navigation';
 import styles from './styles';
@@ -79,8 +86,13 @@ class ModalSingle extends React.Component {
               };
               UserApi.submit(answer, id)
                 .then(res => {
-                  Alert.alert('Success.');
-                  goTo('SRecord', checked);
+                  ToastAndroid.show(
+                    'Thanks for taking your time answering!',
+                    ToastAndroid.LONG
+                  );
+                  this.props.navigation.state.routeName === 'Home'
+                    ? goTo('SRecord', checked.join(', '))
+                    : BackHandler.exitApp();
                 })
                 .catch(error =>
                   Alert.alert('Something went wrong.', error.message)
