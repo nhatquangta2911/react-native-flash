@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   dimensions,
   fonts,
   margin,
   padding,
   darkPalette
-} from "../../styles/base";
+} from '../../styles/base';
 
 export default StyleSheet.create({
   browsingContainer: {
@@ -23,6 +23,6 @@ export default StyleSheet.create({
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray,
-    marginVertical: margin.sm
+    marginVertical: margin.md
   }
 });

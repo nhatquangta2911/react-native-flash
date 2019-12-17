@@ -122,6 +122,7 @@ export class SRecordPage extends Component {
                     <Answer
                       key={answer.id}
                       question={answer.id}
+                      ingredients={answer.ingredients}
                       answer={
                         answer &&
                         answer.ingredients &&
@@ -148,8 +149,8 @@ export class SRecordPage extends Component {
       <View>
         <View style={questionContainer}>
           <View style={mainContent}>
-            <Text style={titleStyles}>SRecord</Text>
-            <Text style={textStyles}>This is all you need</Text>
+            <Text style={titleStyles}>Collection</Text>
+            <Text style={textStyles}>This is all we have collected</Text>
           </View>
           <View style={searchBar}>
             <Searchbar

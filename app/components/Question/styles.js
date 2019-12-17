@@ -23,7 +23,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: margin.md,
+    marginRight: 25,
     marginLeft: 0
   },
   right: {

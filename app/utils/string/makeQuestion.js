@@ -8,9 +8,23 @@ export default {
         return `Did you eat any of these ${time}?`;
         break;
       case 'Yes/No':
-        return `Did you ${ingredient === 'Water' ? 'drink' : 'eat'} ${
-          amount < 10 ? ` ${amount}` : `${amount}ml`
-        } ${ingredient} ${time}?`;
+        return `Did you ${
+          ingredient === 'Water'
+            ? 'drink'
+            : ingredient === 'Running'
+            ? 'run'
+            : ingredient === 'Walking'
+            ? 'walk'
+            : 'eat'
+        } ${
+          amount < 10
+            ? ` ${amount}`
+            : amount < 121
+            ? `${amount} minutes`
+            : `${amount}ml`
+        } ${
+          ingredient === 'Running' || ingredient === 'Walking' ? '' : ingredient
+        } ${time}?`;
         break;
       case 'Dropdown List':
         return `Select food that you ate ${time}`;

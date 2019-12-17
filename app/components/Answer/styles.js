@@ -1,13 +1,28 @@
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../styles/base';
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette,
+  shadow
+} from '../../styles/base';
 
 export default StyleSheet.create({
   answerContainer: {
     backgroundColor: darkPalette.white,
-    height: dimensions.containerHeight / 8,
+    // height: dimensions.containerHeight / 8,
     padding: padding.md,
-    marginVertical: margin.sm
+    marginVertical: margin.sm,
+    flexDirection: 'row'
+  },
+  left: {
+    flex: 2
+  },
+  right: {
+    flex: 1,
+    flexDirection: 'row-reverse'
   },
   titleStyle: {
     fontFamily: fonts.regular,

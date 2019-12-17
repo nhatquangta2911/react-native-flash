@@ -91,7 +91,7 @@ class ModalSingle extends React.Component {
                     ToastAndroid.LONG
                   );
                   this.props.navigation.state.routeName === 'Home'
-                    ? goTo('SRecord', checked.join(', '))
+                    ? goTo('SRecord', checked)
                     : BackHandler.exitApp();
                 })
                 .catch(error =>

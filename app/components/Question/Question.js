@@ -28,7 +28,7 @@ export class Question extends Component {
         <View style={left}>
           {this.props.images && this.props.images.length === 1
             ? this.props.images.map(i => (
-                <Avatar.Image source={{ uri: i.toString() }} size={50} />
+                <Avatar.Image source={{ uri: i }} size={50} />
               ))
             : this.props.images.slice(0, 3).map(i => (
                 <Avatar.Image
@@ -36,7 +36,7 @@ export class Question extends Component {
                     uri: i
                   }}
                   style={{
-                    margin: -4
+                    margin: -3
                   }}
                   size={35}
                 />

@@ -15,11 +15,11 @@ export default StyleSheet.create({
     fontFamily: fonts.light,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flex: 1
   },
   logoContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
-  contentContainer: { flex: 3 },
+  contentContainer: { flex: 1 },
   textStyle: {
     fontSize: fonts.sm,
     fontFamily: fonts.light,
@@ -43,12 +43,12 @@ export default StyleSheet.create({
     marginHorizontal: margin.md,
     backgroundColor: darkPalette.facebook,
     borderRadius: sizes.roundedButtonRadius,
-    height: sizes.buttonHeight
+    height: sizes.buttonHeight * 1.2
   },
   titleButtonLoginStyle: {
     color: darkPalette.white,
-    fontSize: fonts.sm,
-    fontFamily: fonts.regular
+    fontSize: fonts.md,
+    fontFamily: fonts.light
   },
   inputStyle: {
     fontFamily: fonts.regular,

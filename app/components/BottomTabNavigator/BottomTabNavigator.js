@@ -46,12 +46,12 @@ export default class BottomTabNavigator extends Component {
           icon: 'book',
           color: darkPalette.darkCyan
         },
-        {
-          key: 'Community',
-          title: 'Community',
-          icon: 'business',
-          color: darkPalette.darkCyan
-        },
+        // {
+        //   key: 'Community',
+        //   title: 'Community',
+        //   icon: 'business',
+        //   color: darkPalette.darkCyan
+        // },
         {
           key: 'Setting',
           title: 'Setting',
@@ -69,7 +69,7 @@ export default class BottomTabNavigator extends Component {
     Question: QuestionPage,
     SRecord: SRecordPage,
     Setting: SettingPage,
-    Community: BlogPage
+    // Community: BlogPage
   });
 
   render() {

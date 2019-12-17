@@ -9,16 +9,18 @@ import {
   ScrollView,
   Alert,
   RefreshControl,
-  ActivityIndicator
+  ActivityIndicator,
+  ToastAndroid
 } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import { withNavigationFocus, withNavigation } from 'react-navigation';
 import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
-import { QuestionApi } from '../../utils/api';
+import { QuestionApi, UserApi } from '../../utils/api';
 import { makeQuestion, handleDateTime } from '../../utils/string';
 import { tokenHandler } from '../../utils/token';
 import { darkPalette } from '../../styles/base';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export class QuestionPage extends Component {
   constructor(props) {
@@ -97,19 +99,38 @@ export class QuestionPage extends Component {
             // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
             {
               text: 'No',
-              onPress: () =>
-                this.setState({
-                  isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: 'NO'
-                })
+              onPress: () => {
+                ToastAndroid.show(
+                  'Thanks for taking your time answering!',
+                  ToastAndroid.LONG
+                );
+                this.props.navigation.state.routeName === 'Home'
+                  ? this.props.jumpTo('SRecord')
+                  : BackHandler.exitApp();
+              }
             },
             {
               text: 'Yes',
-              onPress: () =>
-                this.setState({
-                  isSnackbarVisible: !this.state.isSnackbarVisible,
-                  choice: 'YES'
-                })
+              onPress: async () => {
+                try {
+                  const id = await AsyncStorage.getItem('id');
+                  const answer = {
+                    answerContent: modal.title,
+                    positiveId: 1,
+                    ingredients: modal.choices[0].id
+                  };
+                  await UserApi.submit(answer, id);
+                  ToastAndroid.show(
+                    'Thanks for taking your time answering!',
+                    ToastAndroid.LONG
+                  );
+                  this.props.navigation.state.routeName === 'Home'
+                    ? this.props.jumpTo('SRecord')
+                    : BackHandler.exitApp();
+                } catch (error) {
+                  Alert.alert('Something went wrong. Please answer again!');
+                }
+              }
             }
           ],
           { cancelable: true }
@@ -146,7 +167,7 @@ export class QuestionPage extends Component {
     });
     setTimeout(() => {
       this.props.jumpTo(route);
-    }, 1500);
+    }, 1000);
   };
 
   _onRefresh = async () => {
@@ -212,7 +233,7 @@ export class QuestionPage extends Component {
                 q.typeQuestion.name,
                 q.amount,
                 q.ingredients[0].name,
-                handleDateTime.transfer(q.consumedTime)
+                handleDateTime.simpleTransfer(q.consumedTime)
               )
             }
             choices={(q && q.ingredients) || null}
@@ -270,7 +291,7 @@ export class QuestionPage extends Component {
           sendStatus={this.handleBackDrop}
           goTo={this.handleAnswer}
         />
-        <Snackbar
+        {/* <Snackbar
           visible={this.state.isSnackbarVisible}
           onDismiss={() => this.setState({ isSnackbarVisible: false })}
           duration={1500}
@@ -282,7 +303,7 @@ export class QuestionPage extends Component {
           }}
         >
           {choice === 'empty' ? 'Choose one, buddy!' : `You chose ${choice}`}
-        </Snackbar>
+        </Snackbar> */}
       </View>
     );
   }

@@ -144,7 +144,8 @@ export const nutrientColor = {
   fat: '#52C0BC',
   protein: '#976FE8',
   fiber: '#444444',
-  cal: '#EF754F'
+  cal: '#EF754F',
+  sugar: '#70AE6E'
 };
 
 export const fonts = {

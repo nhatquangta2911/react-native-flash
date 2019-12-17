@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component } from "react";
-import { Text, View, ScrollView } from "react-native";
-import { withNavigation } from "react-navigation";
-import Collapsible from "react-native-collapsible";
-import { Image } from "react-native-elements";
-import { Text as CustomText } from "../../components";
-import styles from "./styles";
-import { headerStyle, nutrientColor } from "../../styles/base";
+import React, { Component } from 'react';
+import { Text, View, ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import Collapsible from 'react-native-collapsible';
+import { Image } from 'react-native-elements';
+import { Text as CustomText } from '../../components';
+import styles from './styles';
+import { headerStyle, nutrientColor } from '../../styles/base';
 
 class RecipeDetailPage extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam("name", "Recipe Detail"),
+    title: navigation.getParam('name', 'Recipe Detail'),
     headerTitleStyle: { ...headerStyle, marginLeft: -4 }
   });
 
@@ -34,20 +34,22 @@ class RecipeDetailPage extends Component {
       nutrientContainer
     } = styles;
     const { navigation } = this.props;
-    const nutrients = navigation.getParam("nutrients", {
+    const nutrients = navigation.getParam('nutrients', {
       cal: 0,
       carbs: 0,
       fat: 0,
       protein: 0,
-      fiber: 0
+      fiber: 0,
+      sugar: 0,
+      description: 'update soon...'
     });
     return (
       <View style={recipeDetailContainer}>
         <Image
           source={{
             uri: navigation.getParam(
-              "image",
-              "https://wpes.org.uk/wp-content/uploads/2018/02/default-banner.jpg"
+              'image',
+              'https://wpes.org.uk/wp-content/uploads/2018/02/default-banner.jpg'
             )
           }}
           style={imageStyle}
@@ -63,7 +65,7 @@ class RecipeDetailPage extends Component {
           </Text>
           <Collapsible collapsed={this.state.is1Collapsed}>
             <View style={nutrientStyle}>
-              <Text style={textStyles}>Update soon...</Text>
+              <Text style={textStyles}>{nutrients.description}</Text>
             </View>
           </Collapsible>
           <Text
@@ -80,16 +82,19 @@ class RecipeDetailPage extends Component {
                 {nutrients.cal} Calories
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.carbs}>
-                {nutrients.carbs} Carbs
+                {nutrients.carbs}g Carbs
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.fat}>
-                {nutrients.fat} Fat
+                {nutrients.fat}g Fat
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.protein}>
-                {nutrients.protein} Protein
+                {nutrients.protein}g Protein
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.fiber}>
-                {nutrients.fiber} Fiber
+                {nutrients.fiber}g Fiber
+              </CustomText.ColorText>
+              <CustomText.ColorText color={nutrientColor.sugar}>
+                {nutrients.sugar}g Sugar
               </CustomText.ColorText>
             </View>
           </Collapsible>
