@@ -1,9 +1,12 @@
-import Caller from "../api/ApiCaller";
+import Caller from '../api/ApiCaller';
 
-const prefix = "ingredients/";
+const prefix = 'ingredients/';
 
 export default {
   getAll() {
-    return Caller(prefix, "GET");
+    return Caller(prefix, 'GET');
+  },
+  get(id) {
+    return Caller(prefix + id, 'GET');
   }
 };

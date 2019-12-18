@@ -10,7 +10,8 @@ import {
   Alert,
   RefreshControl,
   ActivityIndicator,
-  ToastAndroid
+  ToastAndroid,
+  BackHandler
 } from 'react-native';
 import { withNavigationFocus, withNavigation } from 'react-navigation';
 import styles from './styles';
@@ -22,14 +23,19 @@ import { darkPalette } from '../../styles/base';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import IngredientApi from '../../utils/api/IngredientApi';
 
 export class QuestionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questionList: [],
-      modal: '',
-      isYesNo: false,
+      modal: {
+        question: '',
+        title: '',
+        choices: []
+      },
+      isYesNoVisible: false,
       isSingleVisible: false,
       isMultiVisible: false,
       isDropVisible: false,
@@ -41,31 +47,84 @@ export class QuestionPage extends Component {
   }
 
   async componentDidMount() {
+    const questionData = this.props.navigation.getParam('payload', 'DEFAULT');
+    const transferedChoices = questionData.choices
+      .split(',')
+      .map(n => parseInt(n));
+
+    let choicesArray = [];
+    for (let i = 0; i < transferedChoices.length; i++) {
+      IngredientApi.get(transferedChoices[i])
+        .then(res => choicesArray.push(res.data))
+        .catch(err => Alert.alert(err.message));
+    }
     const id = await tokenHandler.getData('id');
     QuestionApi.getAll(id || 1, 7)
       .then(res => {
-        console.log(res.data);
         this.setState({
           isLoading: false,
           questionList: (res.data && res.data.questions) || []
         });
       })
       .catch(err => console.log(err));
-    const questionData = this.props.navigation.getParam('payload', 'DEFAULT');
-    this.setState({
-      isYesNo: questionData.isYesNoVisible,
-      isSingleVisible: questionData.isSingleVisible,
-      isDropVisible: questionData.isDropVisible,
-      isMultiVisible: questionData.isMultiVisible,
-      modal: {
-        question: questionData.question,
-        title: questionData.title,
-        choice: questionData.choices
-      }
-    });
-    questionData && questionData.isYesNo
-      ? Alert.alert(this.modal.title, this.modal.choices)
+    questionData.isYesNoVisible
+      ? Alert.alert(
+          questionData.modal.title,
+          questionData.modal.question,
+          [
+            // { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+            {
+              text: 'No',
+              onPress: () => {
+                ToastAndroid.show(
+                  'Thanks for taking your time answering!',
+                  ToastAndroid.LONG
+                );
+                this.props.navigation.state.routeName === 'Home'
+                  ? this.props.jumpTo('SRecord')
+                  : BackHandler.exitApp();
+              }
+            },
+            {
+              text: 'Yes',
+              onPress: async () => {
+                try {
+                  const answer = {
+                    answerContent: 'Unknown',
+                    positiveId: 1,
+                    ingredients: [parseInt(questionData.choices)]
+                  };
+                  await UserApi.submit(answer, id);
+                  ToastAndroid.show(
+                    'Thanks for taking your time answering!',
+                    ToastAndroid.LONG
+                  );
+                  this.props.navigation.state.routeName === 'Home'
+                    ? this.props.jumpTo('SRecord')
+                    : BackHandler.exitApp();
+                } catch (error) {
+                  Alert.alert('Something went wrong. Please answer again!');
+                }
+              }
+            }
+          ],
+          { cancelable: true }
+        )
       : null;
+    if (questionData.isNotificationVisible) {
+      this.setState({
+        isNotificationVisible: questionData.isNotificationVisible,
+        isYesNoVisible: questionData.isYesNoVisible,
+        isSingleVisible: questionData.isSingleVisible,
+        isDropVisible: questionData.isDropVisible,
+        isMultiVisible: questionData.isMultiVisible,
+        modal: {
+          question: questionData.modal.question,
+          title: questionData.modal.title,
+          choices: choicesArray
+        }
+      });
+    }
   }
 
   async componentDidUpdate(prevProps) {
@@ -203,6 +262,7 @@ export class QuestionPage extends Component {
     const {
       questionList,
       modal,
+      choices,
       isSingleVisible,
       isMultiVisible,
       isDropVisible,

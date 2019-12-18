@@ -93,28 +93,30 @@ export default class App extends PureComponent {
     if (notificationOpen) {
       const { title, body, data } = notificationOpen.notification;
       const payload = {
+        isNotificationVisible: data.isNotificationVisible === 'true',
         isYesNoVisible: data.isYesNoVisible === 'true',
         isSingleVisible: data.isSingleVisible === 'true',
         isMultiVisible: data.isMultiVisible === 'true',
         isDropVisible: data.isDropVisible === 'true',
+        choices: data.choices,
         modal: {
           title: data.title,
-          question: data.question,
-          choices: [
-            {
-              id: 7,
-              name: 'Water',
-              image:
-                'https://s-report.s3.amazonaws.com/157633068983884353960x0.jpg',
-              cal: 0,
-              carbs: 0,
-              protein: 0,
-              fiber: 0,
-              sugar: 0,
-              fat: 0,
-              description: 'update soon...'
-            }
-          ]
+          question: data.question
+          // choices: [
+          //   {
+          //     id: 7,
+          //     name: 'Water',
+          //     image:
+          //       'https://s-report.s3.amazonaws.com/157633068983884353960x0.jpg',
+          //     cal: 0,
+          //     carbs: 0,
+          //     protein: 0,
+          //     fiber: 0,
+          //     sugar: 0,
+          //     fat: 0,
+          //     description: 'update soon...'
+          //   }
+          // ]
         }
       };
       NavigationService.deepNavigate({ payload });
