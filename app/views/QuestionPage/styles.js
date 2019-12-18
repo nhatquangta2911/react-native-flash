@@ -7,13 +7,14 @@ import {
   margin,
   padding,
   darkPalette,
-  shadow
+  shadow,
+  sizes
 } from '../../styles/base';
 
 export default StyleSheet.create({
   questionContainer: {
-    height: dimensions.containerHeight,
-    justifyContent: 'flex-start',
+    height: dimensions.containerHeight - 20,
+    justifyContent: 'space-between',
     marginHorizontal: margin.md
   },
   titleStyles: {
@@ -34,7 +35,19 @@ export default StyleSheet.create({
     flex: 8,
     justifyContent: 'center'
   },
-  scroll: {
-    height: (dimensions.containerHeight * 7) / 8
+  scroll: {},
+  commonButtonStyle: {
+    marginVertical: margin.sm,
+    borderColor: darkPalette.darkYellow,
+    borderWidth: 0.9,
+    backgroundColor: darkPalette.darkYellow,
+    borderRadius: sizes.roundedButtonRadius,
+    height: sizes.buttonHeight,
+    width: dimensions.fitWidth
+  },
+  commonButtonTextStyle: {
+    fontFamily: fonts.regular,
+    fontSize: fonts.sm,
+    color: darkPalette.white
   }
 });

@@ -12,7 +12,6 @@ import {
   ActivityIndicator,
   ToastAndroid
 } from 'react-native';
-import { Snackbar } from 'react-native-paper';
 import { withNavigationFocus, withNavigation } from 'react-navigation';
 import styles from './styles';
 import { Question, ModalSingle, ModalMulti, ModalDrop } from '../../components';
@@ -21,6 +20,8 @@ import { makeQuestion, handleDateTime } from '../../utils/string';
 import { tokenHandler } from '../../utils/token';
 import { darkPalette } from '../../styles/base';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export class QuestionPage extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export class QuestionPage extends Component {
 
   async componentDidMount() {
     const id = await tokenHandler.getData('id');
-    QuestionApi.getAll(id || 1, 5)
+    QuestionApi.getAll(id || 1, 7)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -177,7 +178,7 @@ export class QuestionPage extends Component {
       questionList: []
     });
     const id = await tokenHandler.getData('id');
-    QuestionApi.getAll(id || 1, 5)
+    QuestionApi.getAll(id || 1, 7)
       .then(res => {
         this.setState({
           refreshing: false,
@@ -195,7 +196,9 @@ export class QuestionPage extends Component {
       textStyles,
       scrollContainer,
       titleContainer,
-      scroll
+      scroll,
+      commonButtonStyle,
+      commonButtonTextStyle
     } = styles;
     const {
       questionList,
@@ -301,9 +304,17 @@ export class QuestionPage extends Component {
               this.setState({ isSnackbarVisible: false });
             }
           }}
-        >
+          >
           {choice === 'empty' ? 'Choose one, buddy!' : `You chose ${choice}`}
         </Snackbar> */}
+        <Button
+          type='solid'
+          icon={<Icon name='sync-alt' size={25} color='white' />}
+          loading={isLoading}
+          onPress={() => this._onRefresh()}
+          buttonStyle={commonButtonStyle}
+          titleStyle={commonButtonTextStyle}
+        />
       </View>
     );
   }
