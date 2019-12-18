@@ -3,29 +3,30 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
-import { Image } from "react-native-elements";
-import AsyncStorage from "@react-native-community/async-storage";
-import styles from "./styles";
-import { darkPalette, headerStyle, text } from "../../styles/base";
-import { tokenHandler } from "../../utils/token";
-import ItemInfo from "./sections/ItemInfo";
-import { UserApi } from "../../utils/api";
+import React, { Component } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { Image } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
+import styles from './styles';
+import { darkPalette, headerStyle, text } from '../../styles/base';
+import { tokenHandler } from '../../utils/token';
+import ItemInfo from './sections/ItemInfo';
+import { UserApi } from '../../utils/api';
+import handleInfo from '../../utils/string/handleInfo';
 
 class InfoPage extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: "Your Info",
-      headerRightTitle: "Done"
+      title: 'Your Info',
+      headerRightTitle: 'Done'
     };
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
-      user: ""
+      id: '',
+      user: ''
     };
   }
 
@@ -37,7 +38,7 @@ class InfoPage extends Component {
   }
 
   getInfo = async () => {
-    const id = await tokenHandler.getData("id");
+    const id = await tokenHandler.getData('id');
     this.setState({ id });
   };
 
@@ -55,34 +56,38 @@ class InfoPage extends Component {
               width: 100,
               height: 100,
               borderRadius: 100,
-              position: "absolute",
+              position: 'absolute',
               bottom: -10
             }}
           />
         </View>
         <ScrollView>
-          <ItemInfo name="Name" value={user.name} />
-          <ItemInfo name="Email" value={user.email} />
+          <ItemInfo name='Name' value={user.name} />
+          <ItemInfo name='Email' value={user.email} />
           {/* <ItemInfo name="Age" value={user.age} /> */}
           <ItemInfo
-            name="Height"
-            value={user && user.infoUser && user.infoUser.height}
-          />
-          <ItemInfo
-            name="Gender"
+            name='Gender'
             value={user && user.infoUser && user.infoUser.gender}
           />
           <ItemInfo
-            name="Weight"
+            name='Height (cm)'
+            value={user && user.infoUser && user.infoUser.height}
+          />
+          <ItemInfo
+            name='Weight (kg)'
             value={user && user.infoUser && user.infoUser.weight}
           />
           <ItemInfo
-            name="Activity Level"
-            value={user && user.infoUser && user.infoUser.activityLevel}
+            name='Activity Level'
+            value={handleInfo.transferActivityLevel(
+              user && user.infoUser && user.infoUser.activityLevel
+            )}
           />
           <ItemInfo
-            name="bodyFat"
-            value={user && user.infoUser && user.infoUser.bodyFat}
+            name='Body Fat'
+            value={handleInfo.transferBodyFat(
+              user && user.infoUser && user.infoUser.bodyFat
+            )}
           />
         </ScrollView>
       </View>

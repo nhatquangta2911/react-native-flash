@@ -41,7 +41,7 @@ export class QuestionPage extends Component {
 
   async componentDidMount() {
     const id = await tokenHandler.getData('id');
-    QuestionApi.getAll(id || 1)
+    QuestionApi.getAll(id || 1, 5)
       .then(res => {
         console.log(res.data);
         this.setState({
@@ -177,7 +177,7 @@ export class QuestionPage extends Component {
       questionList: []
     });
     const id = await tokenHandler.getData('id');
-    QuestionApi.getAll(id || 1)
+    QuestionApi.getAll(id || 1, 5)
       .then(res => {
         this.setState({
           refreshing: false,

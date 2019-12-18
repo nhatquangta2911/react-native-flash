@@ -22,8 +22,10 @@ export default {
             : amount < 121
             ? `${amount} minutes`
             : `${amount}ml`
-        } ${
-          ingredient === 'Running' || ingredient === 'Walking' ? '' : ingredient
+        }${
+          ingredient === 'Running' || ingredient === 'Walking'
+            ? ''
+            : ` ${ingredient}`
         } ${time}?`;
         break;
       case 'Dropdown List':

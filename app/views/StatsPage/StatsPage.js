@@ -85,7 +85,7 @@ export class StatsPage extends Component {
               style={{ alignItems: 'center', borderRadius: 3 }}
             />
           </View>
-          <View style={chartContainer}>
+          {/* <View style={chartContainer}>
             <Text style={titleStyles}>Weekly Heart Rate</Text>
             <LineChart
               data={{
@@ -178,7 +178,7 @@ export class StatsPage extends Component {
               withOuterLines={false}
               style={{ alignItems: 'center', borderRadius: 3 }}
             />
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     );
