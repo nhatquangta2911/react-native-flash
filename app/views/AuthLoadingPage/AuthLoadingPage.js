@@ -2,17 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {
-  StyleSheet,
-  ActivityIndicator,
-  StatusBar,
-  View,
-  Text
-} from 'react-native';
+import { StyleSheet, ActivityIndicator, StatusBar, View } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { fonts, darkPalette, margin } from '../../styles/base';
 import styles from './styles';
+import Text from '../../components/Text/Text.js';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -43,6 +38,7 @@ class AuthLoadingScreen extends React.Component {
     return (
       <View style={greetingContainer}>
         <ActivityIndicator size='large' />
+        <Text.CommonText>Loading</Text.CommonText>
         {/* <View>
           <Text style={greetingText}>welcome</Text>
           <Text style={contentText}> how's your day going? </Text>

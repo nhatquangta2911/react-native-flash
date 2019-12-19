@@ -3,9 +3,23 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Alert } from 'react-native';
 import { Avatar } from 'react-native-paper';
+import { withNavigation, NavigationActions } from 'react-navigation';
 import styles from './styles';
 
-export class Answer extends Component {
+class Answer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      first: this.props.ingredients && this.props.ingredients[0]
+    };
+  }
+  handleBrowsing = () => {
+    this.props.navigation.navigate('Details', {
+      name: this.state.first.name,
+      image: this.state.first.image,
+      nutrients: this.state.first
+    });
+  };
   render() {
     const { answerContainer, titleStyle, textStyle, left, right } = styles;
     const imageList =
@@ -19,8 +33,12 @@ export class Answer extends Component {
             style={{ margin: -3 }}
           />
         ));
+
     return (
-      <TouchableOpacity style={answerContainer}>
+      <TouchableOpacity
+        style={answerContainer}
+        onPress={() => this.handleBrowsing()}
+      >
         <View style={left}>
           <Text style={titleStyle} numberOfLines={1}>
             {this.props.answer}
@@ -35,4 +53,4 @@ export class Answer extends Component {
   }
 }
 
-export default Answer;
+export default withNavigation(Answer);

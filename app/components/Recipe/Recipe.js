@@ -48,10 +48,13 @@ class Recipe extends React.Component {
           </View>
           <View style={buttonContainer}>
             <Button
-              title="Details"
-              type="outline"
+              title='Details'
+              type='outline'
               titleStyle={textStyles}
-              buttonStyle={{ paddingVertical: 4, borderColor: darkPalette.black }}
+              buttonStyle={{
+                paddingVertical: 4,
+                borderColor: darkPalette.black
+              }}
               onPress={() => this.goToDetails()}
             />
           </View>

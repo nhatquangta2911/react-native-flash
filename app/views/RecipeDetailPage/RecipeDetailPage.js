@@ -34,7 +34,8 @@ class RecipeDetailPage extends Component {
       nutrientContainer
     } = styles;
     const { navigation } = this.props;
-    const nutrients = navigation.getParam('nutrients', {
+    const nutrientsFromCarousel = this.props.nutrients;
+    const nutrientsFromNavigate = navigation.getParam('nutrients', {
       cal: 0,
       carbs: 0,
       fat: 0,
@@ -43,6 +44,7 @@ class RecipeDetailPage extends Component {
       sugar: 0,
       description: 'update soon...'
     });
+    const nutrient = nutrientsFromNavigate || nutrientsFromCarousel;
     return (
       <View style={recipeDetailContainer}>
         <Image
@@ -65,7 +67,7 @@ class RecipeDetailPage extends Component {
           </Text>
           <Collapsible collapsed={this.state.is1Collapsed}>
             <View style={nutrientStyle}>
-              <Text style={textStyles}>{nutrients.description}</Text>
+              <Text style={textStyles}>{nutrient.description || ''}</Text>
             </View>
           </Collapsible>
           <Text
@@ -79,22 +81,22 @@ class RecipeDetailPage extends Component {
           <Collapsible collapsed={this.state.is2Collapsed}>
             <View style={nutrientContainer}>
               <CustomText.ColorText color={nutrientColor.cal} bold>
-                {nutrients.cal} Calories
+                {nutrient.cal || 0} Calories
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.carbs}>
-                {nutrients.carbs}g Carbs
+                {nutrient.carbs || 0}g Carbs
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.fat}>
-                {nutrients.fat}g Fat
+                {nutrient.fat || 0}g Fat
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.protein}>
-                {nutrients.protein}g Protein
+                {nutrient.protein || 0}g Protein
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.fiber}>
-                {nutrients.fiber}g Fiber
+                {nutrient.fiber || 0}g Fiber
               </CustomText.ColorText>
               <CustomText.ColorText color={nutrientColor.sugar}>
-                {nutrients.sugar}g Sugar
+                {nutrient.sugar || 0}g Sugar
               </CustomText.ColorText>
             </View>
           </Collapsible>

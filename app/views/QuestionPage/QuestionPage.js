@@ -47,6 +47,15 @@ export class QuestionPage extends Component {
   }
 
   async componentDidMount() {
+    const id = await tokenHandler.getData('id');
+    QuestionApi.getAll(id || 1, 7)
+      .then(res => {
+        this.setState({
+          isLoading: false,
+          questionList: (res.data && res.data.questions) || []
+        });
+      })
+      .catch(err => console.log(err));
     const questionData = this.props.navigation.getParam('payload', 'DEFAULT');
     const transferedChoices = questionData.choices
       .split(',')
@@ -58,15 +67,6 @@ export class QuestionPage extends Component {
         .then(res => choicesArray.push(res.data))
         .catch(err => Alert.alert(err.message));
     }
-    const id = await tokenHandler.getData('id');
-    QuestionApi.getAll(id || 1, 7)
-      .then(res => {
-        this.setState({
-          isLoading: false,
-          questionList: (res.data && res.data.questions) || []
-        });
-      })
-      .catch(err => console.log(err));
     questionData.isYesNoVisible
       ? Alert.alert(
           questionData.modal.title,
