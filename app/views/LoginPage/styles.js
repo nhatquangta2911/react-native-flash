@@ -18,8 +18,17 @@ export default StyleSheet.create({
     justifyContent: 'center',
     flex: 1
   },
-  logoContainer: { flex: 2, justifyContent: 'center', alignItems: 'center' },
-  contentContainer: { flex: 1 },
+  banner: {
+    flex: 1
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    flex: 3.5,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingTop: 20
+  },
+  contentContainer: { flex: 3 },
   textStyle: {
     fontSize: fonts.sm,
     fontFamily: fonts.light,
@@ -29,7 +38,8 @@ export default StyleSheet.create({
   textLogo: {
     fontSize: fonts.xl,
     fontFamily: fonts.thin,
-    color: darkPalette.darkCyan
+    color: darkPalette.darkCyan,
+    marginLeft: 8
   },
   buttonLoginStyle: {
     margin: margin.md,
@@ -48,7 +58,7 @@ export default StyleSheet.create({
   titleButtonLoginStyle: {
     color: darkPalette.white,
     fontSize: fonts.md,
-    fontFamily: fonts.light
+    fontFamily: fonts.regular
   },
   inputStyle: {
     fontFamily: fonts.regular,

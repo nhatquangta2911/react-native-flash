@@ -30,7 +30,7 @@ export class StatusCard extends Component {
           <Text style={contentStyles}>{this.props.content || 'Content'}</Text>
         </View>
         <View style={statusCardRight}>
-          <Text style={statsStyles}>{this.props.percent || '0'}%</Text>
+          <Text style={statsStyles}>{this.props.percent}</Text>
         </View>
       </View>
     );

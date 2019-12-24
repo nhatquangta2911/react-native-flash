@@ -9,7 +9,13 @@ export default {
         break;
       case 'Yes/No':
         return `Did you ${
-          ingredient === 'Water'
+          [
+            'Water',
+            'Mineral Water',
+            'Milk Coffee',
+            'Oolong Tea',
+            'Coke'
+          ].includes(ingredient)
             ? 'drink'
             : ingredient === 'Running'
             ? 'run'

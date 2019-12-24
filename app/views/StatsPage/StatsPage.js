@@ -15,6 +15,8 @@ import {
   padding
 } from '../../styles/base';
 
+//TODO: Something went wrong!
+
 export class StatsPage extends Component {
   static navigationOptions = {
     title: 'Statistic'
@@ -29,15 +31,15 @@ export class StatsPage extends Component {
 
   render() {
     const { statsContainer, chartContainer, textStyles, titleStyles } = styles;
-    const data = {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      datasets: [
-        {
-          data: [3, 11, 2, 13, 1, 4, 0],
-          color: (opacity = 255) => `rgba(23, 162, 184, ${opacity})`
-        }
-      ]
-    };
+    // const data = {
+    //   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    //   datasets: [
+    //     {
+    //       data: [3, 11, 2, 13, 1, 4, 0],
+    //       color: (opacity = 255) => `rgba(23, 162, 184, ${opacity})`
+    //     }
+    //   ]
+    // };
 
     const chartConfig = {
       backgroundColor: '#42f009',
@@ -53,7 +55,7 @@ export class StatsPage extends Component {
     return (
       <View style={statsContainer}>
         <ScrollView>
-          <View style={chartContainer}>
+          {/* <View style={chartContainer}>
             <Text style={titleStyles}>Amount of Answers</Text>
             <LineChart
               data={{
@@ -76,7 +78,7 @@ export class StatsPage extends Component {
                 strokeWidth: 2,
                 color: (opacity = 255) => `rgba(23, 162, 184, ${opacity})`
               }}
-              height={200}
+              // height={200}
               fromZero
               bezier
               withOuterLines={false}
@@ -84,7 +86,7 @@ export class StatsPage extends Component {
               withOuterLines={false}
               style={{ alignItems: 'center', borderRadius: 3 }}
             />
-          </View>
+          </View> */}
           {/* <View style={chartContainer}>
             <Text style={titleStyles}>Weekly Heart Rate</Text>
             <LineChart

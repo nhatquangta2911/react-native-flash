@@ -19,7 +19,7 @@ class RecipeDetailPage extends Component {
     super(props);
     this.state = {
       is1Collapsed: false,
-      is2Collapsed: false
+      is2Collapsed: true
     };
   }
 
@@ -76,7 +76,7 @@ class RecipeDetailPage extends Component {
               this.setState({ is2Collapsed: !this.state.is2Collapsed });
             }}
           >
-            Nutrients
+            Nutrients / 100g (100ml)
           </Text>
           <Collapsible collapsed={this.state.is2Collapsed}>
             <View style={nutrientContainer}>

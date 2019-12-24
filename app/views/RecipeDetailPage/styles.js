@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   dimensions,
   fonts,
@@ -8,12 +8,12 @@ import {
   padding,
   darkPalette,
   textStyles
-} from "../../styles/base";
+} from '../../styles/base';
 
 export default StyleSheet.create({
   recipeDetailContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: padding.md
   },
   scrollContainer: {
@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
   nutrientStyle: {
     backgroundColor: darkPalette.white,
-    width: dimensions.fullWidth
+    width: dimensions.fullWidth * 0.95
   },
   textStyles: {
     fontFamily: fonts.thin,

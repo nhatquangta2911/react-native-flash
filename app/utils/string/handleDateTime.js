@@ -23,7 +23,7 @@ export default {
       return 'this morning';
     } else if (periodByHour > 10 && periodByHour <= 17) {
       return 'this afternoon';
-    } else return 'this evening';
+    } else return 'last night';
   },
   transferDate(original) {
     return original.toISOString().substring(0, 10);

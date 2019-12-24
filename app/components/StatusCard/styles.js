@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-operators */
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   darkPalette,
   fonts,
@@ -7,11 +7,11 @@ import {
   margin,
   colors,
   padding
-} from "../../styles/base";
+} from '../../styles/base';
 
 export default StyleSheet.create({
   statusCardContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     backgroundColor: darkPalette.white,
     shadowColor: darkPalette.darkGray,
     shadowOffset: {
@@ -30,34 +30,34 @@ export default StyleSheet.create({
   },
   titleStyles: {
     fontFamily: fonts.regular,
-    fontSize: fonts.md,
-    color: colors.secondary
+    fontSize: fonts.xlg,
+    color: darkPalette.darkYellow
   },
   statsStyles: {
     fontFamily: fonts.regular,
-    fontSize: fonts.lg,
+    fontSize: fonts.sm,
     color: darkPalette.darkCyan
   },
   contentStyles: {
     fontFamily: fonts.light,
     fontSize: fonts.sm,
-    color: colors.tertiary
+    color: darkPalette.darkGray
   },
   statusCardLeft: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   statusCardCenter: {
     flex: 3,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     marginHorizontal: margin.md
   },
   statusCardRight: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-end",
+    justifyContent: 'center',
+    alignItems: 'flex-end',
     marginRight: margin.sm
   }
 });

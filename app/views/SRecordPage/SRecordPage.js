@@ -22,14 +22,14 @@ export class SRecordPage extends Component {
       firstQuery: '',
       isVisible: false,
       refreshing: false,
-      isCollapsed: true,
+      isCollapsed: false,
       isFocused: this.props.isFocused
     };
   }
 
   async componentDidMount() {
     this.setState({
-      dates: HandleDateTime.generateRecentDates(3)
+      dates: HandleDateTime.generateRecentDates(2)
     });
     const id = await AsyncStorage.getItem('id');
     this.state.dates &&
@@ -60,7 +60,7 @@ export class SRecordPage extends Component {
         refreshing: true,
         answerData: [],
         isCollapsed: false,
-        dates: HandleDateTime.generateRecentDates(3)
+        dates: HandleDateTime.generateRecentDates(2)
       });
       const id = await AsyncStorage.getItem('id');
       this.state.dates &&

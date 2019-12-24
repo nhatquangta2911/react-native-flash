@@ -154,6 +154,7 @@ export const fonts = {
   smd: 16,
   md: 18,
   lg: 18,
+  xlg: 21,
   xl: 40,
   text: 17,
   sxl: 25,

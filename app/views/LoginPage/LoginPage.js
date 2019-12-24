@@ -5,7 +5,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
-import { View, Keyboard, Alert } from 'react-native';
+import { View, Keyboard, Alert, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {
   LoginButton,
@@ -15,7 +15,7 @@ import {
   GraphRequestManager
 } from 'react-native-fbsdk';
 import axios from 'axios';
-import { Input, Text, Button } from 'react-native-elements';
+import { Input, Text, Button, Image } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './styles';
 import { fonts, darkPalette } from '../../styles/base';
@@ -186,7 +186,8 @@ class LoginPage extends Component {
       buttonLoginStyle,
       titleButtonLoginStyle,
       inputStyle,
-      buttonLoginFBStyle
+      buttonLoginFBStyle,
+      banner
     } = styles;
     return (
       <Fragment>
@@ -197,18 +198,22 @@ class LoginPage extends Component {
           sendStatus={this.callbackError}
         /> */}
         <View style={loginContainer}>
-          <View style={logoContainer}>
-            <Icon
-              name='heartbeat'
-              color={darkPalette.darkCyan}
-              size={fonts.special}
+          <View style={banner}>
+            <Image
+              source={require('../../assets/banners/banner5.jpg')}
+              style={{
+                width: Dimensions.get('screen').width,
+                height: Dimensions.get('screen').height
+              }}
             />
+          </View>
+          <View style={logoContainer}>
+            <Icon name='heartbeat' color={darkPalette.darkCyan} size={55} />
             <Text style={textLogo}>SRecord</Text>
           </View>
           <View style={contentContainer}>
             <Button
               title='Login with Facebook'
-              type='solid'
               loading={isFBLoading}
               titleStyle={titleButtonLoginStyle}
               buttonStyle={buttonLoginFBStyle}
