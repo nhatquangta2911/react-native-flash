@@ -30,6 +30,7 @@ import AppNavigator from './AppNavigator';
 import PushController from './app/utils/notification/PushController';
 import NavigationService from './NavigationService';
 import { createStackNavigator } from 'react-navigation';
+import TokenApi from './app/utils/api/TokenApi';
 
 const theme = {
   ...DefaultTheme,
@@ -48,12 +49,15 @@ console.disableYellowBox = true;
 export default class App extends PureComponent {
   async componentDidMount() {
     const token = await firebase.messaging().getToken();
-    console.log(token);
     this.checkPermission();
     this.createNotificationListeners();
     this.messageListener = firebase
       .messaging()
       .onMessage(message => console.log(message));
+    this.topicListener = firebase.messaging().subscribeToTopic('reminder');
+    TokenApi.add({ token })
+      .then(res => console.log('Save token STATUS: ' + res.status))
+      .catch(err => Alert.alert(err.message));
   }
   async componentWillUnmount() {
     this.messageListener();
@@ -129,6 +133,10 @@ export default class App extends PureComponent {
       //process data message
       console.log(JSON.stringify(message));
     });
+
+    this.topicListener = firebase
+      .messaging()
+      .onMessage(message => console.log(JSON.stringify(message)));
   }
 
   showAlert(title, body) {

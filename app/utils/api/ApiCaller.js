@@ -4,7 +4,8 @@ import axios from 'axios';
 const baseUrl = 'http://shawnta.tech/api';
 
 // DEV (Only with ADB Virtual Machine)
-// const baseUrl = "http://192.168.20.216:5000/api";
+// CHECK IPv4 OF THE NETWORK
+// const baseUrl = 'http://192.168.1.153/api';
 
 export default function Caller(
   endpoint,
