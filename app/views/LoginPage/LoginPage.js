@@ -120,8 +120,18 @@ class LoginPage extends Component {
       })
         .then(async res => {
           await tokenHandler.storeData('id', res.data.id.toString());
+          await tokenHandler.storeData(
+            'status',
+            res.data && res.data.status.toString()
+          );
           if (res.status === 201) {
-            this.props.navigation.navigate('Home');
+            if (res.data && res.data.status.toString() === '1') {
+              this.props.navigation.navigate('Home');
+            } else {
+              Alert.alert(
+                'Your account has been blocking. Please come back later.'
+              );
+            }
           } else {
             this.props.navigation.navigate('Register');
           }

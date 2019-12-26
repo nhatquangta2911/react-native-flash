@@ -18,9 +18,9 @@ export default StyleSheet.create({
     marginHorizontal: margin.md
   },
   titleStyles: {
-    fontSize: fonts.md,
+    fontSize: fonts.xlg,
     fontFamily: fonts.regular,
-    color: darkPalette.darkCyan
+    color: darkPalette.black
   },
   textStyles: {
     fontFamily: fonts.thin,

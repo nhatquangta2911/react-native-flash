@@ -6,7 +6,7 @@ import { darkPalette } from '../../styles/base';
 
 const CommonText = styled.Text`
   font-family: 'Nunito-ExtraLight';
-  font-size: 14;
+  font-size: 16;
   color: #444;
 `;
 

@@ -27,7 +27,7 @@ export default StyleSheet.create({
     ...headerStyle
   },
   titleStyles: {
-    fontSize: fonts.lg,
+    fontSize: fonts.xlg,
     fontFamily: fonts.regular,
     color: darkPalette.darkCyan,
     marginVertical: margin.sm
@@ -35,7 +35,7 @@ export default StyleSheet.create({
   textStyles: {
     fontFamily: fonts.light,
     fontSize: fonts.sm,
-    color: darkPalette.lightGray,
+    color: darkPalette.black,
     marginBottom: margin.lg
   }
 });

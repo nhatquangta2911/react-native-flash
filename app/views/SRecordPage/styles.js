@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   dimensions,
   fonts,
   margin,
   padding,
   darkPalette
-} from "../../styles/base";
+} from '../../styles/base';
 
 export default StyleSheet.create({
   questionContainer: {
     height: dimensions.containerHeight,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     margin: margin.md
   },
   scrollContainer: {
@@ -20,20 +20,32 @@ export default StyleSheet.create({
     // height: dimensions.containerHeight / 3.5
   },
   searchBar: {
-    marginVertical: margin.sm
+    marginVertical: margin.sm,
+    alignItems: 'flex-end'
   },
   mainContent: {
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start'
   },
   titleStyles: {
-    fontSize: fonts.md,
+    fontSize: fonts.xlg,
     fontFamily: fonts.regular,
-    color: darkPalette.darkCyan
+    color: darkPalette.black
   },
   textStyles: {
     fontFamily: fonts.thin,
     fontSize: fonts.sm,
     color: darkPalette.darkGray
+  },
+  pickDateTextStyles: {
+    fontFamily: fonts.regular,
+    fontSize: fonts.sm,
+    color: darkPalette.white,
+    backgroundColor: darkPalette.darkYellow,
+    paddingHorizontal: margin.lg,
+    paddingVertical: margin.sm,
+    width: dimensions.fullWidth / 2.3,
+    borderRadius: 5,
+    textAlign: 'center'
   },
   dateStyle: {
     fontFamily: fonts.regular,

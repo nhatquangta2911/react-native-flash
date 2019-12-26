@@ -150,9 +150,9 @@ export const nutrientColor = {
 
 export const fonts = {
   xsm: 12,
-  sm: 14,
-  smd: 16,
-  md: 18,
+  sm: 16,
+  smd: 18,
+  md: 20,
   lg: 18,
   xlg: 21,
   xl: 40,

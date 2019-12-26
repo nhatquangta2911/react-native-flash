@@ -51,7 +51,7 @@ export default StyleSheet.create({
   },
   textStyle: {
     fontFamily: fonts.regular,
-    fontSize: fonts.sm,
+    fontSize: fonts.lg,
     color: darkPalette.darkGray
   }
 });

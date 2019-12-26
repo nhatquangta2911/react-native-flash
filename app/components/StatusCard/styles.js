@@ -31,7 +31,7 @@ export default StyleSheet.create({
   titleStyles: {
     fontFamily: fonts.regular,
     fontSize: fonts.xlg,
-    color: darkPalette.darkYellow
+    color: darkPalette.black
   },
   statsStyles: {
     fontFamily: fonts.regular,

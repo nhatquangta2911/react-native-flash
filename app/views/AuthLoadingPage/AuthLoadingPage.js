@@ -2,7 +2,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { StyleSheet, ActivityIndicator, StatusBar, View } from 'react-native';
+import {
+  StyleSheet,
+  ActivityIndicator,
+  StatusBar,
+  View,
+  Alert
+} from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { fonts, darkPalette, margin } from '../../styles/base';
@@ -23,7 +29,13 @@ class AuthLoadingScreen extends React.Component {
 
   doAuth = async () => {
     const userToken = await AsyncStorage.getItem('token');
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    const status = await AsyncStorage.getItem('status');
+    if (!userToken || status === '0') {
+      Alert.alert('Your account has been blocking. Please come back later.');
+      this.props.navigation.navigate('Auth');
+    } else {
+      this.props.navigation.navigate('App');
+    }
   };
 
   render() {

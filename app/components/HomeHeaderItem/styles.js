@@ -1,7 +1,14 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import { StyleSheet } from 'react-native';
-import { dimensions, fonts, margin, padding, darkPalette, shadow } from '../../styles/base';
+import {
+  dimensions,
+  fonts,
+  margin,
+  padding,
+  darkPalette,
+  shadow
+} from '../../styles/base';
 
 export default StyleSheet.create({
   itemContainer: {
@@ -26,7 +33,7 @@ export default StyleSheet.create({
   },
   textStyle: {
     fontFamily: fonts.thin,
-    fontSize: fonts.xsm,
+    fontSize: fonts.sm - 2,
     color: darkPalette.darkGray
   }
 });

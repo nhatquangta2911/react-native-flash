@@ -68,7 +68,7 @@ export default class BottomTabNavigator extends Component {
     Home: HomePage,
     Question: QuestionPage,
     SRecord: SRecordPage,
-    Setting: SettingPage,
+    Setting: SettingPage
     // Community: BlogPage
   });
 
@@ -78,7 +78,6 @@ export default class BottomTabNavigator extends Component {
         navigationState={this.state}
         onIndexChange={this.handleIndexChange}
         renderScene={this.renderScene}
-        // barStyle={{ height: (dimensions.fullHeight * 6) / 100 }}
       />
       // <Tab.Navigator
       //   initialRouteName="Home"

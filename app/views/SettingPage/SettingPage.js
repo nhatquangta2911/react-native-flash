@@ -103,7 +103,7 @@ class SettingPage extends Component {
         <StatusCard
           title={user.name}
           content="How's your day going, buddy?"
-          percent={`GOAL    5 / 10 questions`}
+          percent={``}
           uri={user.picture}
         />
 
@@ -124,7 +124,7 @@ class SettingPage extends Component {
             />
           ))}
           <Button
-            title='LOGOUT'
+            title='LOG OUT'
             type='solid'
             titleStyle={titleButtonLoginStyle}
             buttonStyle={buttonBackStyle}

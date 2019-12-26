@@ -2,8 +2,15 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 import React, { Component, Fragment } from 'react';
-import { Text, View, ScrollView, RefreshControl, Alert } from 'react-native';
-import { Searchbar, Snackbar } from 'react-native-paper';
+import {
+  Text,
+  View,
+  ScrollView,
+  RefreshControl,
+  Alert,
+  DatePickerAndroid
+} from 'react-native';
+import { Searchbar, Snackbar, Button } from 'react-native-paper';
 import Collapsible from 'react-native-collapsible';
 import { withNavigationFocus } from 'react-navigation';
 import { Answer } from '../../components';
@@ -31,17 +38,21 @@ export class SRecordPage extends Component {
     this.setState({
       dates: HandleDateTime.generateRecentDates(2)
     });
-    const id = await AsyncStorage.getItem('id');
     this.state.dates &&
       this.state.dates.forEach(d => {
-        AnswerApi.getMyAnswers(id, d)
+        AnswerApi.getMyAnswers(1, d)
           .then(res => {
             this.setState({
-              answerData: [...this.state.answerData, { ...res.data, date: d }]
+              answerData: [...this.state.answerData, { ...res.data, date: d }],
+              isCollapsed: true,
+              refreshing: false
             });
           })
           .catch(err => {
             Alert.alert('Something went wrong', err.message);
+            this.setState({
+              refreshing: false
+            });
           });
       });
   }
@@ -62,10 +73,9 @@ export class SRecordPage extends Component {
         isCollapsed: false,
         dates: HandleDateTime.generateRecentDates(2)
       });
-      const id = await AsyncStorage.getItem('id');
       this.state.dates &&
         this.state.dates.forEach(d => {
-          AnswerApi.getMyAnswers(id, d)
+          AnswerApi.getMyAnswers(1, d)
             .then(res => {
               this.setState({
                 answerData: [
@@ -98,12 +108,56 @@ export class SRecordPage extends Component {
       titleStyles,
       textStyles,
       scrollContainer,
-      dateStyle
+      dateStyle,
+      pickDateTextStyles
     } = styles;
     const answerResult =
-      answerData &&
-      answerData.map(day => (
-        <View key={answerData.indexOf(day)}>
+      answerData && answerData.length !== 0 ? (
+        answerData.map(day => (
+          <View key={answerData.indexOf(day)}>
+            <Text
+              style={dateStyle}
+              onPress={() => {
+                this._onRefresh();
+                this.setState({ isCollapsed: !this.state.isCollapsed });
+              }}
+            >
+              {day && day.date}
+            </Text>
+            <Collapsible collapsed={this.state.isCollapsed}>
+              <View style={scrollContainer}>
+                <ScrollView style={scrollContainer}>
+                  {day &&
+                    day.answers &&
+                    day.answers.map(answer => (
+                      <Answer
+                        key={answer.id}
+                        question={answer.id}
+                        ingredients={answer.ingredients}
+                        answer={
+                          answer &&
+                          answer.ingredients &&
+                          answer.ingredients.reduce(
+                            (prev, curr) => `${prev}${curr.name}  `,
+                            ''
+                          )
+                        }
+                        answerTime={
+                          answer &&
+                          answer.answerTime &&
+                          answer.answerTime.split('T')[1].substring(0, 5)
+                          // answer.ingredients &&
+                          // answer.ingredients[0].image
+                        }
+                      />
+                    ))}
+                </ScrollView>
+              </View>
+            </Collapsible>
+          </View>
+        ))
+      ) : (
+        <View>
           <Text
             style={dateStyle}
             onPress={() => {
@@ -111,56 +165,82 @@ export class SRecordPage extends Component {
               this.setState({ isCollapsed: !this.state.isCollapsed });
             }}
           >
-            {day && day.date}
+            {answerData && answerData.date}
           </Text>
-          <Collapsible collapsed={this.state.isCollapsed}>
-            <View style={scrollContainer}>
-              <ScrollView style={scrollContainer}>
-                {day &&
-                  day.answers &&
-                  day.answers.map(answer => (
-                    <Answer
-                      key={answer.id}
-                      question={answer.id}
-                      ingredients={answer.ingredients}
-                      answer={
-                        answer &&
-                        answer.ingredients &&
-                        answer.ingredients.reduce(
-                          (prev, curr) => `${prev}${curr.name}  `,
-                          ''
-                        )
-                      }
-                      answerTime={
-                        answer &&
-                        answer.answerTime &&
-                        answer.answerTime.split('T')[1].substring(0, 5)
-                        // answer.ingredients &&
-                        // answer.ingredients[0].image
-                      }
-                    />
-                  ))}
-              </ScrollView>
-            </View>
-          </Collapsible>
+          <View style={scrollContainer}>
+            <Text style={textStyles}>No Answers</Text>
+          </View>
         </View>
-      ));
+      );
     return (
       <View>
         <View style={questionContainer}>
           <View style={mainContent}>
             <Text style={titleStyles}>Collection</Text>
-            <Text style={textStyles}>This is all we have collected</Text>
           </View>
           <View style={searchBar}>
-            <Searchbar
+            {/* <Searchbar
               placeholder='Search'
               onChangeText={query => this.setState({ firstQuery: query })}
               value={firstQuery}
               inputStyle={textStyles}
               style={{ height: 50 }}
               onSubmitEditing={() => this.setState({ isVisible: true })}
-            />
+            /> */}
+            <Text
+              style={pickDateTextStyles}
+              onPress={async () => {
+                try {
+                  const {
+                    action,
+                    year,
+                    month,
+                    day
+                  } = await DatePickerAndroid.open({ date: new Date() });
+                  if (action !== DatePickerAndroid.dismissedAction) {
+                    this.setState({
+                      refreshing: true,
+                      answerData: [],
+                      isCollapsed: false
+                    });
+                    let pickedDate = `${year}-${
+                      month >= 9 ? month + 1 : `0${month + 1}`
+                    }-${day >= 10 ? day : `0${day}`}`;
+                    AnswerApi.getMyAnswers(1, pickedDate)
+                      .then(res =>
+                        this.setState({
+                          answerData: [
+                            ...this.state.answerData,
+                            { ...res.data, date: pickedDate }
+                          ],
+                          refreshing: false,
+                          isCollapsed: false
+                        })
+                      )
+                      .catch(err => {
+                        Alert.alert('Something went wrong', err.message);
+                        this.setState({
+                          refreshing: false,
+                          isCollapsed: false
+                        });
+                      });
+                  } else {
+                    return null;
+                  }
+                } catch (error) {
+                  Alert.alert(
+                    'Something went wrong. Please try again',
+                    error.message
+                  );
+                  this.setState({
+                    refreshing: false,
+                    isCollapsed: false
+                  });
+                }
+              }}
+            >
+              Pick a specific date
+            </Text>
           </View>
           <ScrollView
             refreshControl={
