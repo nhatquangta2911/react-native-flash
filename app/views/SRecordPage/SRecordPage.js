@@ -24,7 +24,7 @@ export class SRecordPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dates: [],
+      dates: HandleDateTime.generateRecentDates(2),
       answerData: [],
       firstQuery: '',
       isVisible: false,
@@ -35,26 +35,32 @@ export class SRecordPage extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      dates: HandleDateTime.generateRecentDates(2)
-    });
-    this.state.dates &&
-      this.state.dates.forEach(d => {
-        AnswerApi.getMyAnswers(1, d)
-          .then(res => {
-            this.setState({
-              answerData: [...this.state.answerData, { ...res.data, date: d }],
-              isCollapsed: true,
-              refreshing: false
-            });
-          })
-          .catch(err => {
-            Alert.alert('Something went wrong', err.message);
-            this.setState({
-              refreshing: false
-            });
-          });
+    if (this.state.isCollapsed) {
+      this.setState({ isCollapsed: false });
+    } else {
+      this.setState({
+        refreshing: true,
+        answerData: [],
+        isCollapsed: false
       });
+      this.state.dates &&
+        this.state.dates.forEach(d => {
+          AnswerApi.getMyAnswers(1, d)
+            .then(res => {
+              this.setState({
+                answerData: [
+                  ...this.state.answerData,
+                  { ...res.data, date: d }
+                ],
+                refreshing: false,
+                isCollapsed: false
+              });
+            })
+            .catch(err => {
+              Alert.alert('Something went wrong', err.message);
+            });
+        });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -83,7 +89,7 @@ export class SRecordPage extends Component {
                   { ...res.data, date: d }
                 ],
                 refreshing: false,
-                isCollapsed: true
+                isCollapsed: false
               });
             })
             .catch(err => {
@@ -112,7 +118,23 @@ export class SRecordPage extends Component {
       pickDateTextStyles
     } = styles;
     const answerResult =
-      answerData && answerData.length !== 0 ? (
+      !answerData ||
+      (answerData && answerData[0] && answerData[0].total === 0) ? (
+        <View>
+          <Text
+            style={dateStyle}
+            onPress={() => {
+              this._onRefresh();
+              this.setState({ isCollapsed: !this.state.isCollapsed });
+            }}
+          >
+            {answerData && answerData[0] && answerData[0].date}
+          </Text>
+          <View style={scrollContainer}>
+            <Text style={textStyles}>No Answers</Text>
+          </View>
+        </View>
+      ) : (
         answerData.map(day => (
           <View key={answerData.indexOf(day)}>
             <Text
@@ -156,21 +178,6 @@ export class SRecordPage extends Component {
             </Collapsible>
           </View>
         ))
-      ) : (
-        <View>
-          <Text
-            style={dateStyle}
-            onPress={() => {
-              this._onRefresh();
-              this.setState({ isCollapsed: !this.state.isCollapsed });
-            }}
-          >
-            {answerData && answerData.date}
-          </Text>
-          <View style={scrollContainer}>
-            <Text style={textStyles}>No Answers</Text>
-          </View>
-        </View>
       );
     return (
       <View>

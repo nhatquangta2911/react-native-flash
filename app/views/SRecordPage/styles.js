@@ -15,7 +15,7 @@ export default StyleSheet.create({
     margin: margin.md
   },
   scrollContainer: {
-    marginBottom: margin.sm,
+    marginBottom: margin.md,
     marginHorizontal: 1
     // height: dimensions.containerHeight / 3.5
   },
@@ -49,11 +49,12 @@ export default StyleSheet.create({
   },
   dateStyle: {
     fontFamily: fonts.regular,
-    fontSize: fonts.md,
+    fontSize: fonts.sm,
     color: darkPalette.white,
-    marginVertical: margin.sm,
+    marginBottom: margin.sm - 5,
     backgroundColor: darkPalette.darkOrange,
-    paddingVertical: padding.md,
-    paddingHorizontal: padding.sm
+    paddingVertical: padding.sm + 2,
+    paddingHorizontal: padding.sm + 2,
+    borderRadius: 5
   }
 });

@@ -44,7 +44,7 @@ class Answer extends Component {
             {this.props.answer}
           </Text>
           <Text style={textStyle} numberOfLines={2}>
-            {this.props.answerTime}
+            Answerd Time: {this.props.answerTime}
           </Text>
         </View>
         <View style={right}>{imageList}</View>

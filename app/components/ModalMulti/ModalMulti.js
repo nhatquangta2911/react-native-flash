@@ -57,7 +57,7 @@ class ModalMulti extends React.Component {
       >
         <View style={modalContainer}>
           <Text style={modalTitle}>{question}</Text>
-          <Text style={modalContent}>{title}</Text>
+          {/* <Text style={modalContent}>{title}</Text> */}
           <ScrollView style={scrollContainer}>
             {choices &&
               choices.map(c => (

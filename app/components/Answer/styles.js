@@ -22,7 +22,9 @@ export default StyleSheet.create({
   },
   right: {
     flex: 1,
-    flexDirection: 'row-reverse'
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   titleStyle: {
     fontFamily: fonts.regular,
@@ -31,7 +33,7 @@ export default StyleSheet.create({
   },
   textStyle: {
     fontFamily: fonts.thin,
-    fontSize: fonts.sm,
+    fontSize: fonts.sm - 2,
     color: darkPalette.darkGray
   }
 });

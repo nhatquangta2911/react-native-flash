@@ -295,7 +295,6 @@ class RegisterPage extends Component {
             const info = {};
             UserApi.submitInfo(info, id)
               .then(res => {
-                Alert.alert('Success', res.data.toString());
                 navigation.dispatch(
                   NavigationActions.navigate({
                     routeName: 'App',
